@@ -25348,7 +25348,7 @@ body.modal-open {
 
 .button-area-main-wrapper-menuy-sidebar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   padding: 20px;
   border-radius: 6px;
