@@ -1,10 +1,10 @@
 import { X } from "lucide-react";
 import React from "react";
 
-const Sidebar = ({ showMobileMenu, setShowMobileMenu }: { showMobileMenu: boolean, setShowMobileMenu: (value: boolean) => void }) => {
+const Sidebar = ({ showMobileMenu, setShowMobileMenu }: { showMobileMenu: boolean, setShowMobileMenu: (value: boolean) => void }) => {  
   return (
-    <div className="sidebarmenu-overlay">
-      <div id="side-bar" className={showMobileMenu ? "side-bar header-two show" : "side-bar header-two"}>
+    <div className={showMobileMenu ? "sidebarmenu-overlay show-overlay" : "sidebarmenu-overlay close-overlay"}>
+      <div id="side-bar" className={showMobileMenu ? "side-bar header-two show" : "side-bar header-two close"}>
         <button className="close-icon-menu">
           <X onClick={() => setShowMobileMenu(false)} />
         </button>

@@ -27066,6 +27066,19 @@
     u+f27a;
 } */
 
+
+/* slick slider */
+
+.category-area-main-wrapper-one .slick-list {
+  display: flex;
+  justify-content: center;
+}
+
+.category-area-main-wrapper-one .slick-track {
+  display: flex!important;  
+  gap: 5px;
+}
+
 /* swiper css */
 .swiper-slide,
 .swiper-wrapper {

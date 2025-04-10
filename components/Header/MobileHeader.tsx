@@ -9,7 +9,7 @@ import Sidebar from "../Navbar/Sidebar";
 const MobileHeader = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const handleShowMobileMenu = () => {
+  const handleShowMobileMenu = () => {    
     setShowMobileMenu(true);
   };
 
@@ -17,7 +17,7 @@ const MobileHeader = () => {
     <>
       <div className="logo-search-category-wrapper after-md-device-header">
         <a href="index.html" className="logo-area">
-          <Image src={logo1} alt="logo-main" className="logo" />
+          <Image width={181} height={47} src={logo1} alt="logo-main" className="logo" />
         </a>
         <div className="category-search-wrapper">
           <div className="category-btn category-hover-header">
@@ -233,7 +233,7 @@ const MobileHeader = () => {
           </div>
         </div>
       </div>
-      {showMobileMenu && <Sidebar showMobileMenu={showMobileMenu} setShowMobileMenu={setShowMobileMenu} />}
+      <Sidebar showMobileMenu={showMobileMenu} setShowMobileMenu={setShowMobileMenu} />
     </>
   );
 };

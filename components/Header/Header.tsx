@@ -31,14 +31,18 @@ const Header = () => {
                     <span>Account</span>
                   </a>
                   <a href="wishlist.html" className="btn-border-only wishlist">
-                    <Heart width={20} />
+                    <div style={{ position: 'relative' }}>
+                      <Heart width={20} />
+                      <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                    </div>
                     <span className="text">Wishlist</span>
-                    <span className="number">2</span>
                   </a>
                   <div className="btn-border-only cart category-hover-header">
-                    <ShoppingCart width={20} />
-                    <span className="text">My Cart</span>
-                    <span className="number">2</span>
+                    <div style={{ position: 'relative' }}>
+                      <ShoppingCart width={20} style={{ flexShrink: 0 }} />
+                      <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                    </div>
+                    <span className="text" style={{ flexShrink: 0 }}>My Cart</span>
                     <div className="category-sub-menu card-number-show">
                       <h5 className="shopping-cart-number">
                         Shopping Cart (03)
