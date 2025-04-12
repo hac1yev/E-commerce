@@ -29,14 +29,14 @@ const Sidebar = ({ showMobileMenu, setShowMobileMenu }: { showMobileMenu: boolea
           <nav>
             <div className="nav nav-tabs" id="nav-tab">
               <button
-                className="nav-link active"
+                className={activeTab === "menu" ? "nav-link active" : "nav-link"}
                 type="button"
                 onClick={() => handleClick("menu")}
               >
                 Menu
               </button>
               <button
-                className="nav-link"
+                className={activeTab === "category" ? "nav-link active" : "nav-link"}
                 type="button"
                 onClick={() => handleClick("category")}
               >

@@ -1,7 +1,7 @@
-
-const HeaderCartModal = () => {
+const HeaderCartPopover = () => {
   return (
-    <>
+    <div className="category-sub-menu card-number-show">
+      <h5 className="shopping-cart-number">Shopping Cart (03)</h5>
       <div className="cart-item-1 border-top">
         <div className="img-name">
           <div className="thumbanil">
@@ -96,8 +96,8 @@ const HeaderCartModal = () => {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default HeaderCartModal;
+export default HeaderCartPopover;

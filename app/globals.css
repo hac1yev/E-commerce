@@ -16895,7 +16895,7 @@ li.with-megamenu:hover .rts-megamenu {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   animation: show_overlay 0.2s ease;
 }
 
@@ -16914,13 +16914,13 @@ li.with-megamenu:hover .rts-megamenu {
   from {
     background-color: rgba(0, 0, 0, 0);
   } to {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
 @keyframes close_overlay {
   from {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
   } to {
     background-color: rgba(0, 0, 0, 0);
   }
@@ -25327,7 +25327,7 @@ body.modal-open {
   color: #2C3C28;
 }
 
-.tab-nav-btn nav .nav-tabs button[aria-selected=true] {
+.tab-nav-btn nav .nav-tabs button.active {
   background: var(--color-primary);
   color: #fff;
 }
