@@ -7,12 +7,13 @@ import Search from "./Search";
 import MobileHeader from "./MobileHeader";
 import { Heart, ShoppingCart, UserIcon } from "lucide-react";
 import HeaderCartPopover from "../Popovers/HeaderCartPopover";
+import Link from "next/link";
 
 const Header = () => {
   const [openCartPopover,setOpenCartPopover] = useState(false);
 
   const handleOpenCartPopover = () => {
-    setOpenCartPopover(true);
+    setOpenCartPopover((prev) => !prev);
   };
 
   return (
@@ -35,27 +36,35 @@ const Header = () => {
                   <Search />
                 </div>
                 <div className="accont-wishlist-cart-area-header">
-                  <a href="account.html" className="btn-border-only account">
-                    <UserIcon width={20} />
-                    <span>Account</span>
-                  </a>
-                  <a href="wishlist.html" className="btn-border-only wishlist">
-                    <div style={{ position: 'relative' }}>
-                      <Heart width={20} />
-                      <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                  <Link href="/" className="btn-border-only account">
+                    <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
+                      <UserIcon width={20} />
+                      <span className="text">Account</span>
                     </div>
-                    <span className="text">Wishlist</span>
-                  </a>
-                  <div className="btn-border-only cart category-hover-header">
-                    <div style={{ position: 'relative' }}>
-                      <ShoppingCart 
-                        style={{ flexShrink: 0 }} 
-                        onClick={handleOpenCartPopover}
-                        width={20} 
-                      />
-                      <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                  </Link>
+                  <Link href="/" className="btn-border-only wishlist">
+                    <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
+                      <div style={{ position: 'relative' }}>
+                        <Heart width={20} />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                      </div>
+                      <span className="text">Wishlist</span>
                     </div>
-                    <span className="text" style={{ flexShrink: 0 }}>My Cart</span>
+                  </Link>
+                  <div 
+                    className={openCartPopover ? "btn-border-only cart category-hover-header" : "btn-border-only cart"} 
+                    onClick={handleOpenCartPopover}
+                  >
+                    <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
+                      <div style={{ position: 'relative' }}>
+                        <ShoppingCart 
+                          style={{ flexShrink: 0 }} 
+                          width={20} 
+                        />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                      </div>
+                      <span className="text" style={{ flexShrink: 0 }}>My Cart</span>
+                    </div>
                     {openCartPopover && <HeaderCartPopover />}
                   </div>
                 </div>

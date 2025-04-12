@@ -87,7 +87,7 @@ const HeaderCartPopover = () => {
             Spend More <span>$125.00</span> to reach <span>Free Shipping</span>
           </p>
         </div>
-        <div className="button-wrapper d-flex align-items-center justify-content-between">
+        <div className="button-wrapper d-flex align-items-center justify-content-center">
           <a href="cart.html" className="rts-btn btn-primary ">
             View Cart
           </a>

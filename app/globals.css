@@ -15622,12 +15622,16 @@ body.sal-disabled [data-sal|=flip] {
   height: 50px;
   border-radius: 5px;
   background: #F3F4F6;
-  padding: 15px 16px;
   cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   color: #2C3C28;
   position: relative;
+}
+
+.logo-search-category-wrapper .category-search-wrapper .category-btn .cart-button-wrap {
+  padding: 15px 16px;
+  border-radius: 5px;
 }
 
 .logo-search-category-wrapper .category-search-wrapper .search-header {
@@ -15806,8 +15810,8 @@ a.over_link {
   position: absolute;
   top: 100%;
   left: 0;
-  visibility: hidden;
-  opacity: 0;
+  visibility: visible;
+  opacity: 1;
   background: var(--color-white);
   transform: translateZ(0) translateY(30px);
   border-radius: 4px;
@@ -15934,8 +15938,8 @@ a.over_link {
 
 .category-hover-header .category-sub-menu.card-number-show .sub-total-cart-balance .button-wrapper {
   margin-top: 30px;
-  display: flex;
-  gap: 25px;
+  gap: 15px;
+  width: 100%;
 }
 
 @media only screen and (max-width: 575px) {
@@ -15946,7 +15950,7 @@ a.over_link {
 
 .category-hover-header .category-sub-menu.card-number-show .sub-total-cart-balance .button-wrapper a {
   display: block;
-  width: 100%;
+  width: 50%;
   max-width: 100%;
   text-align: center;
   transition: 0.3s;
@@ -16024,19 +16028,13 @@ a.over_link {
   filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(0%) hue-rotate(46deg) brightness(111%) contrast(101%);
 }
 
-.category-hover-header:hover {
+/* .category-hover-header:hover {
   background: var(--color-primary) !important;
   color: #fff !important;
-}
+} */
 
 .category-hover-header:hover img.parent {
   filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(0%) hue-rotate(46deg) brightness(111%) contrast(101%);
-}
-
-.category-hover-header:hover .category-sub-menu {
-  visibility: visible;
-  opacity: 1;
-  transform: translateZ(0) translateY(0);
 }
 
 .rts-header-nav-area-one {
@@ -16895,7 +16893,7 @@ li.with-megamenu:hover .rts-megamenu {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   animation: show_overlay 0.2s ease;
 }
 
@@ -16914,13 +16912,13 @@ li.with-megamenu:hover .rts-megamenu {
   from {
     background-color: rgba(0, 0, 0, 0);
   } to {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
 @keyframes close_overlay {
   from {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
   } to {
     background-color: rgba(0, 0, 0, 0);
   }
@@ -18391,7 +18389,6 @@ li.with-megamenu:hover .rts-megamenu {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 26px;
   font-size: 16px;
   gap: 10px;
   font-weight: 500;
@@ -18408,26 +18405,40 @@ li.with-megamenu:hover .rts-megamenu {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .btn-border-only {
+    height: 40px;
+    padding: 0;
+    width: 40px;
+  }
+}
+
 @media only screen and (max-width: 575px) {
   .btn-border-only {
     border: none;
   }
 }
 
-.btn-border-only:hover {
+/* .btn-border-only:hover {
+  background: var(--color-primary);
+  color: #fff;
+} */
+
+.cart-button-wrap {
+  padding: 0 26px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-button-wrap:hover {
   background: var(--color-primary);
   color: #fff;
 }
 
 @media only screen and (max-width: 767px) {
-  .btn-border-only.wishlist {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .btn-border-only.account {
-    display: none;
+  .btn-border-only.wishlist,
+  .actions-area .search-btn {
+    display: none!important;
   }
 }
 
@@ -19678,6 +19689,10 @@ li.with-megamenu:hover .rts-megamenu {
   .blog-sidebar-single-wized.with-title .latest-post-small-area-wrapper .single-latest-post-area {
     flex-direction: row;
     align-items: flex-start;
+  }
+
+  .btn-border-only {
+    padding: 0 26px;
   }
 }
 
@@ -25327,7 +25342,7 @@ body.modal-open {
   color: #2C3C28;
 }
 
-.tab-nav-btn nav .nav-tabs button.active {
+.tab-nav-btn nav .nav-tabs button[aria-selected=true] {
   background: var(--color-primary);
   color: #fff;
 }

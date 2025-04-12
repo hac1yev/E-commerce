@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 const MobileCategory = () => {
-    console.log("asdasda");
     
   return (
     <div className="category-btn category-hover-header menu-category">
