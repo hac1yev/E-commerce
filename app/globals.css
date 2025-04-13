@@ -516,7 +516,8 @@ ul li a:hover {
   color: var(--color-primary);
 }
 
-ul li a .plus-icon { 
+ul li a .plus-icon,
+.category-hover-header .category-sub-menu li > div .plus-icon { 
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -526,6 +527,10 @@ ul li a .plus-icon {
   background: rgba(98, 157, 35, 0.12); 
   border-radius: 50%; 
 }
+
+.category-hover-header .category-sub-menu li > div:hover .plus-icon {
+  background-color: white;
+} 
 
 ul li a:hover .plus-icon {
   background-color: #fff;
@@ -15972,7 +15977,8 @@ a.over_link {
   margin: 0;
 }
 
-.category-hover-header .category-sub-menu li a {
+.category-hover-header .category-sub-menu li a,
+.category-hover-header .category-sub-menu li > div {
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -15980,22 +15986,26 @@ a.over_link {
   transition: 0.3s;
 }
 
-.category-hover-header .category-sub-menu li a:hover > svg {
+.category-hover-header .category-sub-menu li a:hover > svg,
+.category-hover-header .category-sub-menu li > div:hover > svg {
   color: #fff;
 }
 
-.category-hover-header .category-sub-menu li a span {
+.category-hover-header .category-sub-menu li a span,
+.category-hover-header .category-sub-menu li > div span {
   color: #2C3C28;
   font-weight: 600;
   transition: 0.3s;
 }
 
-.category-hover-header .category-sub-menu li a img {
+.category-hover-header .category-sub-menu li a img,
+.category-hover-header .category-sub-menu li > div img {
   margin-right: 16px;
   transition: 0.3s;
 }
 
-.category-hover-header .category-sub-menu li a i {
+.category-hover-header .category-sub-menu li a i,
+.category-hover-header .category-sub-menu li > div i {
   margin-left: auto;
   margin-right: 0;
   height: 20px;
@@ -16010,21 +16020,25 @@ a.over_link {
   transition: 0.3s;
 }
 
-.category-hover-header .category-sub-menu li a:hover {
+.category-hover-header .category-sub-menu li a:hover,
+.category-hover-header .category-sub-menu li > div:hover {
   background: var(--color-primary);
 }
 
-.category-hover-header .category-sub-menu li a:hover span {
+.category-hover-header .category-sub-menu li a:hover span,
+.category-hover-header .category-sub-menu li > div:hover span {
   color: #fefffd;
   font-weight: 600;
 }
 
-.category-hover-header .category-sub-menu li a:hover i {
+.category-hover-header .category-sub-menu li a:hover i,
+.category-hover-header .category-sub-menu li > div:hover i {
   background: #fff;
   color: #2C3C28;
 }
 
-.category-hover-header .category-sub-menu li a:hover img {
+.category-hover-header .category-sub-menu li a:hover img,
+.category-hover-header .category-sub-menu li > div:hover img {
   filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(0%) hue-rotate(46deg) brightness(111%) contrast(101%);
 }
 
@@ -16613,19 +16627,8 @@ a.over_link {
   position: relative;
 }
 
-#category-active-four .submenu li a::after {
-  content: "\f054";
-  font-family: var(--font-three);
-  top: 50%;
-  transform: translateY(-50%);
-  left: 40px;
-  right: auto;
-  position: absolute;
-  font-size: 16px;
-}
-
 #category-active-four .submenu li a.mobile-menu-link {
-  padding: 7px 10px 7px 70px;
+  padding: 7px 10px 7px 45px;
 }
 
 #category-active-four .submenu li a:hover {
@@ -25342,7 +25345,7 @@ body.modal-open {
   color: #2C3C28;
 }
 
-.tab-nav-btn nav .nav-tabs button[aria-selected=true] {
+.tab-nav-btn nav .nav-tabs button.active {
   background: var(--color-primary);
   color: #fff;
 }

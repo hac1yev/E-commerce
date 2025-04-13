@@ -1,3 +1,5 @@
+"use client";
+
 import { AlignLeft, SearchIcon } from "lucide-react";
 import CategoryPopover from "../Popovers/CategoryPopover";
 import { useState } from "react";
@@ -13,15 +15,14 @@ const Search = () => {
     <>
       <div 
         className="category-btn category-hover-header"
-        onClick={handleOpenCategoryPopover}
       >
-      <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
-        <AlignLeft
-          width={18}
-          height={18}
-          className="parent"
-        />
-        <span>Categories</span>
+        <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap" onClick={handleOpenCategoryPopover}>
+          <AlignLeft
+            width={18}
+            height={18}
+            className="parent"
+          />
+          <span>Categories</span>
         </div>
         {openCategoryPopover && <CategoryPopover />}
       </div>
