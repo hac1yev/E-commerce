@@ -18449,6 +18449,7 @@ li.with-megamenu:hover .rts-megamenu {
   padding: 15px;
   background: #F5F6F7;
   border-radius: 6px;
+  height: 450px;
 }
 
 .single-shopping-card-one .image-and-action-area-wrapper {
@@ -18488,7 +18489,7 @@ li.with-megamenu:hover .rts-megamenu {
 }
 
 .single-shopping-card-one .image-and-action-area-wrapper .action-share-option .single-action:hover {
-  background: #fff;
+  background: #ccc;
 }
 
 .single-shopping-card-one .image-and-action-area-wrapper .action-share-option .single-action:hover i {
@@ -18518,7 +18519,7 @@ li.with-megamenu:hover .rts-megamenu {
 .single-shopping-card-one .thumbnail-preview .badge span {
   position: absolute;
   top: 17px;
-  left: 17px;
+  left: 23px;
   font-size: 11px;
   line-height: 1.1;
   color: #2C3C28;
@@ -18526,8 +18527,9 @@ li.with-megamenu:hover .rts-megamenu {
   font-weight: 700;
 }
 
-.single-shopping-card-one .thumbnail-preview img {
+.single-shopping-card-one .thumbnail-preview > img {
   width: 100%;
+  height: 250px;
   transition: 0.3s;
   transform: scale(1.01);
 }
@@ -18575,6 +18577,8 @@ li.with-megamenu:hover .rts-megamenu {
 
 .single-shopping-card-one .body-content {
   padding-top: 15px;
+  position: relative;
+  height: calc(100% - 250px);
 }
 
 .single-shopping-card-one .body-content .time-tag {
@@ -18644,12 +18648,15 @@ li.with-megamenu:hover .rts-megamenu {
 }
 
 .single-shopping-card-one .cart-counter-action {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 7px;
   margin-top: 10px;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: 0;
 }
 
 .single-shopping-card-one .cart-counter-action .quantity-edit {
@@ -18715,7 +18722,7 @@ li.with-megamenu:hover .rts-megamenu {
   color: #fff;
 }
 
-.single-shopping-card-one:hover .thumbnail-preview img {
+.single-shopping-card-one:hover .thumbnail-preview > img {
   transform: scale(1.1);
 }
 

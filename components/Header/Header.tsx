@@ -1,20 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import React, { useState } from "react";
 import logo1 from "../../public/images/logo/logo-01.svg";
 import Search from "./Search";
 import MobileHeader from "./MobileHeader";
 import { Heart, ShoppingCart, UserIcon } from "lucide-react";
-import HeaderCartPopover from "../Popovers/HeaderCartPopover";
 import Link from "next/link";
 
 const Header = () => {
-  const [openCartPopover,setOpenCartPopover] = useState(false);
 
-  const handleOpenCartPopover = () => {
-    setOpenCartPopover((prev) => !prev);
-  };
 
   return (
     <>
@@ -52,10 +44,11 @@ const Header = () => {
                     </div>
                   </Link>
                   <div 
-                    className={openCartPopover ? "btn-border-only cart category-hover-header" : "btn-border-only cart"} 
-                    onClick={handleOpenCartPopover}
+                    className={"btn-border-only cart category-hover-header"} 
                   >
-                    <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
+                    <div 
+                      className="d-flex align-items-center h-100 gap-3 cart-button-wrap"
+                    >
                       <div style={{ position: 'relative' }}>
                         <ShoppingCart 
                           style={{ flexShrink: 0 }} 
@@ -65,7 +58,6 @@ const Header = () => {
                       </div>
                       <span className="text" style={{ flexShrink: 0 }}>My Cart</span>
                     </div>
-                    {openCartPopover && <HeaderCartPopover />}
                   </div>
                 </div>
               </div>

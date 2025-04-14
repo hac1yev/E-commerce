@@ -5,19 +5,13 @@ import logo1 from "../../public/images/logo/logo-01.svg";
 import { Heart, Menu, ShoppingCart, UserIcon } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "../Navbar/Sidebar";
-import HeaderCartPopover from "../Popovers/HeaderCartPopover";
 import Link from "next/link";
 
 const MobileHeader = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [openCategoryPopover,serOpenCategoryPopover] = useState(false);
 
   const handleShowMobileMenu = () => {    
     setShowMobileMenu(true);
-  };
-
-  const handleOpenCategoryPopover = () => {
-    serOpenCategoryPopover((prev) => !prev);
   };
 
   return (
@@ -36,10 +30,9 @@ const MobileHeader = () => {
               <Heart width={20} />
               <span className="text">Wishlist</span>
             </Link>
-            <div className="btn-border-only cart category-hover-header" onClick={handleOpenCategoryPopover}>
+            <div className="btn-border-only cart category-hover-header">
               <ShoppingCart width={20} />
               <span className="text">My Cart</span>
-              {openCategoryPopover && <HeaderCartPopover />}
             </div>
           </div>
           <div className="actions-area">
