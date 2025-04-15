@@ -1,5 +1,6 @@
-import { PlusIcon, X } from "lucide-react";
+import { HeartIcon, MinusIcon, PlusIcon, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
+import RatingStar from "../RatingStar/RatingStar";
 
 type CardItemProps = Pick<
   CardType,
@@ -50,9 +51,7 @@ const ProductDetailModal = ({ image,category,price,value,count,tags,title,review
                             <div className="product-status">
                                 <span className="product-catagory">{category}</span>
                                 <div className="rating-stars-group">
-                                    <div className="rating-star"><i className="fas fa-star"></i></div>
-                                    <div className="rating-star"><i className="fas fa-star"></i></div>
-                                    <div className="rating-star"><i className="fas fa-star-half-alt"></i></div>
+                                    <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#000' }}>5.0</span> Average Rating 
                                     <span>{reviewCount} Reviews</span>
                                 </div>
                             </div>
@@ -64,25 +63,24 @@ const ProductDetailModal = ({ image,category,price,value,count,tags,title,review
                             <div className="product-bottom-action">
                                 <div className="cart-edit">
                                     <div className="quantity-edit action-item">
-                                        <button className="button">-</button>
+                                        <button className="button">
+                                            <MinusIcon className="minus-icon" width={16}/>
+                                        </button>
                                         <input type="text" className="input" value={count} />
                                         <button className="button plus" style={{ cursor: 'pointer' }}>
-                                            <PlusIcon width={16}/>
+                                            <PlusIcon className="plus-icon" width={16}/>
                                         </button>
                                     </div>
                                 </div>
-                                <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                    <div className="btn-text">
-                                        Add To Cart
+                                <button className="rts-btn btn-primary radious-sm with-icon">
+                                    <div className="btn-textn d-flex align-items-center gap-2">
+                                        <span>Add To Cart</span>
+                                        <ShoppingCart width={20} />
                                     </div>
-                                    <div className="arrow-icon">
-                                        <i className="fa-regular fa-cart-shopping"></i>
-                                    </div>
-                                    <div className="arrow-icon">
-                                        <i className="fa-regular fa-cart-shopping"></i>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0);" className="rts-btn btn-primary ml--20"><i className="fa-light fa-heart"></i></a>
+                                </button>
+                                <button className="rts-btn btn-primary ml--20">
+                                    <HeartIcon width={20} />
+                                </button>
                             </div>
                             <div className="product-uniques">
                                 <span className="sku product-unipue"><span>SKU: </span> BO1D0MX8SJ</span>

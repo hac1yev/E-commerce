@@ -206,7 +206,7 @@ export const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    // autoplay: true,
+    autoplay: true,
     slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [

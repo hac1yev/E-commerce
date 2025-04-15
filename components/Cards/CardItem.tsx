@@ -1,6 +1,6 @@
 import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
-import { EyeIcon, Heart } from "lucide-react";
+import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
 
 const CardItem = (props: Pick<CardType, keyof CardType> & { handleOpenModal: (id: string) => void }) => {
   return (
@@ -49,20 +49,17 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { handleOpenModal: (id
             <input type="text" className="input" value={props.count} />
             <div className="button-wrapper-action">
               <button className="button">
-                <i className="fa-regular fa-chevron-down"></i>
+                <ChevronUp width={16} />
               </button>
-              <button className="button plus">
-                +<i className="fa-regular fa-chevron-up"></i>
+              <button className="button">
+                <ChevronDown width={16} />
               </button>
             </div>
           </div>
           <button className="rts-btn btn-primary radious-sm with-icon">
-            <div className="btn-text">Add</div>
-            <div className="arrow-icon">
-              <i className="fa-regular fa-cart-shopping"></i>
-            </div>
-            <div className="arrow-icon">
-              <i className="fa-regular fa-cart-shopping"></i>
+            <div className="btn-text d-flex align-items-center gap-2">
+              <span>Add</span>
+              <ShoppingCart width={17} />
             </div>
           </button>
         </div>

@@ -96,6 +96,9 @@
   --h4: 18px;
   --h5: 16px;
   --h6: 15px;
+  --primary-colour: #191919;
+  --secondary-colour: hsl(233 80% 70%);
+  --star-colour: hsl(38 90% 55%);
 }
 
 * {
@@ -9803,7 +9806,7 @@ textarea:focus {
   border-color: var(--color-primary);
 }
 
-input[type=checkbox],
+/* input[type=checkbox],
 input[type=radio] {
   opacity: 1;
   position: relative;
@@ -9873,7 +9876,7 @@ input[type=radio]~label::after {
   left: 3px;
   background: #fff;
   border-radius: 50%;
-}
+} */
 
 .form-group {
   margin-bottom: 20px;
@@ -18709,11 +18712,11 @@ li.with-megamenu:hover .rts-megamenu {
   transition: 0.3s;
 }
 
-.single-shopping-card-one .cart-counter-action .quantity-edit button:first-child i {
+.single-shopping-card-one .cart-counter-action .quantity-edit button:first-child {
   border-right: 1px solid rgba(43, 66, 38, 0.12);
 }
 
-.single-shopping-card-one .cart-counter-action .quantity-edit button:hover i {
+.single-shopping-card-one .cart-counter-action .quantity-edit button:hover {
   background: var(--color-primary);
   color: #fff;
 }
@@ -26271,6 +26274,91 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   color: #61b163;
 }
 
+
+/* Rating Star CSS */
+
+
+
+.rating-star-container {
+  position: relative;
+  top: 10px;
+  left: 30%;
+  /* width: 40%; */
+  /* height: 20%; */
+  transform: translate(-50%, -50%) rotateY(180deg);
+}
+
+.rating-star-container .container__items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  gap: 0 .2em;
+  
+  width: 100%;
+  height: 100%;
+}
+
+.rating-star-container .container__items input{
+  display: none;
+}
+
+.rating-star-container .container__items label{
+  width: 20%;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.rating-star-container .container__items label .star-stroke{
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  background: var(--secondary-colour);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-star-container .container__items label .star-stroke .star-fill{
+  width: 70%;
+  aspect-ratio: 1;
+  background: var(--primary-colour);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-star-container .container__items input:hover ~ label .star-stroke,
+.rating-star-container .container__items input:checked ~ label .star-stroke{
+  background: var(--star-colour);
+}
+
+.rating-star-container .container__items input:checked ~ label .star-stroke .star-fill{
+  background: var(--star-colour);
+}
+
+.rating-star-container .container__items label:hover .label-description::after{
+  content: attr(data-content);
+  position: fixed;
+  left: 0;
+  right: 0;
+  
+  margin-top: 1em;
+  margin-inline: auto;
+  
+  width: 100%;
+  height: 2em;
+  
+  color: #fff;
+  
+  text-align: center;
+  font-size: 2rem;
+  
+  transform: rotateY(180deg);
+}
+
+
+/* Rating Star CSS */
+
+
+
 .rts-product-details-section .details-product-area .product-title {
   font-size: 26px;
   margin-bottom: 10px;
@@ -26847,6 +26935,11 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   border-radius: 5px;
 }
 
+.rts-product-details-section .details-product-area .cart-edit .quantity-edit button:hover, 
+.rts-product-details-section .details-product-area .cart-edit .quantity-edit button:hover {
+  background-color: #f0f0f0;
+}
+
 .rts-product-details-section .details-product-area .cart-edit .quantity-edit input,
 .rts-product-details-section .details-product-area .cart-edits .quantity-edit input {
   text-align: center;
@@ -26859,6 +26952,7 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
 .rts-product-details-section .details-product-area .cart-edit .quantity-edit button,
 .rts-product-details-section .details-product-area .cart-edits .quantity-edit button {
   background: none;
+  border-radius: 4px;
   font-size: 0;
 }
 

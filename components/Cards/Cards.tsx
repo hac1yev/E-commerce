@@ -37,18 +37,11 @@ const Cards = () => {
                     </Slider>
                 </div>
             </div>
-            {isModalOpen && modalData && <ProductDetailModal 
-                image={modalData.image}
-                category={modalData.category}
-                price={modalData.price}
-                value={modalData.value}
-                count={modalData.count}
-                tags={modalData.tags}
-                title={modalData.title}
-                reviewCount={modalData.reviewCount}
-                description={modalData.description}
-                handleCloseModal={handleCloseModal}
-            />}
+            {isModalOpen && modalData && 
+                <ProductDetailModal 
+                    handleCloseModal={handleCloseModal}
+                    {...modalData}
+                />}
         </div>
     );
 };
