@@ -10,7 +10,7 @@ declare type CardType = {
     value: number;
     count: number;
     category: string;
-    life: string;
+    life: object;
     tags: string[];
     brand: string;
     productType: string;

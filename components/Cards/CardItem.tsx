@@ -1,10 +1,8 @@
 import Image from "next/image";
-import bookmark from '../../public/images/bookmark.png';
+import bookmark from "../../public/images/bookmark.png";
 import { EyeIcon, Heart } from "lucide-react";
 
-type CardItemProps = Pick<CardType, "image" | "discount" | "title" | "kg" | "price" | "count" | "value">;
-
-const CardItem = ({ image,discount,title,kg,price,count,value }: CardItemProps) => {
+const CardItem = (props: Pick<CardType, keyof CardType> & { handleOpenModal: (id: string) => void }) => {
   return (
     <div className="single-shopping-card-one">
       {" "}
@@ -12,12 +10,12 @@ const CardItem = ({ image,discount,title,kg,price,count,value }: CardItemProps) 
         <a href="shop-details.html" className="thumbnail-preview">
           <div className="badge">
             <span>
-              {discount}% <br />
+              {props.discount}% <br />
               Off
             </span>
             <Image src={bookmark} width={50} height={50} alt="bookmark" />
           </div>
-          <Image src={image} width={300} height={200} alt={title} />
+          <Image src={props.image} width={300} height={200} alt={props.title} />
         </a>
         <div className="action-share-option">
           <div
@@ -25,31 +23,30 @@ const CardItem = ({ image,discount,title,kg,price,count,value }: CardItemProps) 
             data-flow="up"
             title="Add To Wishlist"
           >
-            <Heart width={17} style={{ color: '#fff' }} />
+            <Heart width={17} style={{ color: "#fff" }} />
           </div>
           <div
             className="single-action openuptip cta-quickview product-details-popup-btn"
             data-flow="up"
             title="Quick View"
+            onClick={() => props.handleOpenModal(props.id)}
           >
-            <EyeIcon width={17} style={{ color: '#fff' }} />
+            <EyeIcon width={17} style={{ color: "#fff" }} />
           </div>
         </div>
       </div>
       <div className="body-content">
         <a href="shop-details.html">
-          <h4 className="title">
-            {title}
-          </h4>
+          <h4 className="title">{props.title}</h4>
         </a>
-        <span className="availability">{kg * 1000}g Pack</span>
+        <span className="availability">{props.kg * 1000}g Pack</span>
         <div className="price-area">
-          <span className="current">${price.toFixed(2)}</span>
-          <div className="previous">${value.toFixed(2)}</div>
+          <span className="current">${props.price.toFixed(2)}</span>
+          <div className="previous">${props.value.toFixed(2)}</div>
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" value={count} />
+            <input type="text" className="input" value={props.count} />
             <div className="button-wrapper-action">
               <button className="button">
                 <i className="fa-regular fa-chevron-down"></i>
