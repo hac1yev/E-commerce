@@ -1,6 +1,5 @@
 import { HeartIcon, MinusIcon, PlusIcon, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
-import RatingStar from "../RatingStar/RatingStar";
 
 type CardItemProps = Pick<
   CardType,
