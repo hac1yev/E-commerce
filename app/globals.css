@@ -18828,7 +18828,7 @@ li.with-megamenu:hover .rts-megamenu {
   align-items: center;
   justify-content: space-between;
   position: relative;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 767px) {

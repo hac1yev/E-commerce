@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 import Banner from "@/components/Home/Banner/Banner";
 import RtsFeature from "@/components/Home/RtsFeature/RtsFeature";
-import Cards from "@/components/Cards/Cards";
+import FeaturedCards from "@/components/Home/FeaturedCards/FeaturedCards";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <Navbar />  
       <Banner />  
       <RtsFeature />
-      <Cards />
+      <FeaturedCards />
     </div>
   );
 }
