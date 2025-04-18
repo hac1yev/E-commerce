@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-rea
 
 const CardItem = (props: Pick<CardType, keyof CardType> & { handleOpenModal: (id: string) => void }) => {
   return (
-    <div className="single-shopping-card-one">
+    <div className="single-shopping-card-one featured-grocery-height">
       {" "}
       <div className="image-and-action-area-wrapper">
         <a href="shop-details.html" className="thumbnail-preview">
@@ -15,7 +15,7 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { handleOpenModal: (id
             </span>
             <Image src={bookmark} width={50} height={50} alt="bookmark" />
           </div>
-          <Image src={props.image} width={300} height={200} alt={props.title} />
+          <Image src={props.image} width={300} height={200} alt={props.category} />
         </a>
         <div className="action-share-option">
           <div

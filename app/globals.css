@@ -18465,6 +18465,9 @@ li.with-megamenu:hover .rts-megamenu {
   padding: 15px;
   background: #F5F6F7;
   border-radius: 6px;
+}
+
+.featured-grocery-height {
   height: 450px;
 }
 
@@ -18594,7 +18597,7 @@ li.with-megamenu:hover .rts-megamenu {
 .single-shopping-card-one .body-content {
   padding-top: 15px;
   position: relative;
-  height: calc(100% - 250px);
+  height: 170px;
 }
 
 .single-shopping-card-one .body-content .time-tag {
@@ -18672,7 +18675,7 @@ li.with-megamenu:hover .rts-megamenu {
   margin-top: 10px;
   flex-wrap: wrap;
   position: absolute;
-  bottom: 0;
+  bottom: 3px;
 }
 
 .single-shopping-card-one .cart-counter-action .quantity-edit {
@@ -18934,7 +18937,7 @@ li.with-megamenu:hover .rts-megamenu {
 }
 
 .single-discount-with-bg {
-  /* background-image: url(../public/images/discount-product/01.jpg); */
+  background-image: url(../public/images/discount-product/01.jpg);
   padding: 40px 50px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18955,7 +18958,7 @@ li.with-megamenu:hover .rts-megamenu {
 }
 
 .single-discount-with-bg.bg-2 {
-  /* background-image: url(../public/images/discount-product/02.jpg); */
+  background-image: url(../public/images/discount-product/02.jpg);
 }
 
 .single-discount-with-bg .title {
@@ -19020,19 +19023,19 @@ li.with-megamenu:hover .rts-megamenu {
   }
 }
 
-.single-shopping-card-one.discount-offer .thumbnail-preview img {
+.single-shopping-card-one.discount-offer .thumbnail-preview > img {
   height: 186px;
   object-fit: cover;
 }
 
 @media only screen and (max-width: 767px) {
-  .single-shopping-card-one.discount-offer .thumbnail-preview img {
+  .single-shopping-card-one.discount-offer .thumbnail-preview > img {
     height: auto;
   }
 }
 
 @media only screen and (max-width: 575px) {
-  .single-shopping-card-one.discount-offer .thumbnail-preview img {
+  .single-shopping-card-one.discount-offer .thumbnail-preview > img {
     height: auto;
   }
 }

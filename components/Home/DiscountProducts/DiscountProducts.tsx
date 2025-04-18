@@ -1,3 +1,5 @@
+import { discountProducts } from "@/public/demo/discountProductsData";
+import DiscountCardItem from "./DiscountCardItem";
 
 const DiscountProducts = () => {
     return (
@@ -47,182 +49,16 @@ const DiscountProducts = () => {
                             </div>
                             <div className="col-xl-8 col-lg-12">
                                 <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="single-shopping-card-one discount-offer">
-                                            <a href="shop-details.html" className="thumbnail-preview">
-                                                <div className="badge">
-                                                    <span>25% <br /> 
-                                                        Off
-                                                    </span>
-                                                    <i className="fa-solid fa-bookmark"></i>
-                                                </div>
-                                                <img src="assets/images/grocery/03.jpg" alt="grocery" />
-                                            </a>
-                                            <div className="body-content">
-
-                                                <a href="shop-details.html">
-                                                    <h4 className="title">Nestle Cerelac Mixed Fruits &
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span className="availability">500g Pack</span>
-                                                <div className="price-area">
-                                                    <span className="current">$36.00</span>
-                                                    <div className="previous">$36.00</div>
-                                                </div>
-                                                <div className="cart-counter-action">
-                                                    <div className="quantity-edit">
-                                                        <input type="text" className="input" value={1} />
-                                                        <div className="button-wrapper-action">
-                                                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                                                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                                        <div className="btn-text">
-                                                            Add
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                    {Array.from( { length: 2 } ).map((_,index) => (
+                                        <div className="col-lg-6" key={index}>
+                                            {discountProducts.slice(index * 2, (index + 1) * 2).map((product) => (
+                                                <DiscountCardItem 
+                                                    key={product.id}
+                                                    {...product}
+                                                />
+                                            ))}
                                         </div>
-                                        <div className="single-shopping-card-one discount-offer">
-                                            <a href="shop-details.html" className="thumbnail-preview">
-                                                <div className="badge">
-                                                    <span>25% <br /> 
-                                                        Off
-                                                    </span>
-                                                    <i className="fa-solid fa-bookmark"></i>
-                                                </div>
-                                                <img src="assets/images/grocery/04.jpg" alt="grocery" />
-                                            </a>
-                                            <div className="body-content">
-
-                                                <a href="shop-details.html">
-                                                    <h4 className="title">Nestle Cerelac Mixed Fruits &
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span className="availability">500g Pack</span>
-                                                <div className="price-area">
-                                                    <span className="current">$36.00</span>
-                                                    <div className="previous">$36.00</div>
-                                                </div>
-                                                <div className="cart-counter-action">
-                                                    <div className="quantity-edit">
-                                                        <input type="text" className="input" value={1} />
-                                                        <div className="button-wrapper-action">
-                                                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                                                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                                        <div className="btn-text">
-                                                            Add
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="single-shopping-card-one discount-offer">
-                                            <a href="shop-details.html" className="thumbnail-preview">
-                                                <div className="badge">
-                                                    <span>25% <br /> 
-                                                        Off
-                                                    </span>
-                                                    <i className="fa-solid fa-bookmark"></i>
-                                                </div>
-                                                <img src="assets/images/grocery/05.jpg" alt="grocery" />
-                                            </a>
-                                            <div className="body-content">
-
-                                                <a href="shop-details.html">
-                                                    <h4 className="title">Nestle Cerelac Mixed Fruits &
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span className="availability">500g Pack</span>
-                                                <div className="price-area">
-                                                    <span className="current">$36.00</span>
-                                                    <div className="previous">$36.00</div>
-                                                </div>
-                                                <div className="cart-counter-action">
-                                                    <div className="quantity-edit">
-                                                        <input type="text" className="input" value={1} />
-                                                        <div className="button-wrapper-action">
-                                                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                                                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                                        <div className="btn-text">
-                                                            Add
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="single-shopping-card-one discount-offer">
-                                            <a href="shop-details.html" className="thumbnail-preview">
-                                                <div className="badge">
-                                                    <span>25% <br /> 
-                                                        Off
-                                                    </span>
-                                                    <i className="fa-solid fa-bookmark"></i>
-                                                </div>
-                                                <img src="assets/images/grocery/06.jpg" alt="grocery" />
-                                            </a>
-                                            <div className="body-content">
-
-                                                <a href="shop-details.html">
-                                                    <h4 className="title">Nestle Cerelac Mixed Fruits &
-                                                        Wheat with Milk</h4>
-                                                </a>
-                                                <span className="availability">500g Pack</span>
-                                                <div className="price-area">
-                                                    <span className="current">$36.00</span>
-                                                    <div className="previous">$36.00</div>
-                                                </div>
-                                                <div className="cart-counter-action">
-                                                    <div className="quantity-edit">
-                                                        <input type="text" className="input" value={1} />
-                                                        <div className="button-wrapper-action">
-                                                            <button className="button"><i className="fa-regular fa-chevron-down"></i></button>
-                                                            <button className="button plus">+<i className="fa-regular fa-chevron-up"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" className="rts-btn btn-primary radious-sm with-icon">
-                                                        <div className="btn-text">
-                                                            Add
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                        <div className="arrow-icon">
-                                                            <i className="fa-regular fa-cart-shopping"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
