@@ -19223,11 +19223,11 @@ li.with-megamenu:hover .rts-megamenu {
 
 .best-selling-grocery li button:hover {
   border: none;
-  background: var(--color-primary) !important;
-  color: #fff !important;
+  background-color: #fafafa!important;
+  opacity: 0.8;
 }
 
-.best-selling-grocery li button[aria-selected=true] {
+.best-selling-grocery li button.active {
   border: none;
   background: var(--color-primary) !important;
   color: #fff !important;

@@ -4,6 +4,7 @@ import Banner from "@/components/Home/Banner/Banner";
 import RtsFeature from "@/components/Home/RtsFeature/RtsFeature";
 import FeaturedCards from "@/components/Home/FeaturedCards/FeaturedCards";
 import DiscountProducts from "@/components/Home/DiscountProducts/DiscountProducts";
+import WeeklyGroceries from "@/components/Home/WeeklyGroceries/WeeklyGroceries";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <RtsFeature />
       <FeaturedCards />
       <DiscountProducts />
+      <WeeklyGroceries />
     </div>
   );
 }
