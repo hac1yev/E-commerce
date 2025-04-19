@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import logo1 from "../../public/images/logo/logo-01.svg";
-import { Heart, Menu, ShoppingCart, UserIcon } from "lucide-react";
+import { Bell, Menu, ShoppingCart, UserIcon } from "lucide-react";
 import { useState } from "react";
 import Sidebar from "../Navbar/Sidebar";
 import Link from "next/link";
@@ -21,20 +21,43 @@ const MobileHeader = () => {
           <Image width={181} height={47} src={logo1} alt="logo-main" className="logo" />
         </Link>
         <div className="main-wrapper-action-2 d-flex">
-          <div className="accont-wishlist-cart-area-header">
-            <Link href="/" className="btn-border-only account">
-              <UserIcon width={20} />
-              <span className="text">Account</span>
-            </Link>
-            <Link href="/" className="btn-border-only wishlist">
-              <Heart width={20} />
-              <span className="text">Wishlist</span>
-            </Link>
-            <div className="btn-border-only cart category-hover-header">
-              <ShoppingCart width={20} />
-              <span className="text">My Cart</span>
-            </div>
-          </div>
+        <div className="accont-wishlist-cart-area-header">
+                  <Link href="/" className="btn-border-only account">
+                    <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
+                      <UserIcon width={18} />
+                    </div>
+                  </Link>
+                  <div 
+                    className={"btn-border-only cart category-hover-header"} 
+                  >
+                    <div 
+                      className="d-flex align-items-center h-100 gap-3 cart-button-wrap"
+                    >
+                      <div style={{ position: 'relative' }}>
+                        <Bell 
+                          style={{ flexShrink: 0 }} 
+                          width={18} 
+                        />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div 
+                    className={"btn-border-only cart category-hover-header"} 
+                  >
+                    <div 
+                      className="d-flex align-items-center h-100 gap-3 cart-button-wrap"
+                    >
+                      <div style={{ position: 'relative' }}>
+                        <ShoppingCart 
+                          style={{ flexShrink: 0 }} 
+                          width={18} 
+                        />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           <div className="actions-area">
             <div className="menu-btn" onClick={handleShowMobileMenu}>
               <Menu width={20} />

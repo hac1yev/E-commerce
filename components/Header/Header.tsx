@@ -1,13 +1,11 @@
 import Image from "next/image";
 import logo1 from "../../public/images/logo/logo-01.svg";
-import Search from "./Search";
 import MobileHeader from "./MobileHeader";
-import { Heart, ShoppingCart, UserIcon } from "lucide-react";
+import { Bell, Heart, ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
+import Search from "./Search";
 
 const Header = () => {
-
-
   return (
     <>
       <div className="search-header-area-main">
@@ -30,17 +28,15 @@ const Header = () => {
                 <div className="accont-wishlist-cart-area-header">
                   <Link href="/" className="btn-border-only account">
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
-                      <UserIcon width={20} />
-                      <span className="text">Account</span>
+                      <UserIcon width={18} />
                     </div>
                   </Link>
                   <Link href="/" className="btn-border-only wishlist">
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
                       <div style={{ position: 'relative' }}>
-                        <Heart width={20} />
-                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                        <Heart width={18} />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
                       </div>
-                      <span className="text">Wishlist</span>
                     </div>
                   </Link>
                   <div 
@@ -50,13 +46,27 @@ const Header = () => {
                       className="d-flex align-items-center h-100 gap-3 cart-button-wrap"
                     >
                       <div style={{ position: 'relative' }}>
+                        <Bell 
+                          style={{ flexShrink: 0 }} 
+                          width={18} 
+                        />
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div 
+                    className={"btn-border-only cart category-hover-header"} 
+                  >
+                    <div 
+                      className="d-flex align-items-center h-100 gap-3 cart-button-wrap"
+                    >
+                      <div style={{ position: 'relative' }}>
                         <ShoppingCart 
                           style={{ flexShrink: 0 }} 
-                          width={20} 
+                          width={18} 
                         />
-                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-11px' }}>2</span>
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
                       </div>
-                      <span className="text" style={{ flexShrink: 0 }}>My Cart</span>
                     </div>
                   </div>
                 </div>

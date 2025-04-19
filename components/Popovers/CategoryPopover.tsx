@@ -23,7 +23,7 @@ const CategoryPopover = () => {
       <li onClick={() => handleOpenDropdown("breakfast")}>
         <div className="menu-item">
           <Utensils width={18} height={18} />
-          <span>Breakfast &amp; Dairy</span>
+          <span>Female</span>
           <div className="plus-icon">
             <Plus style={{ width: "15px" }} />
           </div>
@@ -54,7 +54,7 @@ const CategoryPopover = () => {
       <li onClick={() => handleOpenDropdown("meats")}>
         <div className="menu-item">
           <Ham width={18} height={18} />
-          <span>Meats &amp; Seafood</span>
+          <span>Male</span>
           <div className="plus-icon">
             <Plus style={{ width: "15px" }} />
           </div>
@@ -85,13 +85,13 @@ const CategoryPopover = () => {
       <li>
         <Link href="/" className="menu-item">
           <Croissant width={18} height={18} />
-          <span>Breads &amp; Bakery</span>
+          <span>Mother&Kid</span>
         </Link>
       </li>
       <li onClick={() => handleOpenDropdown("chips")}>
         <div className="menu-item">
           <Popcorn width={18} height={18} />
-          <span>Chips &amp; Snacks</span>
+          <span>Households</span>
           <div className="plus-icon">
             <Plus style={{ width: "15px" }} />
           </div>
@@ -122,25 +122,43 @@ const CategoryPopover = () => {
       <li>
         <Link href="/" className="menu-item">
           <HeartPulse width={18} height={18} />
-          <span>Medical Healthcare</span>
+          <span>Furnitures</span>
         </Link>
       </li>
       <li>
         <Link href="/" className="menu-item">
           <Fish width={18} height={18} />
-          <span>Frozen Foods</span>
+          <span>Supermarket</span>
         </Link>
       </li>
       <li>
         <Link href="/" className="menu-item">
           <Soup width={18} height={18} />
-          <span>Grocery &amp; Staples</span>
+          <span>Cosmetics</span>
         </Link>
       </li>
       <li>
         <Link href="/" className="menu-item">
           <EthernetPort width={18} height={18} />
-          <span>Other Items</span>
+          <span>Shoes</span>
+        </Link>
+      </li>
+      <li>
+        <Link href="/" className="menu-item">
+          <EthernetPort width={18} height={18} />
+          <span>Bags</span>
+        </Link>
+      </li>
+      <li>
+        <Link href="/" className="menu-item">
+          <EthernetPort width={18} height={18} />
+          <span>Electronics</span>
+        </Link>
+      </li>
+      <li>
+        <Link href="/" className="menu-item">
+          <EthernetPort width={18} height={18} />
+          <span>Sports</span>
         </Link>
       </li>
     </ul>

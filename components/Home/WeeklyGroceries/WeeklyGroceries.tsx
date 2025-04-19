@@ -56,6 +56,7 @@ const WeeklyGroceries = () => {
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
+                                        componentType="weekly"
                                         handleOpenModal={handleOpenModal}
                                     />
                                 </div>
@@ -66,6 +67,7 @@ const WeeklyGroceries = () => {
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
+                                        componentType="weekly"
                                         handleOpenModal={handleOpenModal}
                                     />
                                 </div>
@@ -76,6 +78,7 @@ const WeeklyGroceries = () => {
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
+                                        componentType="weekly"
                                         handleOpenModal={handleOpenModal}
                                     />
                                 </div>
@@ -86,6 +89,7 @@ const WeeklyGroceries = () => {
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
+                                        componentType="weekly"
                                         handleOpenModal={handleOpenModal}
                                     />
                                 </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { AlignLeft, SearchIcon } from "lucide-react";
+import { AlignLeft } from "lucide-react";
 import CategoryPopover from "../Popovers/CategoryPopover";
 import { useState } from "react";
 
@@ -27,15 +27,18 @@ const Search = () => {
         {openCategoryPopover && <CategoryPopover />}
       </div>
       <form action="#" className="search-header">
-        <input
-          type="text"
-          placeholder="Search for products, categories or brands"
-          required
-        />
-        <button className="rts-btn btn-primary radious-sm with-icon">
-          Search
-          <SearchIcon width={20} />
-        </button>
+        <input type="text" placeholder="Search for products, categories or brands" required />
+        <a href="#" className="rts-btn btn-primary radious-sm with-icon">
+          <div className="btn-text">
+              Search
+          </div>
+          <div className="arrow-icon">
+              <i className="fa-light fa-magnifying-glass"></i>
+          </div>
+          <div className="arrow-icon">
+              <i className="fa-light fa-magnifying-glass"></i>
+          </div>
+        </a>
       </form>
     </>
   );
