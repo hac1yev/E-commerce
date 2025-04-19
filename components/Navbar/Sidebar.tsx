@@ -15,7 +15,7 @@ const Sidebar = ({ showMobileMenu, setShowMobileMenu }: { showMobileMenu: boolea
     <div className={showMobileMenu ? "sidebarmenu-overlay show-overlay" : "sidebarmenu-overlay close-overlay"}>
       <div id="side-bar" className={showMobileMenu ? "side-bar header-two show" : "side-bar header-two close"}>
         <button className="close-icon-menu">
-          <X onClick={() => setShowMobileMenu(false)} />
+          <X width={35} onClick={() => setShowMobileMenu(false)} />
         </button>
 
         <form action="#" className="search-input-area-menu mt--30">

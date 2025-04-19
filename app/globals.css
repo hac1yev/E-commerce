@@ -25358,10 +25358,10 @@ body.modal-open {
   left: 0px;
 }
 
-.side-bar button.close-icon-menu svg {
+.side-bar button.close-icon-menu {
   color: #ffffff;
   height: 35px;
-  width: 35px;
+  width: 35px!important;
   border-radius: 0;
   display: flex;
   align-items: center;
