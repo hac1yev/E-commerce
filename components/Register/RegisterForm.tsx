@@ -1,9 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import google from '../../public/images/form/google.svg';
 import fav from '../../public/images/logo/fav.png';
 import Link from "next/link";
+import { FormEvent } from "react";
+import axios from "axios";
 
 const RegisterForm = () => {
+
+    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            const formData = new FormData(e.currentTarget);
+
+            const data = {
+                email: formData.get("email"),
+                username: formData.get("username"),
+                password: formData.get("password")
+            }
+            const response = await axios.post('/api/register', JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="rts-register-area rts-section-gap bg_light-1">
             <div className="container">
@@ -14,18 +42,18 @@ const RegisterForm = () => {
                                 <Image className="mb--10" src={fav} alt="logo" />
                             </div>
                             <h3 className="title">Register Into Your Account</h3>
-                            <form className="registration-form">
+                            <form className="registration-form" onSubmit={handleRegister}>
                                 <div className="input-wrapper">
                                     <label htmlFor="name">Username*</label>
-                                    <input type="text" id="name" />
+                                    <input type="text" name="username" id="name" />
                                 </div>
                                 <div className="input-wrapper">
                                     <label htmlFor="email">Email*</label>
-                                    <input type="email" id="email" />
+                                    <input type="email" name="email" id="email" />
                                 </div>
                                 <div className="input-wrapper">
                                     <label htmlFor="password">Password*</label>
-                                    <input type="password" id="password" />
+                                    <input type="password" name="password" id="password" />
                                 </div>
                                 <button className="rts-btn btn-primary">Register Account</button>
                                 <div className="another-way-to-registration">

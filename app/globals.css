@@ -15753,14 +15753,14 @@ body.sal-disabled [data-sal|=flip] {
 }
 
 .accont-wishlist-cart-area-header .wishlist span.number {
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
   background: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   color: #fff;
   transition: 0.3s;
 }
@@ -15777,14 +15777,14 @@ body.sal-disabled [data-sal|=flip] {
   position: absolute;
   left: 33px;
   top: 2px;
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
   background: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   color: #fff;
   transition: 0.3s;
 }

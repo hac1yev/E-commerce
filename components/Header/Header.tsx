@@ -13,7 +13,7 @@ const Header = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="logo-search-category-wrapper">
-                <a href="index.html" className="logo-area">
+                <Link href="/" className="logo-area">
                   <Image
                     width={181}
                     height={47}
@@ -21,12 +21,12 @@ const Header = () => {
                     alt="logo-main"
                     className="logo"
                   />
-                </a>
+                </Link>
                 <div className="category-search-wrapper">
                   <Search />
                 </div>
                 <div className="accont-wishlist-cart-area-header">
-                  <Link href="/" className="btn-border-only account">
+                  <Link href="/login" className="btn-border-only account">
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
                       <UserIcon width={18} />
                     </div>
@@ -35,7 +35,7 @@ const Header = () => {
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
                       <div style={{ position: 'relative' }}>
                         <Heart width={18} />
-                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-6px' }}>2</span>
                       </div>
                     </div>
                   </Link>
@@ -50,7 +50,7 @@ const Header = () => {
                           style={{ flexShrink: 0 }} 
                           width={18} 
                         />
-                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-6px' }}>2</span>
                       </div>
                     </div>
                   </div>
@@ -65,7 +65,7 @@ const Header = () => {
                           style={{ flexShrink: 0 }} 
                           width={18} 
                         />
-                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-7px' }}>2</span>
+                        <span className="number" style={{ position: 'absolute', left: '7px', top: '-6px' }}>2</span>
                       </div>
                     </div>
                   </div>
