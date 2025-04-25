@@ -14,7 +14,9 @@ const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleRegister = async (data: FieldValues) => {        
+    const handleRegister = async (data: FieldValues) => {     
+        console.log(data);
+           
         try {
             const formData = {
                 username: data.username,
