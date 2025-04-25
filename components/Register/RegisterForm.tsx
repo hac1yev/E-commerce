@@ -31,11 +31,13 @@ const RegisterForm = () => {
             }
             
         } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-              setErrorMessage(error.response?.data?.message || "Something went wrong!");
-            } else {
+            // if (axios.isAxiosError(error)) {
+            //   setErrorMessage(error.response?.data?.message || "Something went wrong!");
+            // } else {
               setErrorMessage("Unexpected error occurred!");
-            }
+            // }
+            console.log(error);
+            
         }
     }
 
