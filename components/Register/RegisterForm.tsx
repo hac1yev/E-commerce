@@ -16,18 +16,11 @@ const RegisterForm = () => {
 
     const handleRegister = async (data: FieldValues) => {                
         try {
-            const formData = {
-                username: data.username,
-                email: data.email,
-                password: data.password
-            }
-            const response = await axios.post('/api/register', JSON.stringify(formData), {
+            const response = await axios.post('/api/register', JSON.stringify(data), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
-            console.log(response);
             
             if(response.status === 200) {                
                 router.replace('/login');

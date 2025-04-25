@@ -5,12 +5,30 @@ import google from '../../public/images/form/google.svg';
 import fav from '../../public/images/logo/fav.png';
 import Link from 'next/link';
 import { FieldValues, useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useState } from 'react';
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleLogin = (data: FieldValues) => {
-        console.log(data);
+    const handleLogin = async (data: FieldValues) => {
+        try {
+            const response = await axios.post('/api/login', JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log(response);
+            
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+              setErrorMessage(error.response?.data?.message || "Something went wrong!");
+            } else {
+              setErrorMessage("Unexpected error occurred!");
+            }
+        }
     };
 
     return (
@@ -23,6 +41,11 @@ const LoginForm = () => {
                                 <Image className="mb--10" src={fav} alt="logo" />
                             </div>
                             <h3 className="title">Login Into Your Account</h3>
+                            {errorMessage && (
+                                <div className="error-bg">
+                                    <p>{errorMessage}</p>
+                                </div>
+                            )}
                             <form className="registration-form" onSubmit={handleSubmit(handleLogin)}>
                                 <div className="input-wrapper">
                                     <label htmlFor="email">Email*</label>

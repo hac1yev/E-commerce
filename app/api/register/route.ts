@@ -30,9 +30,7 @@ export async function POST(req: NextRequest) {
         await pool.close();
 
         return NextResponse.json({ message: 'Your user has created!' });
-    } catch (error) {
-        console.log(error);
-        
+    } catch (error) {        
         return NextResponse.json({ error });
     }
 }
