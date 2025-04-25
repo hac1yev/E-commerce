@@ -2,7 +2,7 @@ import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
 import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
 
-const CardItem = (props: Pick<CardType, keyof CardType> & { componentType: string; handleOpenModal: (id: string) => void }) => {
+const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: string; handleOpenModal: (id: string) => void }) => {
   return (
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
