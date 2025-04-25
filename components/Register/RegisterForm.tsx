@@ -26,6 +26,9 @@ const RegisterForm = () => {
                     'Content-Type': 'application/json'
                 }
             });
+
+            console.log(response);
+
             if(response.status === 200) {                
                 router.replace('/login');
             }
