@@ -14,9 +14,7 @@ const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleRegister = async (data: FieldValues) => {     
-        console.log(data);
-           
+    const handleRegister = async (data: FieldValues) => {                
         try {
             const formData = {
                 username: data.username,
@@ -28,8 +26,6 @@ const RegisterForm = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
-            console.log(response);
 
             if(response.status === 200) {                
                 router.replace('/login');
