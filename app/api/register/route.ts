@@ -1,21 +1,38 @@
 import { connectToDB } from "@/app/lib/connectToDB";
 import { NextRequest, NextResponse } from "next/server";
+import sql from "mssql";
+import { hashPassword } from "@/app/lib/hashPassword";
 
 export async function POST(req: NextRequest) {
     try {
         const { email,username,password } = await req.json();
-
         const pool = await connectToDB();
-        const result = await pool.request().query(`
+        const hasEmailOrUsername = await pool.request().query(`
             SELECT email, username 
             FROM Users 
-            WHERE email = @email OR username = @username 
-        `);
+            WHERE email = '${email}' OR username = '${username}' 
+        `);        
+        
+        if(hasEmailOrUsername.recordset.length > 0) {
+            return NextResponse.json({ message: 'Email or username is already exist!' }, { status: 401 });
+        }
+        
+        const hashedPassword = await hashPassword(password);
 
+        await pool.request()
+            .input("username", sql.VarChar, username)
+            .input("email", sql.VarChar, email)
+            .input("password", sql.VarChar, hashedPassword)
+            .query(`
+                insert into Users values(@username, @email, @password)    
+            `);
+        
         await pool.close();
 
-        return NextResponse.json({ result });
+        return NextResponse.json({ message: 'Your user has created!' });
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json({ error });
     }
 }

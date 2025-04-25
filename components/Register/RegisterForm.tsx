@@ -4,31 +4,38 @@ import Image from "next/image";
 import google from '../../public/images/form/google.svg';
 import fav from '../../public/images/logo/fav.png';
 import Link from "next/link";
-import { FormEvent } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FieldValues, useForm } from "react-hook-form";
+import { useState } from "react";
 
 const RegisterForm = () => {
+    const router = useRouter();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const handleRegister = async (data: FieldValues) => {        
         try {
-            const formData = new FormData(e.currentTarget);
-
-            const data = {
-                email: formData.get("email"),
-                username: formData.get("username"),
-                password: formData.get("password")
+            const formData = {
+                username: data.username,
+                email: data.email,
+                password: data.password
             }
-            const response = await axios.post('/api/register', JSON.stringify(data), {
+            const response = await axios.post('/api/register', JSON.stringify(formData), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
+            if(response.status === 200) {                
+                router.replace('/login');
+            }
             
-        } catch (error) {
-            console.log(error);
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+              setErrorMessage(error.response?.data?.message || "Something went wrong!");
+            } else {
+              setErrorMessage("Unexpected error occurred!");
+            }
         }
     }
 
@@ -42,18 +49,67 @@ const RegisterForm = () => {
                                 <Image className="mb--10" src={fav} alt="logo" />
                             </div>
                             <h3 className="title">Register Into Your Account</h3>
-                            <form className="registration-form" onSubmit={handleRegister}>
+                            {errorMessage && (
+                                <div className="error-bg">
+                                    <p>{errorMessage}</p>
+                                </div>
+                            )}
+                            <form className="registration-form" onSubmit={handleSubmit(handleRegister)}>
                                 <div className="input-wrapper">
                                     <label htmlFor="name">Username*</label>
-                                    <input type="text" name="username" id="name" />
+                                    <input 
+                                        type="text" 
+                                        {...register("username", { required: "Username is required!", minLength: {
+                                            value: 6,
+                                            message: 'Username must be at least 6 caracters!'
+                                        } })}
+                                        name="username" 
+                                        id="name" 
+                                    />
+                                    {errors['username'] && (
+                                        <p className="error">{errors['username'].message as string}</p>
+                                    )}
                                 </div>
+                                
                                 <div className="input-wrapper">
                                     <label htmlFor="email">Email*</label>
-                                    <input type="email" name="email" id="email" />
+                                    <input 
+                                        type="email" 
+                                        {...register("email", {
+                                            required: "Email is required!",
+                                            pattern: {
+                                              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                                              message: "Invalid email address!",
+                                            },
+                                        })}
+                                        name="email" 
+                                        id="email" 
+                                    />
+                                    {errors['email'] && (
+                                        <p className="error">{errors['email'].message as string}</p>
+                                    )}
                                 </div>
                                 <div className="input-wrapper">
                                     <label htmlFor="password">Password*</label>
-                                    <input type="password" name="password" id="password" />
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        {...register("password", {
+                                            required: "Password is required!",
+                                            minLength: {
+                                              value: 6,
+                                              message: "Password must be at least 6 caracters!",
+                                            },
+                                            maxLength: {
+                                              value: 20,
+                                              message: "Password can not longer than 20 caracters!",
+                                            },
+                                        })}
+                                        name="password" 
+                                    />
+                                    {errors['password'] && (
+                                        <p className="error">{errors['password'].message as string}</p>
+                                    )}
                                 </div>
                                 <button className="rts-btn btn-primary">Register Account</button>
                                 <div className="another-way-to-registration">

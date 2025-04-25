@@ -6,8 +6,8 @@ export const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     options: {
-        encrypt: true,
-        trustedConnection: true
+        encrypt: false,
+        trustedConnection: false
     }
 } 
 

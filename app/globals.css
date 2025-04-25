@@ -23289,6 +23289,25 @@ body.modal-open {
   padding: 15px;
 }
 
+p.error {
+  color: rgb(253, 34, 34);
+  margin-top: 5px;
+}
+
+div.error-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(253, 167, 167);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+div.error-bg > p {
+  color: rgb(253, 34, 34);
+  font-weight: 600;
+}
+
 .error-main-wrapper {
   text-align: center;
 }
@@ -23898,6 +23917,10 @@ body.modal-open {
   color: #2C3C28;
   font-weight: 600;
   margin-left: 10px;
+}
+
+.registration-form .another-way-to-registration p a:hover {
+  text-decoration: underline;
 }
 
 .faq-content-left-main-wrapper p.disc {

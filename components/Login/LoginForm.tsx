@@ -1,9 +1,18 @@
+"use client";
+
 import Image from 'next/image';
 import google from '../../public/images/form/google.svg';
 import fav from '../../public/images/logo/fav.png';
 import Link from 'next/link';
+import { FieldValues, useForm } from 'react-hook-form';
 
 const LoginForm = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const handleLogin = (data: FieldValues) => {
+        console.log(data);
+    };
+
     return (
         <div className="rts-register-area rts-section-gap bg_light-1">
             <div className="container">
@@ -14,14 +23,46 @@ const LoginForm = () => {
                                 <Image className="mb--10" src={fav} alt="logo" />
                             </div>
                             <h3 className="title">Login Into Your Account</h3>
-                            <form className="registration-form">
+                            <form className="registration-form" onSubmit={handleSubmit(handleLogin)}>
                                 <div className="input-wrapper">
                                     <label htmlFor="email">Email*</label>
-                                    <input type="email" id="email" />
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        {...register("email", { 
+                                            required: 'Email is required!', 
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                                                message: "Invalid email address!",
+                                            }, 
+                                        })}
+                                        name="email"
+                                    />
+                                    {errors['email'] && (
+                                        <p className='error'>{errors['email'].message as string}</p>
+                                    )}
                                 </div>
                                 <div className="input-wrapper">
                                     <label htmlFor="password">Password*</label>
-                                    <input type="password" id="password" />
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        {...register("password", {
+                                            required: 'Password isrequired!',
+                                            minLength: {
+                                                value: 6,
+                                                message: "Password must be at least 6 caracters!",
+                                            },
+                                            maxLength: {
+                                                value: 20,
+                                                message: "Password can not longer than 20 caracters!",
+                                            },
+                                        })}
+                                        name="password"
+                                    />
+                                    {errors['password'] && (
+                                        <p className='error'>{errors['password'].message as string}</p>
+                                    )}
                                 </div>
                                 <button className="rts-btn btn-primary">Login Account</button>
                                 <div className="another-way-to-registration">
