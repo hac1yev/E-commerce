@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
     try {
         const { email,password } = await req.json();
 
-        
+        console.log(email,password);
 
         const response = NextResponse.json({ message: "Success" });
     
