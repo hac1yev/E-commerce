@@ -2,7 +2,7 @@ import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
 import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
 
-const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: string; handleOpenModal: (id: string) => void }) => {
+const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
   return (
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
@@ -29,7 +29,7 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: stri
             className="single-action openuptip cta-quickview product-details-popup-btn"
             data-flow="up"
             title="Quick View"
-            onClick={() => props.handleOpenModal(props.id)}
+            // onClick={() => props.handleOpenModal(props.id)}
           >
             <EyeIcon width={17} style={{ color: "#fff" }} />
           </div>

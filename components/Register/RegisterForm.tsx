@@ -42,7 +42,7 @@ const RegisterForm = () => {
                     <div className="col-lg-12">
                         <div className="registration-wrapper-1">
                             <div className="logo-area mb--0">
-                                <Image className="mb--10" src={fav} alt="logo" />
+                                <Image className="mb--10" width={50} height={50} src={fav} alt="logo" />
                             </div>
                             <h3 className="title">Register Into Your Account</h3>
                             {errorMessage && (

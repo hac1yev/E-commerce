@@ -15,6 +15,7 @@ const RtsFeature = () => {
                                 <Image 
                                     src={rtsDollar}
                                     width={45}
+                                    height={45}
                                     alt="best-wide-assortment"
                                 />
                             </div>
@@ -30,6 +31,7 @@ const RtsFeature = () => {
                                 <Image 
                                     src={rtsPolicy}
                                     width={45}
+                                    height={45}
                                     alt="best-policy"
                                 />
                             </div>
@@ -45,6 +47,7 @@ const RtsFeature = () => {
                                 <Image 
                                     src={rtsOffer}
                                     width={45}
+                                    height={45}
                                     alt="best-offer"
                                 />
                             </div>
@@ -60,6 +63,7 @@ const RtsFeature = () => {
                                 <Image 
                                     src={rtsPrice}
                                     width={45}
+                                    height={45}
                                     alt="best-prices"
                                 />
                             </div>
