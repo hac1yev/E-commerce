@@ -1,12 +1,32 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
- 
-export function middleware(request: NextRequest) {
-    const { url } = request;
+import { NextRequest } from 'next/server'
+import { verifyRefreshToken } from './app/lib/verifyToken';
 
-    return NextResponse.redirect(new URL('/home', url));
+const authPages = ['/login', '/register'];
+
+const isAuthPage = (url: string) => authPages.includes(url);
+
+export async function middleware(request: NextRequest) {
+  const { url,nextUrl } = request;
+  const refreshToken = request.cookies.get("refreshToken")?.value || ""; 
+
+  if(isAuthPage(nextUrl.pathname)) {
+    const isValidRefreshToken = await verifyRefreshToken(refreshToken);
+
+    if(!isValidRefreshToken) {
+      return NextResponse.next();
+    }
+  }else{
+    const isValidRefreshToken = await verifyRefreshToken(refreshToken);
+
+    if(isValidRefreshToken) {
+      return NextResponse.next();
+    }
+  }
+
+  return NextResponse.redirect(new URL('/', url));
 }
  
 export const config = {
-  matcher: '/about/:path*',
+  matcher: ['/', '/login', '/register']
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDown, ChevronUp, ShoppingCart } from "lucide-react";
 import bookmark from "../../../public/images/bookmark.png";
 import Image from "next/image";
@@ -33,7 +35,7 @@ const DiscountCardItem = ({ discount, image, category, title, kg, price, value, 
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" value={count} />
+            <input type="text" className="input" onChange={() => console.log("")} value={count} />
             <div className="button-wrapper-action">
               <button className="button">
                 <ChevronDown width={16} />

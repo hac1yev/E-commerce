@@ -46,7 +46,7 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: stri
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" value={props.count} />
+            <input type="text" className="input" onChange={() => console.log("")} value={props.count} />
             <div className="button-wrapper-action">
               <button className="button">
                 <ChevronUp width={16} />

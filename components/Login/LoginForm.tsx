@@ -20,7 +20,9 @@ const LoginForm = () => {
                 }
             });
 
-            console.log(response);
+            if(response.status === 200) {
+                window.location.reload();
+            }
             
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
