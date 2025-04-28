@@ -3,8 +3,12 @@
 import ProductsFilterSelect from "./ProductsFilterSelect";
 import { cards } from "@/public/demo/demoCardData";
 import CardItem from "../Cards/CardItem";
+import { useEffect } from "react";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 const ProductsMain = () => {
+  const axiosPrivate = useAxiosPrivate();
+
     // const [isModalOpen,setIsModalOpen] = useState(false);
     // const [modalData,setModalData] = useState<CardType>();
 
@@ -17,6 +21,17 @@ const ProductsMain = () => {
     // const handleCloseModal = useCallback(() => {
     //     setIsModalOpen(false);
     // }, []);
+
+    useEffect(() => {
+      (async function() {
+        try {
+          const response = await axiosPrivate.get("/api/products");
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
+      })()
+    }, [axiosPrivate]);
 
   return (
     <div className="col-xl-9 col-lg-12">

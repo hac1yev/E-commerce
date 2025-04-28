@@ -14,6 +14,6 @@ declare type CardType = {
     tags: string[];
     brand: string;
     productType: string;
-    reviewCount: number
-    ratingStars: { five: number, four: number, three: number, two: number, one: number }
+    reviewCount: number;
+    ratingStars: { five: number, four: number, three: number, two: number, one: number };
 }

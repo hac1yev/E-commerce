@@ -3,10 +3,10 @@
 import { cards, settings } from "@/public/demo/demoCardData";
 import Slider from "react-slick";
 import CardItem from "../../Cards/CardItem";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 import { useCallback, useState } from "react";
 import ProductDetailModal from "../../Modals/ProductDetailModal";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 const FeaturedCards = () => {
     const [isModalOpen,setIsModalOpen] = useState(false);

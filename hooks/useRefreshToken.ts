@@ -5,8 +5,8 @@ const useRefreshToken = () => {
     const getRefreshToken = async () => {
         try {
             const response = await axios.get("/api/refresh");
-            console.log(response);
-            return response;            
+            window.localStorage.setItem("accessToken", response.data.newAccessToken);
+            return response.data.newAccessToken;     
         } catch (error) {
             console.log(error);
         }
