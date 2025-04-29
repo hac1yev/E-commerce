@@ -21,6 +21,12 @@ export async function middleware(request: NextRequest) {
 
     if(isValidRefreshToken) {
       return NextResponse.next();
+    }else{
+      if(nextUrl.pathname !== '/') {
+        return NextResponse.redirect(new URL('/login', url));
+      }else{
+        return NextResponse.next();
+      }
     }
   }
 
@@ -28,5 +34,5 @@ export async function middleware(request: NextRequest) {
 }
  
 export const config = {
-  matcher: ['/', '/login', '/register']
+  matcher: ['/', '/login', '/register', '/profile']
 }

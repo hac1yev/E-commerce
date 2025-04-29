@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
         await pool.request()
             .input("username", sql.VarChar, username)
             .input("email", sql.VarChar, email)
+            .input("role", sql.VarChar, "user")
             .input("password", sql.VarChar, hashedPassword)
             .query(`
                 insert into Users values(@username, @email, @password)    

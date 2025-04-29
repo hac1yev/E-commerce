@@ -21,7 +21,7 @@ const LoginForm = () => {
             });
 
             if(response.status === 200) {
-                window.localStorage.setItem("accessToken", JSON.stringify(response.data.accessToken));
+                window.localStorage.setItem("accessToken", response.data.accessToken);
                 window.location.reload();
             }
             

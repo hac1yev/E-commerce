@@ -1,11 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import logo1 from "../../public/images/logo/logo-01.svg";
 import MobileHeader from "./MobileHeader";
 import { Bell, Heart, ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
 import Search from "./Search";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [token,setToken] = useState("");
+
+  useEffect(() => {
+    const accessToken: string = typeof window !== "undefined" && localStorage.getItem("accessToken") || "";
+    setToken(accessToken)
+  }, [])
+  
   return (
     <>
       <div className="search-header-area-main">
@@ -26,7 +36,7 @@ const Header = () => {
                   <Search />
                 </div>
                 <div className="accont-wishlist-cart-area-header">
-                  <Link href="/login" className="btn-border-only account">
+                  <Link href={token ? "/profile" : "/login"} className="btn-border-only account">
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
                       <UserIcon width={18} />
                     </div>

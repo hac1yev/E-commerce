@@ -1,0 +1,52 @@
+export const productTypes = [
+  "Original",
+  "Replica",
+  "Refurbished",
+  "Used",
+  "Handmade",
+  "Custom",
+  "Organic",
+  "Imported",
+  "Local",
+  "Limited Edition",
+];
+
+export const productTags = [
+  "fashion",
+  "t-shirt",
+  "Men",
+  "casualwear",
+  "streetwear",
+  "menswear",
+  "summer style",
+  "slim fit",
+  "cotton",
+  "breathable",
+  "short sleeve",
+  "crew neck",
+  "graphic tee",
+  "printed design",
+  "solid color",
+  "trendy",
+  "everyday wear",
+  "wardrobe essential",
+  "minimalist style",
+  "youth fashion",
+  "soft fabric",
+  "durable",
+  "machine washable",
+];
+
+export const productCategories = [
+    "Female",
+    "Male",
+    "Mother&Kid",
+    "Households",
+    "Furnitures",
+    "Supermarket",
+    "Cosmetics",
+    "Shoes",
+    "Bags",
+    "Electronics",
+    "Sports"
+];  
