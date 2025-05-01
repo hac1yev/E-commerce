@@ -25010,6 +25010,10 @@ div.error-bg > p {
   margin-bottom: 15px;
 }
 
+.add-product-form .single-input > label {
+  margin-bottom: 5px;
+}
+
 .add-product-form .custom-file-upload {
   position: relative;
   display: inline-block;
@@ -25060,14 +25064,62 @@ div.error-bg > p {
   margin-bottom: 15px;
 }
 
+.add-product-form .basic-multi-select {
+  margin-bottom: 15px;
+}
+
+.add-product-form .select__control {
+  border: 1px solid #E8E8E8;
+}
+
 .add-product-form .input-half-area {
   display: flex;
-  align-items: center;
   gap: 10px;
+}
+
+.add-product-form .select__value-container {
+  padding: 0 8px!important;
+}
+
+.add-product-form .select__input-container {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  margin: 0!important;
 }
 
 .add-product-form .input-half-area .single-input {
   width: 100%;
+}
+
+.add-product-form .upload-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-product-form .upload-button > div {
+  width: 100%;
+}
+
+.add-product-form .upload-button > div > div {
+  display: none;
+}
+
+.add-product-form .upload-button label {
+  display: block;
+  height: 55px;
+  width: 100%;
+  line-height: 55px;
+  background-color: #fff;
+  border: 1px solid #E8E8E8;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #555!important;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
 }
 
 .vendor-name-area-details {

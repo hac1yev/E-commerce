@@ -9,7 +9,7 @@ import Orders from "./Orders";
 import AddProduct from "./AddProduct";
 
 const ProfileSidebar = () => {
-    const [activeTab,setActiveTab] = useState("tab1");
+    const [activeTab,setActiveTab] = useState("tab4");
 
     const handleChangeTab = (e: MouseEvent<HTMLDivElement>) => {
         const target = e.target as HTMLElement;
