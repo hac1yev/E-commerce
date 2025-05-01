@@ -1,10 +1,5 @@
 import { UploadButton } from "@/app/lib/uploadthing";
-import {
-  productCategories,
-  productStatus,
-  productTags,
-  productTypes,
-} from "@/public/demo/demoSelectItems";
+import { productCategories, productStatus, productTags, productTypes } from "@/public/demo/demoSelectItems";
 import React, { FormEvent, useState } from "react";
 import Select from "react-select";
 
