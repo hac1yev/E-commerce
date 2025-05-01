@@ -1,30 +1,38 @@
 import { UploadButton } from "@/app/lib/uploadthing";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { productCategories, productStatus, productTags, productTypes } from "@/public/demo/demoSelectItems";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
 
 const AddProduct = () => {
+  const axiosPrivate = useAxiosPrivate();
+
   const [productItems,setProductItems] = useState({
     title: "",
     date: new Date().toISOString().split('T')[0],
     kg: 0,
     price: 0,
-    tags: [
-      { value: '', label: '' }
-    ],
-    categories: [
-      { value: '', label: '' }
-    ],
-    type: [
-      { value: '', label: '' }
-    ],
-    status: [
-      { value: '', label: '' }
-    ],
+    tags: [],
+    categories: [],
+    type: 1,
+    status: 1,
     image: "",
     description: "",
     additionalInfo: ""
   });
+
+  useEffect(() => {
+    (async function() {
+      try {
+        const response = await axiosPrivate.get("/api/products/meta");
+        console.log(response);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    })()
+  }, [axiosPrivate]);
 
   const handleAddNewProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
