@@ -1,13 +1,12 @@
 import { UploadButton } from "@/app/lib/uploadthing";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
-import { productCategories, productStatus, productTags, productTypes } from "@/public/demo/demoSelectItems";
 import React, { FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
 
 const AddProduct = () => {
   const axiosPrivate = useAxiosPrivate();
-
-  const [productItems,setProductItems] = useState({
+  const [selectData,setSelectData] = useState<AddProductSelectType>({});
+  const [productItems,setProductItems] = useState<ProductItem>({
     title: "",
     date: new Date().toISOString().split('T')[0],
     kg: 0,
@@ -25,11 +24,11 @@ const AddProduct = () => {
     (async function() {
       try {
         const response = await axiosPrivate.get("/api/products/meta");
-        console.log(response);
+        setSelectData(response.data);
+        console.log(response.data);
         
       } catch (error) {
         console.log(error);
-        
       }
     })()
   }, [axiosPrivate]);
@@ -37,7 +36,7 @@ const AddProduct = () => {
   const handleAddNewProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
+    console.log(productItems);
   };
 
   return (
@@ -111,13 +110,13 @@ const AddProduct = () => {
           <label htmlFor="tags">Tags*</label>
           <Select
             isMulti
-            options={productTags}
+            options={selectData.tags}
             id="tags"
             className="basic-multi-select"
             classNamePrefix="select"
             placeholder="Select tags:"
             value={productItems.tags}
-            onChange={(selectedOption) => setProductItems((prev) => { 
+            onChange={(selectedOption) => setProductItems((prev) => {               
               return {
                 ...prev,
                 tags: [
@@ -132,10 +131,11 @@ const AddProduct = () => {
           <Select
             isMulti
             id="categories"
-            options={productCategories}
+            options={selectData.categories}
             className="basic-multi-select"
             classNamePrefix="select"
             placeholder="Select categories:"
+            value={productItems.categories}
             onChange={(selectedOption) => setProductItems((prev) => { 
               return {
                 ...prev,
@@ -151,42 +151,40 @@ const AddProduct = () => {
         <div className="single-input">
           <label htmlFor="type">Type*</label>
           <Select
-            options={productTypes}
+            options={selectData.types}
             id="type"
             className="basic-multi-select"
             classNamePrefix="select"
             placeholder="Select type:"
-            value={productItems.type}
+            value={selectData.types?.find(opt => opt.value === productItems.type) || null}
             onChange={(selectedOption) => {          
-              setProductItems((prev) => {
-                return {
-                  ...prev,
-                  type: [
-                    selectedOption
-                  ]
-                }
-              })
+              if(selectedOption) {
+                setProductItems((prev) => {
+                  return {
+                    ...prev,
+                    type: selectedOption.value
+                  }
+                })
+              }
             }}
           />
         </div>
         <div className="single-input">
           <label htmlFor="status">Status*</label>
           <Select
-            options={productStatus}
+            options={selectData.status}
             id="status"
             className="basic-multi-select"
             classNamePrefix="select"
             placeholder="Select status:"
-            value={productItems.status}
-            onChange={(selectedOption) => {              
-              setProductItems((prev) => {
-                return {
+            value={selectData.status?.find(opt => opt.value === productItems.status) || null}
+            onChange={(selectedOption) => {
+              if(selectedOption) {
+                setProductItems((prev) => ({
                   ...prev,
-                  status: [
-                    selectedOption
-                  ]
-                }
-              })
+                  status: selectedOption.value
+                }))
+              }
             }}
           />
         </div>
@@ -210,7 +208,6 @@ const AddProduct = () => {
           }}
         />
       </div>
-
       <div className="single-input">
         <label htmlFor="description">Description*</label>
         <textarea
