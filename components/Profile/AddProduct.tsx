@@ -1,6 +1,6 @@
 import { UploadButton } from "@/app/lib/uploadthing";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
-import React, { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
 
 const AddProduct = () => {
@@ -8,35 +8,45 @@ const AddProduct = () => {
   const [selectData,setSelectData] = useState<AddProductSelectType>({});
   const [productItems,setProductItems] = useState<ProductItem>({
     title: "",
-    date: new Date().toISOString().split('T')[0],
-    kg: 0,
-    price: 0,
+    life: new Date().toISOString().split('T')[0],
+    discount: "",
+    price: "",
     tags: [],
     categories: [],
-    type: 1,
-    status: 1,
-    image: "",
+    type: "",
+    status: "",
     description: "",
-    additionalInfo: ""
+    additionalInfo: "",
+    image: {
+      name: "",
+      url: ""
+    },
+    brand: ""
   });
 
   useEffect(() => {
     (async function() {
       try {
         const response = await axiosPrivate.get("/api/products/meta");
-        setSelectData(response.data);
-        console.log(response.data);
-        
+        setSelectData(response.data);        
       } catch (error) {
         console.log(error);
       }
     })()
   }, [axiosPrivate]);
 
-  const handleAddNewProduct = (e: FormEvent<HTMLFormElement>) => {
+  const handleAddNewProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(productItems);
+    try {
+      await axiosPrivate.post("/api/products", JSON.stringify(productItems), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -63,11 +73,11 @@ const AddProduct = () => {
           <input 
             type="date" 
             id="lifespan"
-            value={productItems.date} 
+            value={productItems.life} 
             onChange={(e) => setProductItems((prev) => {
               return {
                 ...prev,
-                date: e.target.value
+                life: e.target.value
               }
             })} 
           />
@@ -75,16 +85,16 @@ const AddProduct = () => {
       </div>
       <div className="input-half-area">
         <div className="single-input">
-          <label htmlFor="kg">Kg*</label>
+          <label htmlFor="kg">Discount*</label>
           <input 
             type="number" 
-            id="kg"
-            placeholder="Kg:" 
-            value={productItems.kg} 
+            id="Discount"
+            placeholder="Discount:" 
+            value={productItems.discount} 
             onChange={(e) => setProductItems((prev) => {
               return {
                 ...prev,
-                kg: parseInt(e.target.value)
+                discount: parseInt(e.target.value)
               }
             })} 
           />
@@ -189,17 +199,35 @@ const AddProduct = () => {
           />
         </div>
       </div>
+      <div className="single-input">
+        <label htmlFor="price">Brand*</label>
+        <input 
+          type="text" 
+          id="brand"
+          placeholder="Enter brand:" 
+          value={productItems.brand} 
+          onChange={(e) => setProductItems((prev) => {
+            return {
+              ...prev,
+              brand: e.target.value
+            }
+          })} 
+        />
+      </div>
       <div className="upload-button">
         <UploadButton
           endpoint="imageUploader"
           content={{
-            button: "Upload Image",
+            button: productItems.image.name || "Upload Image",
           }}
-          onClientUploadComplete={(res) => {
+          onClientUploadComplete={(res) => {            
             setProductItems((prev) => {
               return {
                 ...prev, 
-                image: res[0].ufsUrl
+                image: {
+                  name: res[0].name,
+                  url: res[0].ufsUrl
+                }
               }
             });
           }}
