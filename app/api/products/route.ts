@@ -13,8 +13,14 @@ export async function GET(req: NextRequest) {
     if(!isVerifyAccessToken) {
         return NextResponse.json({ message: 'Forbidden!' }, { status: 403 });
     }
+    
+    const pool = await connectToDB();
 
-    return NextResponse.json({ message: 'Success' });
+    const productsRequest = await pool.request().query(`
+        select * from Products
+    `);
+
+    return NextResponse.json({ message: 'Success', products: productsRequest.recordset });
 } 
 
 export async function POST(req: NextRequest) {
@@ -46,10 +52,11 @@ export async function POST(req: NextRequest) {
         .input("type", sql.Int, type)
         .input("status", sql.Int, status)
         .input("brand", sql.VarChar, brand)
+        .input("salesCount", sql.Int, 0)
     .query(`
         insert into Products
         output inserted.id
-        values (@discount,@image,@title,@description,@additionalInfo,@price,@value,@reviewCount,@life,@createdAt,@views,@type,@status,@brand)
+        values (@discount,@image,@title,@description,@additionalInfo,@price,@value,@reviewCount,@life,@createdAt,@views,@type,@status,@brand,@salesCount)
     `);
 
     const productId = insertProductRequest.recordset[0].id;

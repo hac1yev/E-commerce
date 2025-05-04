@@ -1,3 +1,5 @@
+"use client"
+
 import { UploadButton } from "@/app/lib/uploadthing";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { FormEvent, useEffect, useState } from "react";
@@ -39,11 +41,15 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      await axiosPrivate.post("/api/products", JSON.stringify(productItems), {
+      const response = await axiosPrivate.post("/api/products", JSON.stringify(productItems), {
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      if(response.status === 200) {
+        setProductItems({ title: "", life: new Date().toISOString().split('T')[0], discount: "", price: "", tags: [], categories: [], type: "", status: "", description: "", additionalInfo: "", image: { name: "", url: "" }, brand: "" });
+      }
+      
     } catch (error) {
       console.log(error);
     }
