@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 
 const FeaturedCards = () => {
     const [isModalOpen,setIsModalOpen] = useState(false);
-    const [modalData,setModalData] = useState<CardType>();
+    const [modalData,setModalData] = useState<ProductType>();
 
     const handleOpenModal = useCallback((id: string) => {
         setIsModalOpen(true);

@@ -2,7 +2,7 @@ import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
 import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
 
-const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
+const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
   return (
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
@@ -15,7 +15,7 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: stri
             </span>
             <Image src={bookmark} width={50} height={50} alt="bookmark" />
           </div>
-          <Image src={props.image} width={300} height={200} alt={props.category} />
+          <Image src={props.image} width={300} height={200} alt={props.brand} />
         </a>
         <div className="action-share-option">
           <div
@@ -39,14 +39,13 @@ const CardItem = (props: Pick<CardType, keyof CardType> & { componentType?: stri
         <a href="shop-details.html">
           <h4 className="title">{props.title}</h4>
         </a>
-        <span className="availability">{props.kg * 1000}g Pack</span>
         <div className="price-area">
           <span className="current">${props.price.toFixed(2)}</span>
           <div className="previous">${props.value.toFixed(2)}</div>
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" onChange={() => console.log("")} value={props.count} />
+            <input type="text" className="input" onChange={() => console.log("")} value={1} />
             <div className="button-wrapper-action">
               <button className="button">
                 <ChevronUp width={16} />

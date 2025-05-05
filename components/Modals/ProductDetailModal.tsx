@@ -2,7 +2,7 @@ import { HeartIcon, MinusIcon, PlusIcon, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 
 type CardItemProps = Pick<
-  CardType,
+  ProductType,
     "image" | "title" | "price" | "count" | "value" | "category" | "tags" | "reviewCount" | "description"
 > & {
     handleCloseModal: () => void;

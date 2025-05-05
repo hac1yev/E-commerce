@@ -1,37 +1,39 @@
 "use client";
 
 import ProductsFilterSelect from "./ProductsFilterSelect";
-import { cards } from "@/public/demo/demoCardData";
 import CardItem from "../Cards/CardItem";
 import { useEffect } from "react";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { ProductSliceActions, useTypedProductSelector } from "@/store/products-slice";
+import { useDispatch } from "react-redux";
 
 const ProductsMain = () => {
+  const products = useTypedProductSelector((state) => state.productReducer.products);
+  const dispatch = useDispatch();
+  // const [isModalOpen,setIsModalOpen] = useState(false);
+  // const [modalData,setModalData] = useState<ProductType>();
   const axiosPrivate = useAxiosPrivate();
+  
+  // const handleOpenModal = useCallback((id: string) => {
+  //     setIsModalOpen(true);
+  //     const findedProduct = products.find((product) => product.id === parseInt(id));
+  //     setModalData(findedProduct);
+  // }, [products]);
 
-    // const [isModalOpen,setIsModalOpen] = useState(false);
-    // const [modalData,setModalData] = useState<CardType>();
+  // const handleCloseModal = useCallback(() => {
+  //     setIsModalOpen(false);
+  // }, []);
 
-    // const handleOpenModal = useCallback((id: string) => {
-    //     setIsModalOpen(true);
-    //     const findedCard = cards.find((card) => card.id === id);
-    //     setModalData(findedCard);
-    // }, []);
-
-    // const handleCloseModal = useCallback(() => {
-    //     setIsModalOpen(false);
-    // }, []);
-
-    useEffect(() => {
-      (async function() {
-        try {
-          const response = await axiosPrivate.get("/api/products");
-          console.log(response);
-        } catch (error) {
-          console.log(error);
-        }
-      })()
-    }, [axiosPrivate]);
+  useEffect(() => {
+    (async function() {
+      try {
+        const response = await axiosPrivate.get("/api/products");
+        dispatch(ProductSliceActions.getAllProducts(response.data.products));
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [axiosPrivate, dispatch]);
 
   return (
     <div className="col-xl-9 col-lg-12">
@@ -41,16 +43,16 @@ const ProductsMain = () => {
         id="home-tab-pane"
       >
         <div className="row g-4">
-          {cards.map((card) => (
+          {products.map((product) => (
             <div
               className="col-lg-3 col-md-6 col-sm-6 col-12"
-              key={card.id}
+              key={product.id}
             >
               <CardItem 
-                    key={card.id}
-                    // handleOpenModal={handleOpenModal}
-                    {...card}
-                />
+                key={product.id}
+                // handleOpenModal={handleOpenModal}
+                {...product}
+              />
             </div>
           ))}
         </div>

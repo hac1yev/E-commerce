@@ -5,6 +5,7 @@ import "@uploadthing/react/styles.css";
 import Header from "@/components/Header/Header";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import ProviderWrapper from "@/components/ReduxProvider/ProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <Navbar />
-        {children}
-        <Footer />
+        <ProviderWrapper>
+          <Header />
+          <Navbar />
+          {children}
+          <Footer />
+        </ProviderWrapper>
       </body>
     </html>
   );

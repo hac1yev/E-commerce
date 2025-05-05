@@ -17,10 +17,38 @@ export async function GET(req: NextRequest) {
     const pool = await connectToDB();
 
     const productsRequest = await pool.request().query(`
-        select * from Products
+        select p.*, c.label [categories], t.label [tags]
+        from Products p inner join ProductCategories pc
+        on p.id = pc.productId inner join Categories c
+        on pc.categoryId = c.value inner join ProductTags pt 
+        on p.id = pt.productId inner join Tags t
+        on pt.tagId = t.value
     `);
 
-    return NextResponse.json({ message: 'Success', products: productsRequest.recordset });
+    const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
+        const { id,categories,tags } = item;
+        const index = resultArr.findIndex((obj: ProductType) => obj.id === id);
+
+        if (index === -1) {
+            resultArr.push({
+                ...item,
+                categories: [categories],
+                tags: [tags]
+            });
+        }else{
+            if(!resultArr[index].categories.includes(categories)) {
+                resultArr[index].categories.push(categories);
+            }
+            if(!resultArr[index].tags.includes(tags)) {
+                resultArr[index].tags.push(tags);
+            }
+        }
+
+        return resultArr;
+    }, []);
+    
+
+    return NextResponse.json({ message: 'Success', products: resultProducts  });
 } 
 
 export async function POST(req: NextRequest) {

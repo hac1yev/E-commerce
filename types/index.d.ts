@@ -1,20 +1,22 @@
-declare type CardType = {
-    id: string;
+declare type ProductType = {
+    id: number;
     discount: number;
     image: StaticImageData;
     title: string;
     description: string;
     additionalInfo: string;
-    kg: number;
     price: number;
     value: number;
-    count: number;
-    category: string;
-    life: object;
-    tags: string[];
-    brand: string;
-    productType: string;
     reviewCount: number;
+    life: Date;
+    createdAt: Date;
+    views: number;
+    type: number;
+    status: number;
+    brand: string;
+    category: number[];
+    tags: number[];
+    productType: string;
     ratingStars: { five: number, four: number, three: number, two: number, one: number };
 };
 

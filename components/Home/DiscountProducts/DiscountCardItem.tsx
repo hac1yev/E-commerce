@@ -6,7 +6,7 @@ import Image from "next/image";
 
 type DiscountProductsType = "discount" | "image" | "category" | "title" | "kg" | "price" | "value" | "count";
 
-const DiscountCardItem = ({ discount, image, category, title, kg, price, value, count }: Pick<CardType, DiscountProductsType>) => {
+const DiscountCardItem = ({ discount, image, category, title, kg, price, value, count }: Pick<ProductType, DiscountProductsType>) => {
   return (
     <div className="single-shopping-card-one discount-offer">
       <a href="shop-details.html" className="thumbnail-preview">

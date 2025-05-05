@@ -9,7 +9,7 @@ const categories = ["Frozen Foods","Diet Foods","Healthy Foods", "Vitamin Foods"
 
 const WeeklyGroceries = () => {
     const [isModalOpen,setIsModalOpen] = useState(false);
-    const [modalData,setModalData] = useState<CardType>();
+    const [modalData,setModalData] = useState<ProductType>();
     const [tab,setTab] = useState("Frozen Foods");
 
     const handleOpenModal = useCallback((id: string) => {
