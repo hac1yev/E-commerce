@@ -14,7 +14,7 @@ const WeeklyGroceries = () => {
 
     const handleOpenModal = useCallback((id: string) => {
         setIsModalOpen(true);
-        const findedCard = cards.find((card) => card.id === id);
+        const findedCard = cards.find((card) => card.id === parseInt(id));
         setModalData(findedCard);
     }, []);
     
@@ -52,7 +52,7 @@ const WeeklyGroceries = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         {tab === 'Frozen Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category === 'Frozen Foods').map((item) => (
+                            {cards.filter((card) => card.category.includes(1)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
@@ -63,7 +63,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Diet Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category === 'Diet Foods').map((item) => (
+                            {cards.filter((card) => card.category.includes(2)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
@@ -74,7 +74,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Healthy Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category === 'Healthy Foods').map((item) => (
+                            {cards.filter((card) => card.category.includes(3)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
@@ -85,7 +85,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Vitamin Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category === 'Vitamin Foods').map((item) => (
+                            {cards.filter((card) => card.category.includes(4)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         {...item}
