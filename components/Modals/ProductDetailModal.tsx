@@ -3,12 +3,12 @@ import Image from "next/image";
 
 type CardItemProps = Pick<
   ProductType,
-    "image" | "title" | "price" | "count" | "value" | "category" | "tags" | "reviewCount" | "description"
+    "image" | "title" | "price" | "value" | "category" | "tags" | "reviewCount" | "description"
 > & {
     handleCloseModal: () => void;
 };
 
-const ProductDetailModal = ({ image,category,price,value,count,tags,title,reviewCount,description,handleCloseModal }: CardItemProps) => {
+const ProductDetailModal = ({ image,category,price,value,tags,title,reviewCount,description,handleCloseModal }: CardItemProps) => {
     return (
         <div className="product-detail-modal-overlay">
             <div className="rts-product-details-section rts-product-details-section2 product-details-popup-section">
@@ -65,7 +65,7 @@ const ProductDetailModal = ({ image,category,price,value,count,tags,title,review
                                         <button className="button">
                                             <MinusIcon className="minus-icon" width={16}/>
                                         </button>
-                                        <input type="text" className="input" value={count} />
+                                        <input type="text" className="input" value={1} />
                                         <button className="button plus" style={{ cursor: 'pointer' }}>
                                             <PlusIcon className="plus-icon" width={16}/>
                                         </button>

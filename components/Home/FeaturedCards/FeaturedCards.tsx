@@ -14,7 +14,7 @@ const FeaturedCards = () => {
 
     const handleOpenModal = useCallback((id: string) => {
         setIsModalOpen(true);
-        const findedCard = cards.find((card) => card.id === id);
+        const findedCard = cards.find((card) => card.id === parseInt(id));
         setModalData(findedCard);
     }, []);
 
