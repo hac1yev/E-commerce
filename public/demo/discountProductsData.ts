@@ -14,6 +14,7 @@ export const discountProducts = [
       value: 45,
       count: 1,
       category: "Baby Food",
+      brand: "Dress"
     },
     {
       id: 'card2',
@@ -25,6 +26,7 @@ export const discountProducts = [
       value: 33,
       count: 1,
       category: "Baby Food",
+      brand: "Dress"
     },
     {
       id: 'card3',
@@ -36,6 +38,7 @@ export const discountProducts = [
       value: 36,
       count: 1,
       category: "Baby Food",
+      brand: "Dress"
     },
     {
       id: 'card4',
@@ -47,5 +50,6 @@ export const discountProducts = [
       value: 42,
       count: 1,
       category: "Baby Food",
+      brand: "Dress"
     }
 ];  
