@@ -19,7 +19,7 @@ const ProfileSidebar = () => {
     const handleLogOut = async (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();        
         await axios.post("/api/logout");
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userInfo");
         window.location.reload();
     };
 

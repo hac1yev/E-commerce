@@ -12,8 +12,10 @@ const Header = () => {
   const [token,setToken] = useState("");
 
   useEffect(() => {
-    const accessToken: string = typeof window !== "undefined" && localStorage.getItem("accessToken") || "";
-    setToken(accessToken)
+    const accessToken: string = typeof window !== "undefined" && localStorage.getItem("userInfo") 
+      ? JSON.parse(localStorage.getItem("userInfo") || "{}").accessToken 
+      : "";        
+    setToken(accessToken);
   }, [])
   
   return (

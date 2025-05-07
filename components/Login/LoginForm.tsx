@@ -19,9 +19,11 @@ const LoginForm = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
+            
             if(response.status === 200) {
-                window.localStorage.setItem("accessToken", response.data.accessToken);
+                window.localStorage.setItem("userInfo", JSON.stringify({
+                    ...response.data
+                }));
                 window.location.reload();
             }
             

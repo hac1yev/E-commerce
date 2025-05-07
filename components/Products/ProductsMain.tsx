@@ -25,15 +25,17 @@ const ProductsMain = () => {
   // }, []);
 
   useEffect(() => {
-    (async function() {
-      try {
-        const response = await axiosPrivate.get("/api/products");
-        dispatch(ProductSliceActions.getAllProducts(response.data.products));
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [axiosPrivate, dispatch]);
+    if(products.length === 0) {
+      (async function() {
+        try {
+          const response = await axiosPrivate.get("/api/products");
+          dispatch(ProductSliceActions.getAllProducts(response.data.products));
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
+  }, [axiosPrivate, dispatch, products.length]);
 
   return (
     <div className="col-xl-9 col-lg-12">

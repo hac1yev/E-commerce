@@ -3,7 +3,9 @@ import useRefreshToken from "./useRefreshToken"
 import axios from "axios";
 
 const useAxiosPrivate = () => {
-    const accessToken = typeof window !== "undefined" && localStorage.getItem("accessToken") || "";
+    const accessToken: string = typeof window !== "undefined" && localStorage.getItem("userInfo") 
+        ? JSON.parse(localStorage.getItem("userInfo") || "{}").accessToken 
+        : "";        
     const refresh = useRefreshToken();
 
     useEffect(() => {

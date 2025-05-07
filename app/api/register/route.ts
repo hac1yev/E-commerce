@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             .input("role", sql.VarChar, "user")
             .input("password", sql.VarChar, hashedPassword)
             .query(`
-                insert into Users values(@username, @email, @password)    
+                insert into Users values(@username, @email, @role, @password)    
             `);
         
         await pool.close();
