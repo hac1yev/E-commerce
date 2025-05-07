@@ -1,8 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
 import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
 const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
+  const [count,setCount] = useState(1);
+
+  const handleIncreaseCount = () => {
+    setCount((prev) => prev + 1);
+  }
+
+  const handleDecreaseCount = () => {
+    if(count === 1) return;
+    else setCount((prev) => prev - 1);
+  }
+
   return (
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
@@ -45,12 +59,12 @@ const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" onChange={() => console.log("")} value={1} />
+            <input type="text" className="input" value={count} />
             <div className="button-wrapper-action">
-              <button className="button">
+              <button className="button" onClick={handleIncreaseCount}>
                 <ChevronUp width={16} />
               </button>
-              <button className="button">
+              <button className="button" onClick={handleDecreaseCount}>
                 <ChevronDown width={16} />
               </button>
             </div>

@@ -7,10 +7,23 @@ import { useCallback, useState } from "react";
 import ProductDetailModal from "../../Modals/ProductDetailModal";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+// import axios from "axios";
 
 const FeaturedCards = () => {
     const [isModalOpen,setIsModalOpen] = useState(false);
     const [modalData,setModalData] = useState<ProductType>();
+
+    // useEffect(() => {
+    //     (async function() {
+    //         try {
+    //             const response = await axios.get('/api/products/featured');
+    //             console.log(response.data);
+                
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     })()
+    // }, []);
 
     const handleOpenModal = useCallback((id: string) => {
         setIsModalOpen(true);

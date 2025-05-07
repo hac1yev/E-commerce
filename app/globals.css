@@ -18722,7 +18722,7 @@ li.with-megamenu:hover .rts-megamenu {
 
 .single-shopping-card-one .cart-counter-action .quantity-edit input {
   padding: 0;
-  max-width: 10px;
+  max-width: 25px;
   font-weight: 600;
 }
 
@@ -22747,6 +22747,11 @@ body.modal-open {
   background: transparent;
   color: #629D23;
   border: 1px solid #629D23;
+}
+
+.product-area-wrapper-shopgrid-list .single-shopping-card-one .cart-counter-action .rts-btn:hover {
+  background-color: var(--color-primary);
+  color: #fff;
 }
 
 .category-active-menu-sidebar {
