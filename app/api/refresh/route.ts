@@ -20,7 +20,8 @@ export async function GET(req: NextRequest) {
         `);        
 
         const newAccessToken = await new SignJWT({ 
-            email: result.recordset[0].email
+            email: result.recordset[0].email,
+            role: result.recordset[0].role
         })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()

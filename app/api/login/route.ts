@@ -47,6 +47,7 @@ export async function POST(req: NextRequest) {
         .sign(refreshSecretKey);
 
         const response = NextResponse.json({ 
+            userId: result.recordset[0].userId,
             username: result.recordset[0].username,
             role: result.recordset[0].role,
             accessToken,

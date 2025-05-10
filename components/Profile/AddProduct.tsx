@@ -8,6 +8,9 @@ import Select from "react-select";
 const AddProduct = () => {
   const axiosPrivate = useAxiosPrivate();
   const [selectData,setSelectData] = useState<AddProductSelectType>({});
+  const userId: number = typeof window !== "undefined" && localStorage.getItem("userInfo") 
+    ? JSON.parse(localStorage.getItem("userInfo") || "{}").userId 
+    : "";     
   const [productItems,setProductItems] = useState<ProductItem>({
     title: "",
     life: new Date().toISOString().split('T')[0],
@@ -41,11 +44,15 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosPrivate.post("/api/products", JSON.stringify(productItems), {
+      const response = await axiosPrivate.post("/api/products", JSON.stringify({
+        ...productItems,
+        userId
+      }), {
         headers: {
           'Content-Type': 'application/json'
         }
       });
+
       if(response.status === 200) {
         setProductItems({ title: "", life: new Date().toISOString().split('T')[0], discount: "", price: "", tags: [], categories: [], type: "", status: "", description: "", additionalInfo: "", image: { name: "", url: "" }, brand: "" });
       }

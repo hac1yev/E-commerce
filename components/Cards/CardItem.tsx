@@ -4,6 +4,7 @@ import Image from "next/image";
 import bookmark from "../../public/images/bookmark.png";
 import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
   const [count,setCount] = useState(1);
@@ -21,7 +22,7 @@ const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
       <div className="image-and-action-area-wrapper">
-        <a href="shop-details.html" className="thumbnail-preview">
+        <Link href={`/products/${props.id}`} className="thumbnail-preview">
           <div className="badge">
             <span>
               {props.discount}% <br />
@@ -30,7 +31,7 @@ const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?
             <Image src={bookmark} width={50} height={50} alt="bookmark" />
           </div>
           <Image src={props.image} width={300} height={200} alt={props.brand} />
-        </a>
+        </Link>
         <div className="action-share-option">
           <div
             className="single-action openuptip message-show-action"
@@ -50,9 +51,9 @@ const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?
         </div>
       </div>
       <div className="body-content">
-        <a href="shop-details.html">
+        <Link href={`/products/${props.id}`}>
           <h4 className="title">{props.title}</h4>
-        </a>
+        </Link>
         <div className="price-area">
           <span className="current">${props.price.toFixed(2)}</span>
           <div className="previous">${props.value.toFixed(2)}</div>

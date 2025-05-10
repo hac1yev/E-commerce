@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
 } 
 
 export async function POST(req: NextRequest) {
-    const { title,discount,image,description,additionalInfo,price,life,type,status,tags,categories,brand } = await req.json();
+    const { title,discount,image,description,additionalInfo,price,life,type,status,tags,categories,brand,userId } = await req.json();
     const bearer = req.headers.get("Authorization") || "";
 
     const accessToken = bearer.split(" ")[1];
@@ -84,7 +84,10 @@ export async function POST(req: NextRequest) {
     .query(`
         insert into Products
         output inserted.id
-        values (@discount,@image,@title,@description,@additionalInfo,@price,@value,@reviewCount,@life,@createdAt,@views,@type,@status,@brand,@salesCount)
+        values (
+            @discount,@image,@title,@description,@additionalInfo,@price,@value,
+            @reviewCount,@life,@createdAt,@views,@type,@status,@brand,@salesCount
+        )
     `);
 
     const productId = insertProductRequest.recordset[0].id;
@@ -102,6 +105,13 @@ export async function POST(req: NextRequest) {
             .input("tagId", sql.Int, tag.value)
             .query(`INSERT INTO ProductTags VALUES (@productId, @tagId)`);
     }
+
+    await pool.request()
+        .input("productId", sql.Int, productId)
+        .input("userId", sql.Int, parseInt(userId))
+        .input("star", sql.Int, null)
+        .input("createdAt", sql.Date, new Date())
+        .query(`insert into ProductRatings values (@productId, @userId, @star, @createdAt)`);
 
     return NextResponse.json({ message: 'Success' });
 };
