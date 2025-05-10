@@ -48,11 +48,12 @@ const ProductDetail = ({ params }: { params: { id: string } }) => {
             <div className="row g-5">
               <div className="col-xl-8 col-lg-8 col-md-12">
                 <ProductDetailContent />
-                <ProductDetailTabs />
               </div>
               <div className="col-xl-3 col-lg-4 col-md-12 offset-xl-1  rts-sticky-column-item">
-                <ProductDetailOffers />
-                
+                <ProductDetailOffers />                
+              </div>
+              <div className="col-md-12">
+                <ProductDetailTabs />
               </div>
             </div>
           </div>

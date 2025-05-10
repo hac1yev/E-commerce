@@ -1,4 +1,6 @@
 import React from "react";
+import StaticRatingStar from "../RatingStar/StaticRatingStar";
+import { Forward, GitCompare, HeartIcon, Minus, Plus, ShoppingCart } from "lucide-react";
 
 const ProductDetailContent = () => {
   return (
@@ -83,15 +85,7 @@ const ProductDetailContent = () => {
               <div className="product-status">
                 <span className="product-catagory">Dress</span>
                 <div className="rating-stars-group">
-                  <div className="rating-star">
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <div className="rating-star">
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <div className="rating-star">
-                    <i className="fas fa-star-half-alt"></i>
-                  </div>
+                  <StaticRatingStar filledStars={3} />
                   <span>10 Reviews</span>
                 </div>
               </div>
@@ -115,11 +109,11 @@ const ProductDetailContent = () => {
                 <div className="cart-edits">
                   <div className="quantity-edit action-item">
                     <button className="button">
-                      <i className="fal fa-minus minus"></i>
+                      <Minus width={18} />
                     </button>
-                    <input type="text" className="input" value="01" />
+                    <input type="text" className="input" value={1} />
                     <button className="button plus">
-                      +<i className="fal fa-plus plus"></i>
+                      <Plus width={18} />
                     </button>
                   </div>
                 </div>
@@ -129,17 +123,8 @@ const ProductDetailContent = () => {
                 >
                   <div className="btn-text">Add To Cart</div>
                   <div className="arrow-icon">
-                    <i className="fa-regular fa-cart-shopping"></i>
+                    <ShoppingCart width={20} />
                   </div>
-                  <div className="arrow-icon">
-                    <i className="fa-regular fa-cart-shopping"></i>
-                  </div>
-                </a>
-                <a
-                  href="javascript:void(0);"
-                  className="rts-btn btn-primary ml--20"
-                >
-                  <i className="fa-light fa-heart"></i>
                 </a>
               </div>
               <div className="product-uniques">
@@ -150,7 +135,7 @@ const ProductDetailContent = () => {
                       marginRight: "10px",
                     }}
                   >
-                    SKU:{" "}
+                    Sku:{" "}
                   </span>{" "}
                   BO1D0MX8SJ
                 </span>
@@ -183,7 +168,7 @@ const ProductDetailContent = () => {
                       marginRight: "10px",
                     }}
                   >
-                    LIFE::{" "}
+                    Life:{" "}
                   </span>{" "}
                   6 Months
                 </span>
@@ -213,19 +198,19 @@ const ProductDetailContent = () => {
               <div className="share-option-shop-details">
                 <div className="single-share-option">
                   <div className="icon">
-                    <i className="fa-regular fa-heart"></i>
+                    <HeartIcon width={20} />
                   </div>
                   <span>Add To Wishlist</span>
                 </div>
                 <div className="single-share-option">
                   <div className="icon">
-                    <i className="fa-solid fa-share"></i>
+                    <Forward />
                   </div>
                   <span>Share On social</span>
                 </div>
                 <div className="single-share-option">
                   <div className="icon">
-                    <i className="fa-light fa-code-compare"></i>
+                    <GitCompare />
                   </div>
                   <span>Compare</span>
                 </div>

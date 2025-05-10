@@ -1,4 +1,7 @@
+import { Box, Handshake, RotateCcwSquare } from "lucide-react";
+import payment from '../../public/images/payment/01.png';
 import React from "react";
+import Image from "next/image";
 
 const ProductDetailOffers = () => {
   return (
@@ -7,7 +10,7 @@ const ProductDetailOffers = () => {
         <h6 className="title">Available offers</h6>
         <div className="single-offer-area">
           <div className="icon">
-            {/* <img src="assets/images/shop/01.svg" alt="icon" /> */}
+            <Handshake width={20} />
           </div>
           <div className="details">
             <p>
@@ -18,7 +21,7 @@ const ProductDetailOffers = () => {
         </div>
         <div className="single-offer-area">
           <div className="icon">
-            {/* <img src="assets/images/shop/02.svg" alt="icon" /> */}
+            <RotateCcwSquare width={20} />
           </div>
           <div className="details">
             <p>
@@ -29,7 +32,7 @@ const ProductDetailOffers = () => {
         </div>
         <div className="single-offer-area">
           <div className="icon">
-            {/* <img src="assets/images/shop/03.svg" alt="icon" /> */}
+            <Box width={20} />
           </div>
           <div className="details">
             <p>Free Worldwide Shipping on all orders over $100</p>
@@ -38,7 +41,7 @@ const ProductDetailOffers = () => {
       </div>
       <div className="our-payment-method">
         <h5 className="title">Guaranteed Safe Checkout</h5>
-        {/* <img src="assets/images/shop/03.png" alt="sadas" /> */}
+        <Image width={300} src={payment} alt="payment" />
       </div>
     </div>
   );
