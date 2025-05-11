@@ -18,14 +18,32 @@ export async function GET(req: NextRequest) {
     const pool = await connectToDB();
 
     const result = await pool.request().query(`
-        select p.*, c.label [categories], t.label [tags]
+        select p.*, c.label [categories], t.label [tags], s.label [status_content], ty.label [type_content] 
         from Products p inner join ProductCategories pc
         on p.id = pc.productId inner join Categories c
         on pc.categoryId = c.value inner join ProductTags pt 
         on p.id = pt.productId inner join Tags t
-        on pt.tagId = t.value
+        on pt.tagId = t.value inner join Status s
+        on p.status = s.value inner join Types ty
+        on p.type = ty.value
         where p.id = ${id}
     `);
+
+    const ratingResult = await pool.request().query(`
+        WITH Stars AS (
+            SELECT 1 AS star UNION ALL
+            SELECT 2 UNION ALL
+            SELECT 3 UNION ALL
+            SELECT 4 UNION ALL
+            SELECT 5
+        )
+        SELECT s.star,  COUNT(pr.star) AS count
+        FROM Stars s CROSS JOIN Products p
+        LEFT JOIN ProductRatings pr ON pr.star = s.star AND pr.productId = p.id
+        WHERE p.id = ${id}
+        GROUP BY p.id, s.star
+        ORDER BY s.star;
+    `);    
 
     const resultProduct = result.recordset.reduce((resultArr, item) => {
         const { id,categories,tags } = item;
@@ -47,7 +65,9 @@ export async function GET(req: NextRequest) {
         }
 
         return resultArr;
-    }, []);    
+    }, []);   
+    
+    resultProduct[0].ratingResult = ratingResult.recordset;
     
     return NextResponse.json({ message: 'Success', data: resultProduct });
 }

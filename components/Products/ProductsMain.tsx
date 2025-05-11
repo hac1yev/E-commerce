@@ -29,7 +29,7 @@ const ProductsMain = () => {
       (async function() {
         try {
           const response = await axiosPrivate.get("/api/products");
-          dispatch(ProductSliceActions.getAllProducts(response.data.products));
+          dispatch(ProductSliceActions.getAllProducts(response.data.products));          
         } catch (error) {
           console.log(error);
         }

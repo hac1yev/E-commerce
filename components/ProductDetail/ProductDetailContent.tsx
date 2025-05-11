@@ -9,77 +9,14 @@ const ProductDetailContent = () => {
         <div className="product-details-popup">
           <div className="details-product-area">
             <div className="product-thumb-area">
-              <div className="cursor"></div>
               <div className="thumb-wrapper one filterd-items figure">
                 <div
                   className="product-thumb zoom"
-                  style={{
-                    backgroundImage: "url(assets/images/shop/01.jpg)",
-                  }}
                 >
-                  {/* <img src="assets/images/shop/01.jpg" alt="product-thumb" /> */}
+                  
                 </div>
               </div>
-              <div className="thumb-wrapper two filterd-items hide">
-                <div
-                  className="product-thumb zoom"
-                  style={{
-                    backgroundImage: "url(assets/images/shop/02.jpg)",
-                  }}
-                >
-                  {/* <img src="assets/images/shop/02.jpg" alt="product-thumb" /> */}
-                </div>
-              </div>
-              <div className="thumb-wrapper three filterd-items hide">
-                <div
-                  className="product-thumb zoom"
-                  style={{
-                    backgroundImage: "url(assets/images/shop/03.jpg)",
-                  }}
-                >
-                  {/* <img src="assets/images/shop/03.jpg" alt="product-thumb" /> */}
-                </div>
-              </div>
-              <div className="thumb-wrapper four filterd-items hide">
-                <div
-                  className="product-thumb zoom"
-                  style={{
-                    backgroundImage: "url(assets/images/shop/04.jpg)",
-                  }}
-                >
-                  {/* <img src="assets/images/shop/04.jpg" alt="product-thumb" /> */}
-                </div>
-              </div>
-              <div className="thumb-wrapper five filterd-items hide">
-                <div
-                  className="product-thumb zoom"
-                  style={{
-                    backgroundImage: "url(assets/images/shop/05.jpg)",
-                  }}
-                >
-                  {/* <img src="assets/images/shop/05.jpg" alt="product-thumb" /> */}
-                </div>
-              </div>
-              <div className="product-thumb-filter-group">
-                <div
-                  className="thumb-filter filter-btn active"
-                  data-show=".one"
-                >
-                  {/* <img src="assets/images/shop/01.jpg" alt="product-thumb-filter" /> */}
-                </div>
-                <div className="thumb-filter filter-btn" data-show=".two">
-                  {/* <img src="assets/images/shop/02.jpg" alt="product-thumb-filter" /> */}
-                </div>
-                <div className="thumb-filter filter-btn" data-show=".three">
-                  {/* <img src="assets/images/shop/03.jpg" alt="product-thumb-filter" /> */}
-                </div>
-                <div className="thumb-filter filter-btn" data-show=".four">
-                  {/* <img src="assets/images/shop/04.jpg" alt="product-thumb-filter" /> */}
-                </div>
-                <div className="thumb-filter filter-btn" data-show=".five">
-                  {/* <img src="assets/images/shop/05.jpg" alt="product-thumb-filter" /> */}
-                </div>
-              </div>
+            
             </div>
             <div className="contents">
               <div className="product-status">

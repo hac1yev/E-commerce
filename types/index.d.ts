@@ -1,30 +1,32 @@
 declare type ProductType = {
-    id: number;
-    discount: number;
-    image: StaticImageData;
-    title: string;
-    description: string;
-    additionalInfo: string;
-    price: number;
-    value: number;
-    reviewCount: number;
-    life: Date;
-    createdAt: Date;
-    views: number;
-    type: number;
-    status: number;
-    brand: string;
-    category: number[];
-    tags: number[];
-    productType: string;
-    ratingStars: { five: number, four: number, three: number, two: number, one: number };
+  id: number;
+  discount: number;
+  image: StaticImageData;
+  title: string;
+  description: string;
+  additionalInfo: string;
+  price: number;
+  value: number;
+  reviewCount: number;
+  life: Date;
+  createdAt: Date;
+  views: number;
+  type: number;
+  status: number;
+  brand: string;
+  salesCount: number;
+  category: string[];
+  tags: string[];
+  ratingStars: { 
+    [key: string]: number;
+  };
 };
 
 declare type AddProductSelectType = {
-    [key: string]: {
-        value: number;
-        label: string;
-    }[]
+  [key: string]: {
+    value: number;
+    label: string;
+  }[]
 };
 
 declare type OptionType = { value: number; label: string };

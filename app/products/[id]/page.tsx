@@ -9,20 +9,19 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 const ProductDetail = ({ params }: { params: { id: string } }) => {
-    const axiosPrivate = useAxiosPrivate();
-    const { id } = params;
+  const axiosPrivate = useAxiosPrivate();
+  const { id } = params;
 
-    useEffect(() => {
-        (async function() {
-            try {
-                const response = await axiosPrivate.get(`/api/products/${id}`);
-                console.log(response);
-                
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-    }, [id,axiosPrivate]);
+  useEffect(() => {
+    (async function() {
+      try {
+        const response = await axiosPrivate.get(`/api/products/${id}`);
+        console.log(response);  
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [id,axiosPrivate]);
 
   return (
     <>
