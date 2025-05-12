@@ -2,12 +2,15 @@ import { useState } from "react";
 import TabDetail from "./TabDetail";
 import TabCustomer from "./TabCustomer";
 
-const ProductDetailTabs = () => {
+const ProductDetailTabs = ({ productDetailTabContent }: { productDetailTabContent: ProductDetailTabContentType })  => {
   const [activeTab, setActiveTab] = useState("tab1");
 
   const handleChangeTab = (tab: string) => {
     setActiveTab(tab);
   };
+
+  console.log(productDetailTabContent);
+  
 
   return (
     <div className="product-discription-tab-shop mt--50">

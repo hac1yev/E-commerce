@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
-type ProductState = {
+type ProductDetailState = {
     product: (Pick<ProductType, keyof ProductType> & {
         status_content: string;
         type_content: string;
     }) | null
 }
 
-const initialProductDetailState: ProductState = {
+const initialProductDetailState: ProductDetailState = {
     product: null
 };
 
@@ -16,7 +16,7 @@ const productDetailSlice = createSlice({
     name: 'productDetailSlice',
     initialState: initialProductDetailState,
     reducers: {
-        getAllProducts(state,action) {
+        getAllProductItems(state,action) {
             state.product = {
                 ...action.payload
             }
@@ -24,6 +24,6 @@ const productDetailSlice = createSlice({
     }
 });
 
-export const useTypedProductSelector: TypedUseSelectorHook<{ productDetailReducer: ProductState }> = useSelector;
-export const ProductSliceActions = productDetailSlice.actions; 
+export const useTypedProductDetailSelector: TypedUseSelectorHook<{ productDetailReducer: ProductDetailState }> = useSelector;
+export const ProductDetailSliceActions = productDetailSlice.actions; 
 export default productDetailSlice;

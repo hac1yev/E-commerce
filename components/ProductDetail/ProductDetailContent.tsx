@@ -2,7 +2,9 @@ import React from "react";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { Forward, GitCompare, HeartIcon, Minus, Plus, ShoppingCart } from "lucide-react";
 
-const ProductDetailContent = () => {
+const ProductDetailContent = ({ productContent }: { productContent: ProductDetailContentType }) => {
+  console.log(productContent);
+
   return (
     <div className="product-details-popup-wrapper in-shopdetails">
       <div className="rts-product-details-section rts-product-details-section2 product-details-popup-section">

@@ -47,3 +47,29 @@ declare type ProductItem = {
   description: string;
   additionalInfo: string;
 };
+
+declare type ProductDetailContentType = {
+  brand: string;
+  title: string;
+  category: stirng[];
+  tags: string[];
+  description: string;
+  price: number;
+  value: number;
+  life: Date;
+  type: number;
+  image: StaticImageData;
+  ratingStars: { 
+    [key: string]: number;
+  };
+}
+
+declare type ProductDetailTabContentType = {
+  id: number;
+  additionalInfo: string;
+  brand: string;
+  type: number;
+  ratingStars: { 
+    [key: string]: number;
+  };
+}

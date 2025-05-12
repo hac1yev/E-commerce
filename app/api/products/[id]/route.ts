@@ -69,5 +69,5 @@ export async function GET(req: NextRequest) {
     
     resultProduct[0].ratingResult = ratingResult.recordset;
     
-    return NextResponse.json({ message: 'Success', data: resultProduct });
+    return NextResponse.json({ message: 'Success', product: resultProduct[0] });
 }
