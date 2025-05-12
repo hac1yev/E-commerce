@@ -24041,7 +24041,6 @@ div.error-bg > p {
 }
 
 .product-details-review-product-style .average-stars-area-left .review-charts-details .single-review .progress-bar {
-  width: 100% !important;
   height: 5px !important;
   background: var(--color-primary);
 }
@@ -24052,7 +24051,6 @@ div.error-bg > p {
 }
 
 .product-details-review-product-style .average-stars-area-left .review-charts-details .single-review:nth-child(2) .progress-bar {
-  width: 80% !important;
   height: 5px !important;
   background: var(--color-primary);
 }
@@ -24063,7 +24061,6 @@ div.error-bg > p {
 }
 
 .product-details-review-product-style .average-stars-area-left .review-charts-details .single-review:nth-child(3) .progress-bar {
-  width: 60% !important;
   height: 5px !important;
   background: var(--color-primary);
 }
@@ -24074,7 +24071,6 @@ div.error-bg > p {
 }
 
 .product-details-review-product-style .average-stars-area-left .review-charts-details .single-review:nth-child(4) .progress-bar {
-  width: 40% !important;
   height: 5px !important;
   background: var(--color-primary);
 }
@@ -24085,7 +24081,6 @@ div.error-bg > p {
 }
 
 .product-details-review-product-style .average-stars-area-left .review-charts-details .single-review:nth-child(5) .progress-bar {
-  width: 20% !important;
   height: 5px !important;
   background: var(--color-primary);
 }

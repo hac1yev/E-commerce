@@ -8,7 +8,17 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
     return productDetailRatingResult.ratingResult.filter((item) => item.count !== 0);
   }, []);
 
-  const average = getAvarageRating(filteredRating);
+  const reviewCount = useMemo(() => {
+    return filteredRating.reduce((total,item) => {
+      const { count } = item;
+      total += count;
+      return total;
+    }, 0);
+  }, []);  
+
+  const average = useMemo(() => {
+    return getAvarageRating(filteredRating)?.toFixed(1);
+  }, []);
 
   return (
     <div className="single-tab-content-shop-details">
@@ -29,76 +39,31 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
             <span>Recommended (2 of 3)</span>
           </div>}
           {average && <div className="review-charts-details">
-            <div className="single-review">
-              <div className="stars">
-                <StaticRatingStar filledStars={5} />
-                <span className="pac">100%</span>
-              </div>
-              <div className="single-progress-area-incard">
-                <div className="progress">
-                  <div
-                    className="progress-bar wow fadeInLeft"
-                    role="progressbar"
-                  ></div>
+            {Array.from({ length: 5 }, (_, i) => i + 1).toSorted((a,b) => b-a).map((item) => {
+              const findedStar = filteredRating.find((el) => el.star === item);
+
+              return (
+                <div className="single-review" key={item}>
+                  <div className="stars">
+                    <StaticRatingStar filledStars={item} />
+                    {findedStar ? (
+                      <span className="pac">{(findedStar.count / reviewCount) * 100}%</span>
+                    ) : (
+                      <span className="pac">0%</span>
+                    )}
+                  </div>
+                  <div className="single-progress-area-incard">
+                    <div className="progress">
+                      <div
+                        className="progress-bar wow fadeInLeft"
+                        role="progressbar"
+                        style={{ width: findedStar ? `${(findedStar.count / reviewCount) * 100}%` : '0%' }}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="single-review">
-              <div className="stars">
-                <StaticRatingStar filledStars={4} />
-                <span className="pac">80%</span>
-              </div>
-              <div className="single-progress-area-incard">
-                <div className="progress">
-                  <div
-                    className="progress-bar wow fadeInLeft"
-                    role="progressbar"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div className="single-review">
-              <div className="stars">
-                <StaticRatingStar filledStars={3} />
-                <span className="pac">60%</span>
-              </div>
-              <div className="single-progress-area-incard">
-                <div className="progress">
-                  <div
-                    className="progress-bar wow fadeInLeft"
-                    role="progressbar"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div className="single-review">
-              <div className="stars">
-                <StaticRatingStar filledStars={2} />
-                <span className="pac">40%</span>
-              </div>
-              <div className="single-progress-area-incard">
-                <div className="progress">
-                  <div
-                    className="progress-bar wow fadeInLeft"
-                    role="progressbar"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div className="single-review">
-              <div className="stars">
-                <StaticRatingStar filledStars={1} />
-                <span className="pac">20%</span>
-              </div>
-              <div className="single-progress-area-incard">
-                <div className="progress">
-                  <div
-                    className="progress-bar wow fadeInLeft"
-                    role="progressbar"
-                  ></div>
-                </div>
-              </div>
-            </div>
+              )
+            })}
           </div>}
         </div>
         <div className="submit-review-area" style={{ width: '100%' }}>
