@@ -7,7 +7,7 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
   const filteredRating = useMemo(() => {
     return productDetailRatingResult.ratingResult.filter((item) => item.count !== 0);
   }, []);
-  
+
   const average = getAvarageRating(filteredRating);
 
   return (
@@ -16,19 +16,19 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
         <div className="average-stars-area-left">
           <div className="top-stars-wrapper">
             <h4 className="review">{!average ? 'No Rating Yet' : average}</h4>
-            <div className="rating-disc">
+            {average && <div className="rating-disc">
               <span>Average Rating</span>
               <div className="stars">
                 <StaticRatingStar filledStars={4} />
                 <span>(1 Reviews & 0 Ratings)</span>
               </div>
-            </div>
+            </div>}
           </div>
-          <div className="average-stars-area">
+          {average && <div className="average-stars-area">
             <h4 className="average">66.7%</h4>
             <span>Recommended (2 of 3)</span>
-          </div>
-          <div className="review-charts-details">
+          </div>}
+          {average && <div className="review-charts-details">
             <div className="single-review">
               <div className="stars">
                 <StaticRatingStar filledStars={5} />
@@ -99,7 +99,7 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
         <div className="submit-review-area" style={{ width: '100%' }}>
           <form action="#" className="submit-review-area">
