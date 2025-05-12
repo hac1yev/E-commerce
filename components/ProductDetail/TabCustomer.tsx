@@ -1,13 +1,21 @@
+import { getAvarageRating } from "@/app/lib/getAverageRating";
 import RatingStar from "../RatingStar/RatingStar";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
+import { useMemo } from "react";
 
-const TabCustomer = () => {
+const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult: ProductDetailRatingResultType }) => {
+  const filteredRating = useMemo(() => {
+    return productDetailRatingResult.ratingResult.filter((item) => item.count !== 0);
+  }, []);
+  
+  const average = getAvarageRating(filteredRating);
+
   return (
     <div className="single-tab-content-shop-details">
       <div className="product-details-review-product-style">
         <div className="average-stars-area-left">
           <div className="top-stars-wrapper">
-            <h4 className="review">5.0</h4>
+            <h4 className="review">{!average ? 'No Rating Yet' : average}</h4>
             <div className="rating-disc">
               <span>Average Rating</span>
               <div className="stars">

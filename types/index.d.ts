@@ -1,3 +1,8 @@
+type ProductDetailRatingItem = {
+  star: number;
+  count: number;
+};
+
 declare type ProductType = {
   id: number;
   discount: number;
@@ -8,18 +13,18 @@ declare type ProductType = {
   price: number;
   value: number;
   reviewCount: number;
-  life: Date;
+  life: string;
   createdAt: Date;
   views: number;
   type: number;
   status: number;
+  type_content: string;
+  status_content: string;
   brand: string;
   salesCount: number;
-  category: string[];
+  categories: string[];
   tags: string[];
-  ratingStars: { 
-    [key: string]: number;
-  };
+  ratingResult: ProductDetailRatingItem[];
 };
 
 declare type AddProductSelectType = {
@@ -51,25 +56,25 @@ declare type ProductItem = {
 declare type ProductDetailContentType = {
   brand: string;
   title: string;
-  category: stirng[];
+  categories: stirng[];
   tags: string[];
   description: string;
   price: number;
   value: number;
-  life: Date;
-  type: number;
+  life: string;
+  type_content: string;
   image: StaticImageData;
-  ratingStars: { 
-    [key: string]: number;
-  };
-}
+  ratingResult: ProductDetailRatingItem[];
+};
 
-declare type ProductDetailTabContentType = {
+declare type ProductDetailAdditionalInfoType = {
   id: number;
   additionalInfo: string;
   brand: string;
-  type: number;
-  ratingStars: { 
-    [key: string]: number;
-  };
+  type_content: string;
+  status_content: string;
+};
+
+declare type ProductDetailRatingResultType = {
+  ratingResult: ProductDetailRatingItem[];
 }

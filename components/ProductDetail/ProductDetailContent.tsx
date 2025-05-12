@@ -1,9 +1,10 @@
 import React from "react";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { Forward, GitCompare, HeartIcon, Minus, Plus, ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import moment from "moment";
 
 const ProductDetailContent = ({ productContent }: { productContent: ProductDetailContentType }) => {
-  console.log(productContent);
 
   return (
     <div className="product-details-popup-wrapper in-shopdetails">
@@ -15,34 +16,32 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                 <div
                   className="product-thumb zoom"
                 >
-                  
+                  <Image width={300} height={500} src={productContent.image} alt={productContent.brand} />
                 </div>
               </div>
             
             </div>
             <div className="contents">
               <div className="product-status">
-                <span className="product-catagory">Dress</span>
+                <span className="product-catagory">{productContent.brand}</span>
                 <div className="rating-stars-group">
                   <StaticRatingStar filledStars={3} />
                   <span>10 Reviews</span>
                 </div>
               </div>
               <h2 className="product-title">
-                Kitchen Fade Defy PLUG Air Freshener
+                {productContent.title}
               </h2>
               <p className="mt--20 mb--20">
-                Priyoshop has brought to you the Hijab 3 Pieces Combo Pack PS23.
-                It is a completely modern design and you feel comfortable to put
-                on this hijab. Buy it at the best price.
+                {productContent.description}
               </p>
               <span
                 className="product-price mb--15 d-block"
                 style={{ color: "#DC2626", fontWeight: "600" }}
               >
                 {" "}
-                $36.25
-                <span className="old-price ml--15">$69.35</span>
+                ${productContent.price.toFixed(2)}
+                <span className="old-price ml--15">${productContent.value.toFixed(2)}</span>
               </span>
               <div className="product-bottom-action">
                 <div className="cart-edits">
@@ -87,7 +86,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                   >
                     Categories:{" "}
                   </span>{" "}
-                  T-Shirts, Tops, Mens
+                  {productContent.categories.join(", ")}
                 </span>
                 <span className="tags product-unipue mb--10">
                   <span
@@ -98,7 +97,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                   >
                     Tags:{" "}
                   </span>{" "}
-                  fashion, t-shirts, Men
+                  {productContent.tags.join(", ")}
                 </span>
                 <span className="tags product-unipue mb--10">
                   <span
@@ -109,7 +108,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                   >
                     Life:{" "}
                   </span>{" "}
-                  6 Months
+                  {moment(productContent.life).fromNow()}
                 </span>
                 <span className="tags product-unipue mb--10">
                   <span
@@ -120,18 +119,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                   >
                     Type:{" "}
                   </span>{" "}
-                  original
-                </span>
-                <span className="tags product-unipue mb--10">
-                  <span
-                    style={{
-                      fontWeight: "400",
-                      marginRight: "10px",
-                    }}
-                  >
-                    Category:{" "}
-                  </span>{" "}
-                  Beverages, Dairy & Bakery
+                  {productContent.type_content}
                 </span>
               </div>
               <div className="share-option-shop-details">

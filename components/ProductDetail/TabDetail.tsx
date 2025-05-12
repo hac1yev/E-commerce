@@ -1,40 +1,33 @@
-const TabDetail = () => {
+const TabDetail = ({ productDetailAdditionalInfo }: { productDetailAdditionalInfo: ProductDetailAdditionalInfoType }) => {
   return (
     <div className="single-tab-content-shop-details">
       <p className="disc">
-        Uninhibited carnally hired played in whimpered dear gorilla koala
-        depending and much yikes off far quetzal goodness and from for grimaced
-        goodness unaccountably and meadowlark near unblushingly crucial scallop
-        tightly neurotic hungrily some and dear furiously this apart.
+        {productDetailAdditionalInfo.additionalInfo}
       </p>
       <div className="table-responsive table-shop-details-pd">
         <table className="table">
           <thead>
             <tr>
-              <th>Kitchen Fade Defy</th>
-              <th>5KG</th>
+              <th>
+                <b>Item code</b>
+              </th>
+              <th>
+                <b>{`PR-${productDetailAdditionalInfo.id}`}</b>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>PRAN Full Cream Milk Powder</td>
-              <td>3KG</td>
-            </tr>
-            <tr>
-              <td>Net weight</td>
-              <td>8KG</td>
+              <td>Status</td>
+              <td>{productDetailAdditionalInfo.status_content}</td>
             </tr>
             <tr>
               <td>Brand</td>
-              <td>Reactheme</td>
-            </tr>
-            <tr>
-              <td>Item code</td>
-              <td>4000000005</td>
+              <td>{productDetailAdditionalInfo.brand}</td>
             </tr>
             <tr>
               <td>Product type</td>
-              <td>Powder milk</td>
+              <td>{productDetailAdditionalInfo.type_content}</td>
             </tr>
           </tbody>
         </table>

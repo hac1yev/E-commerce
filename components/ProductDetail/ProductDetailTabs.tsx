@@ -2,16 +2,13 @@ import { useState } from "react";
 import TabDetail from "./TabDetail";
 import TabCustomer from "./TabCustomer";
 
-const ProductDetailTabs = ({ productDetailTabContent }: { productDetailTabContent: ProductDetailTabContentType })  => {
+const ProductDetailTabs = ({ productDetailAdditionalInfo, productDetailRatingResult }: { productDetailAdditionalInfo: ProductDetailAdditionalInfoType, productDetailRatingResult: ProductDetailRatingResultType }) => {
   const [activeTab, setActiveTab] = useState("tab1");
 
   const handleChangeTab = (tab: string) => {
     setActiveTab(tab);
   };
-
-  console.log(productDetailTabContent);
   
-
   return (
     <div className="product-discription-tab-shop mt--50">
       <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -27,10 +24,10 @@ const ProductDetailTabs = ({ productDetailTabContent }: { productDetailTabConten
       </ul>
       <div className="tab-content" id="myTabContent">
         {activeTab === "tab1" && (
-          <TabDetail />
+          <TabDetail productDetailAdditionalInfo={productDetailAdditionalInfo} />
         )}
         {activeTab === "tab2" && (
-          <TabCustomer />
+          <TabCustomer productDetailRatingResult={productDetailRatingResult} />
         )}
       </div>
     </div>
