@@ -3,7 +3,7 @@ import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { Forward, GitCompare, HeartIcon, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import moment from "moment";
-import { getReviewCount } from "@/app/lib/getRating";
+import { getAverageRating, getReviewCount } from "@/app/lib/getRating";
 
 const ProductDetailContent = ({ productContent }: { productContent: ProductDetailContentType }) => {
   const filteredRating = useMemo(() => {
@@ -13,6 +13,10 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
   const reviewCount = useMemo(() => {
     return getReviewCount(filteredRating);
   }, [filteredRating]);    
+
+  const averageRating = useMemo(() => {
+    return getAverageRating(filteredRating);
+  }, [filteredRating]);
 
   return (
     <div className="product-details-popup-wrapper in-shopdetails">
@@ -33,7 +37,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
               <div className="product-status">
                 <span className="product-catagory">{productContent.brand}</span>
                 <div className="rating-stars-group">
-                  <StaticRatingStar filledStars={3} />
+                  {averageRating && <StaticRatingStar filledStars={averageRating} />}
                   <span>{reviewCount} Reviews</span>
                 </div>
               </div>

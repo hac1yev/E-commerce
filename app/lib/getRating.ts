@@ -1,4 +1,4 @@
-export function getAvarageRating(filteredRating: ProductDetailRatingItem[]) {
+export function getAverageRating(filteredRating: ProductDetailRatingItem[]) {
     let average;
 
     const totalSum = filteredRating.reduce((total,item) => {

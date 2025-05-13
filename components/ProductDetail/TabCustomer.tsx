@@ -1,4 +1,4 @@
-import { getAvarageRating, getReviewCount } from "@/app/lib/getRating"
+import { getAverageRating, getReviewCount } from "@/app/lib/getRating"
 import RatingStar from "../RatingStar/RatingStar";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { useMemo } from "react";
@@ -13,7 +13,7 @@ const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult:
   }, [filteredRating]);  
 
   const average = useMemo(() => {
-    return getAvarageRating(filteredRating)?.toFixed(1);
+    return getAverageRating(filteredRating)?.toFixed(1);
   }, [filteredRating]);
 
   return (
