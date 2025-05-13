@@ -1,4 +1,4 @@
-import { getAvarageRating } from "@/app/lib/getAverageRating";
+import { getAvarageRating, getReviewCount } from "@/app/lib/getRating"
 import RatingStar from "../RatingStar/RatingStar";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { useMemo } from "react";
@@ -6,19 +6,15 @@ import { useMemo } from "react";
 const TabCustomer = ({ productDetailRatingResult }: { productDetailRatingResult: ProductDetailRatingResultType }) => {
   const filteredRating = useMemo(() => {
     return productDetailRatingResult.ratingResult.filter((item) => item.count !== 0);
-  }, []);
+  }, [productDetailRatingResult.ratingResult]);
 
   const reviewCount = useMemo(() => {
-    return filteredRating.reduce((total,item) => {
-      const { count } = item;
-      total += count;
-      return total;
-    }, 0);
-  }, []);  
+    return getReviewCount(filteredRating);
+  }, [filteredRating]);  
 
   const average = useMemo(() => {
     return getAvarageRating(filteredRating)?.toFixed(1);
-  }, []);
+  }, [filteredRating]);
 
   return (
     <div className="single-tab-content-shop-details">

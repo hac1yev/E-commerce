@@ -28223,8 +28223,7 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   color: #fff !important;
 }
 
-.product-discription-tab-shop button:not(.active):hover {
-  
+.product-discription-tab-shop > ul button:not(.active):hover {
   border: 1px solid var(--color-primary) !important;
   color: #629D23!important;
 }

@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useMemo } from "react";
 import StaticRatingStar from "../RatingStar/StaticRatingStar";
 import { Forward, GitCompare, HeartIcon, Minus, Plus, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import moment from "moment";
+import { getReviewCount } from "@/app/lib/getRating";
 
 const ProductDetailContent = ({ productContent }: { productContent: ProductDetailContentType }) => {
+  const filteredRating = useMemo(() => {
+    return productContent.ratingResult.filter((item) => item.count !== 0);
+  }, [productContent.ratingResult]);
+
+  const reviewCount = useMemo(() => {
+    return getReviewCount(filteredRating);
+  }, [filteredRating]);    
 
   return (
     <div className="product-details-popup-wrapper in-shopdetails">
@@ -26,7 +34,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                 <span className="product-catagory">{productContent.brand}</span>
                 <div className="rating-stars-group">
                   <StaticRatingStar filledStars={3} />
-                  <span>10 Reviews</span>
+                  <span>{reviewCount} Reviews</span>
                 </div>
               </div>
               <h2 className="product-title">

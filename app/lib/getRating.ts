@@ -17,3 +17,11 @@ export function getAvarageRating(filteredRating: ProductDetailRatingItem[]) {
 
     return average;
 };
+
+export function getReviewCount(filteredRating: ProductDetailRatingItem[]) {
+    return filteredRating.reduce((total,item) => {
+        const { count } = item;
+        total += count;
+        return total;
+    }, 0);
+};
