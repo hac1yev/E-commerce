@@ -68,6 +68,8 @@ export async function GET(req: NextRequest) {
     }, []);   
     
     resultProduct[0].ratingResult = ratingResult.recordset;
+
+    await pool.close();
     
     return NextResponse.json({ message: 'Success', product: resultProduct[0] });
 }

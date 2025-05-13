@@ -62,6 +62,8 @@ export async function POST(req: NextRequest) {
             secure: true   
         });
     
+        await pool.close();
+
         return response;
     } catch (error) {
         return NextResponse.json({ error });

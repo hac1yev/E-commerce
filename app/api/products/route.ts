@@ -114,5 +114,7 @@ export async function POST(req: NextRequest) {
         .input("reviewMessage", sql.VarChar, null)
         .query(`insert into ProductRatings values (@productId, @userId, @star, @createdAt, @reviewMessage)`);
 
+    await pool.close();
+
     return NextResponse.json({ message: 'Success' });
 };

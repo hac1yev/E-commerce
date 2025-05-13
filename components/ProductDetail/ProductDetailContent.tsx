@@ -37,8 +37,11 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
               <div className="product-status">
                 <span className="product-catagory">{productContent.brand}</span>
                 <div className="rating-stars-group">
-                  {averageRating && <StaticRatingStar filledStars={averageRating} />}
-                  <span>{reviewCount} Reviews</span>
+                  {averageRating && <>
+                    <StaticRatingStar filledStars={Math.round(averageRating)} />
+                    <span>{reviewCount} Reviews</span>
+                  </>}
+                  {!averageRating && <span>No review</span>}
                 </div>
               </div>
               <h2 className="product-title">

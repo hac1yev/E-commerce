@@ -22,6 +22,8 @@ export async function GET(req: NextRequest) {
       pool.request().query(`SELECT * FROM Status ORDER BY value`)
     ]);
 
+    await pool.close();
+
     return NextResponse.json({
       categories: categoriesResult.recordset,
       tags: tagsResult.recordset,

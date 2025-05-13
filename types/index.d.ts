@@ -78,3 +78,8 @@ declare type ProductDetailAdditionalInfoType = {
 declare type ProductDetailRatingResultType = {
   ratingResult: ProductDetailRatingItem[];
 }
+
+declare type RatingType = {
+  star: null | number;
+  reviewMessage: string;
+}

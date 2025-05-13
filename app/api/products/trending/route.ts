@@ -9,6 +9,8 @@ export async function GET() {
             select * from Products
         `); 
 
+        await pool.close();
+
         return NextResponse.json({ result });
     } catch (error) {
         return NextResponse.json({ message: error });
