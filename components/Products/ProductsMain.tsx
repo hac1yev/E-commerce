@@ -3,9 +3,13 @@
 import ProductsFilterSelect from "./ProductsFilterSelect";
 import CardItem from "../Cards/CardItem";
 import { useTypedProductSelector } from "@/store/products-slice";
+import ProductsPagination from "./ProductsPagination";
+import { useState } from "react";
 
 const ProductsMain = () => {
   const products = useTypedProductSelector((state) => state.productReducer.products);
+  const [page,setPage] = useState(1);
+
   // const [isModalOpen,setIsModalOpen] = useState(false);
   // const [modalData,setModalData] = useState<ProductType>();
   
@@ -22,7 +26,7 @@ const ProductsMain = () => {
 
   return (
     <div className="col-xl-9 col-lg-12">
-      <ProductsFilterSelect />
+      <ProductsFilterSelect page={page} />
       <div
         className="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active"
         id="home-tab-pane"
@@ -42,6 +46,7 @@ const ProductsMain = () => {
           ))}
         </div>
       </div>
+      <ProductsPagination setPage={setPage} />
     </div>
   );
 };

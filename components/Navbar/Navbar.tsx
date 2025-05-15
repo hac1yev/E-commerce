@@ -10,23 +10,23 @@ const Navbar = () => {
                     <div className="nav-area">
                         <nav>
                             <ul className="parent-nav">
-                                <li className="parent has-dropdown">
-                                    <Link className="nav-link" href="/">Households</Link>
-                                </li>
-                                <li className="parent has-dropdown">
-                                    <Link className="nav-link" href="/">Furniture</Link>
+                                <li className="parent">
+                                    <Link href="/products?category=1">Female</Link>
                                 </li>
                                 <li className="parent">
-                                    <Link href="/products">Supermarket</Link>
-                                </li>
-                                <li className="parent with-megamenu">
-                                    <Link href="/shop">Cosmetics</Link>
-                                </li>
-                                <li className="parent has-dropdown">
-                                    <Link className="nav-link" href="/vendor">Shoes</Link>
+                                    <Link href="/products?category=2">Male</Link>
                                 </li>
                                 <li className="parent">
-                                    <Link href="/contact">Others</Link>
+                                    <Link href="/products?category=3">Mother & Kid</Link>
+                                </li>
+                                <li className="parent">
+                                    <Link href="/products?category=4">Households</Link>
+                                </li>
+                                <li className="parent">
+                                    <Link href="/products?category=5">Furnitures</Link>
+                                </li>
+                                <li className="parent">
+                                    <Link href="/products">Others</Link>
                                 </li>
                             </ul>
                         </nav>

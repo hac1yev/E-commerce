@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
 
-const ProductsFilterSelect = () => {
+const ProductsFilterSelect = ({ page }: { page: number }) => {
   const [selectData,setSelectData] = useState<AddProductSelectType>({});
   const dispatch = useDispatch();  
   const searchParams = useSearchParams();
@@ -39,7 +39,11 @@ const ProductsFilterSelect = () => {
   useEffect(() => {
     (async function() {
       try {
-        const allParams = Object.fromEntries(Array.from(searchParams.entries()));
+        const obj = Object.fromEntries(Array.from(searchParams.entries()));
+        const allParams: Record<string, string | number> = {
+          ...obj,
+          page: page
+        }
         const url = new URL(window.location.href);
 
         for(const key in allParams) {
@@ -51,18 +55,15 @@ const ProductsFilterSelect = () => {
             }
           }
         }
-        const response = await axiosPrivate.get(`/api/products/${url.search}`);
+
+        navigate.push(`/products${url.search}`);
+        const response = await axiosPrivate.get(`/api/products${url.search}`);
         dispatch(ProductSliceActions.getAllProducts(response.data.products)); 
-        setFilterItems({
-          category: null,
-          tag: null,
-          type: null
-        }); 
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [axiosPrivate,dispatch,searchParams]);
+  }, [axiosPrivate,dispatch,searchParams,page,navigate]);
 
   const handleFilter = () => {
     const filterItemsArr = Object.entries(filterItems).filter((item) => {
@@ -72,6 +73,7 @@ const ProductsFilterSelect = () => {
     });
     const url = new URL(window.location.href);
     const obj = Object.fromEntries(filterItemsArr);
+    obj['page'] = page;
 
     for(const key in obj) {
       if(obj[key]) {
@@ -85,6 +87,11 @@ const ProductsFilterSelect = () => {
         
     navigate.push(`/products${url.search}`);
   };      
+
+  const handleResetFilter = () => {
+    navigate.push(`/products?page=${page}`);
+    setFilterItems({ category: null, tag: null, type: null }); 
+  }
 
   return (
     <div className="filter-select-area">
@@ -148,7 +155,7 @@ const ProductsFilterSelect = () => {
         </div>
         <div className="button-area">
           <button className="rts-btn" onClick={handleFilter}>Filter</button>
-          <button className="rts-btn">Reset Filter</button>
+          <button className="rts-btn" onClick={handleResetFilter}>Reset Filter</button>
         </div>
       </div>
     </div>

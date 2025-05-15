@@ -18,8 +18,18 @@ export async function GET(req: NextRequest) {
     }
     
     const pool = await connectToDB();
-    let productsRequest;
 
+   try {
+        let productsRequest;
+        const searchParamsArr = searchParams.split('&').map((item) => {
+            const arr = item.split("=");
+            return arr;
+        });        
+    
+    const obj = Object.fromEntries(searchParamsArr);        
+    const { page } = obj;
+    const arr = [];
+    
     if(!searchParams) {
         productsRequest = await pool.request().query(`
             select p.*, c.label [categories], t.label [tags]
@@ -30,35 +40,30 @@ export async function GET(req: NextRequest) {
             on pt.tagId = t.value
         `);
     }else{
-        const searchParamsArr = searchParams.split('&').map((item) => {
-            const arr = item.split("=");
-            return arr;
-        });
-
-        const obj = Object.fromEntries(searchParamsArr);
-        const arr = [];
         let query = `
             select p.*, c.label [categories], t.label [tags]
             from Products p inner join ProductCategories pc
             on p.id = pc.productId inner join Categories c
             on pc.categoryId = c.value inner join ProductTags pt 
             on p.id = pt.productId inner join Tags t
-            on pt.tagId = t.value where
+            on pt.tagId = t.value
         `;
+
+        if(obj.category || obj.tag || obj.type) {
+            query += ' where ';
+        }
 
         for(const key in obj) {
             if(key === 'category') {
                 arr.push(`pc.${key}Id = ${obj[key]}`);
             }else if(key === 'tag') {
                 arr.push(`pt.${key}Id = ${obj[key]}`);
-            }else{
+            }else if(key === 'type'){
                 arr.push(`p.${key} = ${obj[key]}`);
             }
         }
         
         query += arr.join(' and ');
-
-        console.log(query);
         
         productsRequest = await pool.request().query(query);
     }
@@ -85,9 +90,13 @@ export async function GET(req: NextRequest) {
         return resultArr;
     }, []);
     
-    await pool.close();
+    return NextResponse.json({ message: 'Success', products: resultProducts.slice((page-1)*12, page*12) });
+   } catch (error) {
+        return NextResponse.json({ error }, { status: 501 });
+   }finally{
+       await pool.close();
+   }
 
-    return NextResponse.json({ message: 'Success', products: resultProducts  });
 } 
 
 export async function POST(req: NextRequest) {
