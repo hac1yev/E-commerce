@@ -29017,3 +29017,11 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
 }
 
 /*# sourceMappingURL=../maps/style.css.map */
+
+/* PAGINATION */
+
+.products-main-wrapper nav {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 0 0;
+}

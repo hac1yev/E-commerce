@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 type ProductState = {
-    products: Pick<ProductType, keyof ProductType>[]
-}
+    products: Pick<ProductType, keyof ProductType>[];
+    totalProducts: number | null;
+};
 
 const initialProductState: ProductState = {
-    products: []
+    products: [],
+    totalProducts: null
 };
 
 const productSlice = createSlice({
@@ -17,6 +19,9 @@ const productSlice = createSlice({
             state.products = [
                 ...action.payload
             ]
+        },
+        getProductCounts(state,action) {
+            state.totalProducts = action.payload;
         }
     }
 });

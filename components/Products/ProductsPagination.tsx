@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import { useEffect, useState } from 'react';
 
 const ProductsPagination = ({ setPage }: { setPage: (value: number) => void }) => {
-    const products = useTypedProductSelector(state => state.productReducer.products);
+    const totalProducts = useTypedProductSelector(state => state.productReducer.totalProducts);
     const [pageCount,setPageCount] = useState(1);
 
     const handleChangePagination = (e: React.ChangeEvent<unknown>, value: number) => {
@@ -11,8 +11,10 @@ const ProductsPagination = ({ setPage }: { setPage: (value: number) => void }) =
     }
 
     useEffect(() => {
-        setPageCount(Math.ceil(products.length / 12));
-    }, [products]);
+        if(totalProducts){
+            setPageCount(Math.ceil(totalProducts / 12));
+        }
+    }, [totalProducts]);
     
     return (
         <Pagination 

@@ -25,7 +25,7 @@ const ProductsMain = () => {
 
 
   return (
-    <div className="col-xl-9 col-lg-12">
+    <div className="col-xl-9 col-lg-12 products-main-wrapper">
       <ProductsFilterSelect page={page} />
       <div
         className="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active"

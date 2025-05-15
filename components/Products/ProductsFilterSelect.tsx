@@ -59,6 +59,7 @@ const ProductsFilterSelect = ({ page }: { page: number }) => {
         navigate.push(`/products${url.search}`);
         const response = await axiosPrivate.get(`/api/products${url.search}`);
         dispatch(ProductSliceActions.getAllProducts(response.data.products)); 
+        dispatch(ProductSliceActions.getProductCounts(response.data.totalProducts)); 
       } catch (error) {
         console.log(error);
       }

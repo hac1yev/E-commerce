@@ -33,19 +33,19 @@ export async function GET(req: NextRequest) {
     if(!searchParams) {
         productsRequest = await pool.request().query(`
             select p.*, c.label [categories], t.label [tags]
-            from Products p inner join ProductCategories pc
-            on p.id = pc.productId inner join Categories c
-            on pc.categoryId = c.value inner join ProductTags pt 
-            on p.id = pt.productId inner join Tags t
+            from Products p left join ProductCategories pc
+            on p.id = pc.productId left join Categories c
+            on pc.categoryId = c.value left join ProductTags pt 
+            on p.id = pt.productId left join Tags t
             on pt.tagId = t.value
         `);
     }else{
         let query = `
             select p.*, c.label [categories], t.label [tags]
-            from Products p inner join ProductCategories pc
-            on p.id = pc.productId inner join Categories c
-            on pc.categoryId = c.value inner join ProductTags pt 
-            on p.id = pt.productId inner join Tags t
+            from Products p left join ProductCategories pc
+            on p.id = pc.productId left join Categories c
+            on pc.categoryId = c.value left join ProductTags pt 
+            on p.id = pt.productId left join Tags t
             on pt.tagId = t.value
         `;
 
@@ -64,8 +64,8 @@ export async function GET(req: NextRequest) {
         }
         
         query += arr.join(' and ');
-        
-        productsRequest = await pool.request().query(query);
+
+        productsRequest = await pool.request().query(query);        
     }
 
     const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
@@ -88,9 +88,9 @@ export async function GET(req: NextRequest) {
         }
 
         return resultArr;
-    }, []);
+    }, []);    
     
-    return NextResponse.json({ message: 'Success', products: resultProducts.slice((page-1)*12, page*12) });
+    return NextResponse.json({ message: 'Success', products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
    } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
    }finally{
