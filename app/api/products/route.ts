@@ -4,6 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 import sql from 'mssql';
 
 export async function GET(req: NextRequest) {
+    const url = req.url;
+    const searchParams = url.split('?')[1];
+    
     const bearer = req.headers.get("Authorization") || "";
 
     const accessToken = bearer.split(" ")[1];
@@ -15,15 +18,50 @@ export async function GET(req: NextRequest) {
     }
     
     const pool = await connectToDB();
+    let productsRequest;
 
-    const productsRequest = await pool.request().query(`
-        select p.*, c.label [categories], t.label [tags]
-        from Products p inner join ProductCategories pc
-        on p.id = pc.productId inner join Categories c
-        on pc.categoryId = c.value inner join ProductTags pt 
-        on p.id = pt.productId inner join Tags t
-        on pt.tagId = t.value
-    `);
+    if(!searchParams) {
+        productsRequest = await pool.request().query(`
+            select p.*, c.label [categories], t.label [tags]
+            from Products p inner join ProductCategories pc
+            on p.id = pc.productId inner join Categories c
+            on pc.categoryId = c.value inner join ProductTags pt 
+            on p.id = pt.productId inner join Tags t
+            on pt.tagId = t.value
+        `);
+    }else{
+        const searchParamsArr = searchParams.split('&').map((item) => {
+            const arr = item.split("=");
+            return arr;
+        });
+
+        const obj = Object.fromEntries(searchParamsArr);
+        const arr = [];
+        let query = `
+            select p.*, c.label [categories], t.label [tags]
+            from Products p inner join ProductCategories pc
+            on p.id = pc.productId inner join Categories c
+            on pc.categoryId = c.value inner join ProductTags pt 
+            on p.id = pt.productId inner join Tags t
+            on pt.tagId = t.value where
+        `;
+
+        for(const key in obj) {
+            if(key === 'category') {
+                arr.push(`pc.${key}Id = ${obj[key]}`);
+            }else if(key === 'tag') {
+                arr.push(`pt.${key}Id = ${obj[key]}`);
+            }else{
+                arr.push(`p.${key} = ${obj[key]}`);
+            }
+        }
+        
+        query += arr.join(' and ');
+
+        console.log(query);
+        
+        productsRequest = await pool.request().query(query);
+    }
 
     const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
         const { id,categories,tags } = item;
@@ -47,6 +85,7 @@ export async function GET(req: NextRequest) {
         return resultArr;
     }, []);
     
+    await pool.close();
 
     return NextResponse.json({ message: 'Success', products: resultProducts  });
 } 
