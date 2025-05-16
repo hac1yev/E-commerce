@@ -3,6 +3,27 @@ type ProductDetailRatingItem = {
   count: number;
 };
 
+declare type ProductCardType = {
+  id: number;
+  discount: number;
+  image: StaticImageData;
+  title: string;
+  price: number;
+  value: number;
+  brand: string;
+};
+
+declare type ProductCardModalType = {
+  image: StaticImageData;
+  title: string;
+  description: string;
+  price: number;
+  value: number;
+  reviewCount: number;
+  categories: string[];
+  tags: string[];
+};
+
 declare type ProductType = {
   id: number;
   discount: number;

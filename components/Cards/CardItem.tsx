@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp, EyeIcon, Heart, ShoppingCart } from "lucide-rea
 import { useState } from "react";
 import Link from "next/link";
 
-const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
+const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
   const [count,setCount] = useState(1);
 
   const handleIncreaseCount = () => {

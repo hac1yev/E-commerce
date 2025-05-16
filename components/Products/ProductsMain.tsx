@@ -38,7 +38,13 @@ const ProductsMain = () => {
               <CardItem 
                 key={product.id}
                 // handleOpenModal={handleOpenModal}
-                {...product}
+                id={product.id}
+                discount={product.discount}
+                image={product.image}
+                title={product.title}
+                price={product.price}
+                value={product.value}
+                brand={product.brand}
               />
             </div>
           ))}

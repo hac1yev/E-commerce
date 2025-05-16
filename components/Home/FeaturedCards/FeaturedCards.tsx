@@ -3,15 +3,15 @@
 import { cards, settings } from "@/public/demo/demoCardData";
 import Slider from "react-slick";
 import CardItem from "../../Cards/CardItem";
-import { useCallback, useState } from "react";
-import ProductDetailModal from "../../Modals/ProductDetailModal";
+// import { useCallback, useState } from "react";
+// import ProductDetailModal from "../../Modals/ProductDetailModal";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 // import axios from "axios";
 
 const FeaturedCards = () => {
-    const [isModalOpen,setIsModalOpen] = useState(false);
-    const [modalData,setModalData] = useState<ProductType>();
+    // const [isModalOpen,setIsModalOpen] = useState(false);
+    // const [modalData,setModalData] = useState<ProductCardModalType>();
 
     // useEffect(() => {
     //     (async function() {
@@ -25,15 +25,24 @@ const FeaturedCards = () => {
     //     })()
     // }, []);
 
-    const handleOpenModal = useCallback((id: string) => {
-        setIsModalOpen(true);
-        const findedCard = cards.find((card) => card.id === parseInt(id));
-        setModalData(findedCard);
-    }, []);
+    // const handleOpenModal = useCallback((id: string) => {
+    //     setIsModalOpen(true);
+    //     const findedCard = cards.find((card) => card.id === parseInt(id)) as ProductType;
+    //     setModalData({
+    //         image: findedCard?.image,
+    //         title: findedCard?.title,
+    //         description: findedCard?.description,
+    //         price: findedCard?.price,
+    //         value: findedCard?.value,
+    //         reviewCount: findedCard?.reviewCount,
+    //         categories: findedCard?.category,
+    //         tags: findedCard?.tags
+    //     });
+    // }, []);
 
-    const handleCloseModal = useCallback(() => {
-        setIsModalOpen(false);
-    }, []);
+    // const handleCloseModal = useCallback(() => {
+    //     setIsModalOpen(false);
+    // }, []);
 
     return (
         <div className="rts-grocery-feature-area rts-section-gapBottom">
@@ -55,18 +64,24 @@ const FeaturedCards = () => {
                             {cards.map((card) => (
                                 <CardItem 
                                     key={card.id}
-                                    handleOpenModal={handleOpenModal}
-                                    {...card}
+                                    // handleOpenModal={handleOpenModal}
+                                    id={card.id}
+                                    discount={card.discount}
+                                    image={card.image}
+                                    title={card.title}
+                                    price={card.price}
+                                    value={card.value}
+                                    brand={card.brand}
                                 />
                             ))}
                         </Slider>
                     </div>
                 </div>
-                {isModalOpen && modalData && 
+                {/* {isModalOpen && modalData && 
                     <ProductDetailModal 
                         handleCloseModal={handleCloseModal}
                         {...modalData}
-                    />}
+                    />} */}
             </div>
         </div>
     );

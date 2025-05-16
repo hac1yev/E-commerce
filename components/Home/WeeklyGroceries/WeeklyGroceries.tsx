@@ -1,26 +1,26 @@
 "use client";
 
 import CardItem from "@/components/Cards/CardItem";
-import ProductDetailModal from "@/components/Modals/ProductDetailModal";
+// import ProductDetailModal from "@/components/Modals/ProductDetailModal";
 import { cards } from "@/public/demo/demoCardData";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 const categories = ["Frozen Foods","Diet Foods","Healthy Foods", "Vitamin Foods"]
 
 const WeeklyGroceries = () => {
-    const [isModalOpen,setIsModalOpen] = useState(false);
-    const [modalData,setModalData] = useState<ProductType>();
+    // const [isModalOpen,setIsModalOpen] = useState(false);
+    // const [modalData,setModalData] = useState<ProductType>();
     const [tab,setTab] = useState("Frozen Foods");
 
-    const handleOpenModal = useCallback((id: string) => {
-        setIsModalOpen(true);
-        const findedCard = cards.find((card) => card.id === parseInt(id));
-        setModalData(findedCard);
-    }, []);
+    // const handleOpenModal = useCallback((id: string) => {
+    //     setIsModalOpen(true);
+    //     const findedCard = cards.find((card) => card.id === parseInt(id));
+    //     setModalData(findedCard);
+    // }, []);
     
-    const handleCloseModal = useCallback(() => {
-        setIsModalOpen(false);
-    }, []);
+    // const handleCloseModal = useCallback(() => {
+    //     setIsModalOpen(false);
+    // }, []);
 
     const handleChangeTab = (tab: string) => {
         setTab(tab);
@@ -55,9 +55,15 @@ const WeeklyGroceries = () => {
                             {cards.filter((card) => card.category.includes(1)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
-                                        {...item}
                                         componentType="weekly"
-                                        handleOpenModal={handleOpenModal}
+                                        // handleOpenModal={handleOpenModal}
+                                        id={item.id}
+                                        discount={item.discount}
+                                        image={item.image}
+                                        title={item.title}
+                                        price={item.price}
+                                        value={item.value}
+                                        brand={item.brand}
                                     />
                                 </div>
                             ))}
@@ -66,9 +72,15 @@ const WeeklyGroceries = () => {
                             {cards.filter((card) => card.category.includes(2)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
-                                        {...item}
                                         componentType="weekly"
-                                        handleOpenModal={handleOpenModal}
+                                        // handleOpenModal={handleOpenModal}
+                                        id={item.id}
+                                        discount={item.discount}
+                                        image={item.image}
+                                        title={item.title}
+                                        price={item.price}
+                                        value={item.value}
+                                        brand={item.brand}
                                     />
                                 </div>
                             ))}
@@ -77,9 +89,15 @@ const WeeklyGroceries = () => {
                             {cards.filter((card) => card.category.includes(3)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
-                                        {...item}
                                         componentType="weekly"
-                                        handleOpenModal={handleOpenModal}
+                                        // handleOpenModal={handleOpenModal}
+                                        id={item.id}
+                                        discount={item.discount}
+                                        image={item.image}
+                                        title={item.title}
+                                        price={item.price}
+                                        value={item.value}
+                                        brand={item.brand}
                                     />
                                 </div>
                             ))}
@@ -88,21 +106,27 @@ const WeeklyGroceries = () => {
                             {cards.filter((card) => card.category.includes(4)).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
-                                        {...item}
                                         componentType="weekly"
-                                        handleOpenModal={handleOpenModal}
+                                        // handleOpenModal={handleOpenModal}
+                                        id={item.id}
+                                        discount={item.discount}
+                                        image={item.image}
+                                        title={item.title}
+                                        price={item.price}
+                                        value={item.value}
+                                        brand={item.brand}
                                     />
                                 </div>
                             ))}
                         </div>}
                     </div>
                 </div>
-                {isModalOpen && modalData && 
+                {/* {isModalOpen && modalData && 
                     <ProductDetailModal 
                         handleCloseModal={handleCloseModal}
                         {...modalData}
                     />
-                }
+                } */}
             </div>
         </div>
     );
