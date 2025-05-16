@@ -29031,8 +29031,8 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   font-size: 14px;
 }
 
-.products-pagination li button span {
-  font-size: 14px;
+.products-pagination li button svg {
+  font-size: 18px;
 }
 
 .products-pagination li button.Mui-selected {

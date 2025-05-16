@@ -42,7 +42,7 @@ const ProductsFilterSelect = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    params.set("page", "1");
+    params.set("page", page.toString());
     const category = searchParams.get('category');
     const tag = searchParams.get('tag');
     const type = searchParams.get('type');
@@ -54,7 +54,7 @@ const ProductsFilterSelect = () => {
     });
     
     navigate.replace(`/products?${params}`);
-  }, [navigate,searchParams]);
+  }, [navigate,searchParams,page]);
 
   useEffect(() => {
     (async function() {
@@ -62,7 +62,7 @@ const ProductsFilterSelect = () => {
         const obj = Object.fromEntries(Array.from(searchParams.entries()));
         const allParams: Record<string, string | number> = {
           ...obj,
-          page: page
+          page
         }
         const params = new URLSearchParams(searchParams);
 
