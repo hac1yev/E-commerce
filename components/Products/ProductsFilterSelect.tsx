@@ -1,11 +1,11 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { ProductSliceActions } from "@/store/products-slice";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
 
-const ProductsFilterSelect = ({ page }: { page: number }) => {
+const ProductsFilterSelect = () => {
   const [selectData,setSelectData] = useState<AddProductSelectType>({});
   const dispatch = useDispatch();  
   const searchParams = useSearchParams();
@@ -20,6 +20,10 @@ const ProductsFilterSelect = ({ page }: { page: number }) => {
     tag: null,
     type: null
   });
+
+  const page = useMemo(() => {
+    return Number(searchParams.get("page")) || 1;
+  }, [searchParams]);
 
   useEffect(() => {
     (async function() {
@@ -37,6 +41,22 @@ const ProductsFilterSelect = ({ page }: { page: number }) => {
   }, [axiosPrivate]);
 
   useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    const category = searchParams.get('category');
+    const tag = searchParams.get('tag');
+    const type = searchParams.get('type');
+
+    setFilterItems({
+      category: category ? Number(category) : null,
+      tag: tag ? Number(tag) : null,
+      type: type ? Number(type) : null,
+    });
+    
+    navigate.replace(`/products?${params}`);
+  }, [navigate,searchParams]);
+
+  useEffect(() => {
     (async function() {
       try {
         const obj = Object.fromEntries(Array.from(searchParams.entries()));
@@ -44,27 +64,27 @@ const ProductsFilterSelect = ({ page }: { page: number }) => {
           ...obj,
           page: page
         }
-        const url = new URL(window.location.href);
+        const params = new URLSearchParams(searchParams);
 
         for(const key in allParams) {
           if(allParams[key]) {
-            if(!url.searchParams.has(key)) {
-              url.searchParams.append(key, allParams[key].toString());
+            if(!params.has(key)) {
+              params.set(key, allParams[key].toString());
             }else{
-              url.searchParams.set(key, allParams[key].toString());
+              params.set(key, allParams[key].toString());
             }
           }
         }
 
-        navigate.push(`/products${url.search}`);
-        const response = await axiosPrivate.get(`/api/products${url.search}`);
-        dispatch(ProductSliceActions.getAllProducts(response.data.products)); 
-        dispatch(ProductSliceActions.getProductCounts(response.data.totalProducts)); 
+        const response = await axiosPrivate.get(`/api/products?${params}`);
+        dispatch(ProductSliceActions.getAllProducts({
+          ...response.data
+        })); 
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [axiosPrivate,dispatch,searchParams,page,navigate]);
+  }, [axiosPrivate,dispatch,searchParams,page]);
 
   const handleFilter = () => {
     const filterItemsArr = Object.entries(filterItems).filter((item) => {
@@ -72,25 +92,25 @@ const ProductsFilterSelect = ({ page }: { page: number }) => {
         return item;
       }
     });
-    const url = new URL(window.location.href);
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
     const obj = Object.fromEntries(filterItemsArr);
-    obj['page'] = page;
-
+    
     for(const key in obj) {
       if(obj[key]) {
-        if(!url.searchParams.has(key)) {
-          url.searchParams.append(key, obj[key].toString());
+        if(!params.has(key)) {
+          params.set(key, obj[key].toString());
         }else{
-          url.searchParams.set(key, obj[key].toString());
+          params.set(key, obj[key].toString());
         }
       }
     }
         
-    navigate.push(`/products${url.search}`);
+    navigate.push(`/products?${params}`);
   };      
 
   const handleResetFilter = () => {
-    navigate.push(`/products?page=${page}`);
+    navigate.push(`/products?page=1`);
     setFilterItems({ category: null, tag: null, type: null }); 
   }
 

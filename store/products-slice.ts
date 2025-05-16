@@ -17,12 +17,10 @@ const productSlice = createSlice({
     reducers: {
         getAllProducts(state,action) {
             state.products = [
-                ...action.payload
-            ]
+                ...action.payload.products
+            ];
+            state.totalProducts = action.payload.totalProducts;
         },
-        getProductCounts(state,action) {
-            state.totalProducts = action.payload;
-        }
     }
 });
 

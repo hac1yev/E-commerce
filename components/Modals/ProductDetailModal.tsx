@@ -3,12 +3,12 @@ import Image from "next/image";
 
 type CardItemProps = Pick<
   ProductType,
-    "image" | "title" | "price" | "value" | "category" | "tags" | "reviewCount" | "description"
+    "image" | "title" | "price" | "value" | "categories" | "tags" | "reviewCount" | "description"
 > & {
     handleCloseModal: () => void;
 };
 
-const ProductDetailModal = ({ image,category,price,value,tags,title,reviewCount,description,handleCloseModal }: CardItemProps) => {
+const ProductDetailModal = ({ image,categories,price,value,tags,title,reviewCount,description,handleCloseModal }: CardItemProps) => {
     return (
         <div className="product-detail-modal-overlay">
             <div className="rts-product-details-section rts-product-details-section2 product-details-popup-section">
@@ -48,7 +48,7 @@ const ProductDetailModal = ({ image,category,price,value,tags,title,reviewCount,
                         </div>
                         <div className="contents">
                             <div className="product-status">
-                                <span className="product-catagory">{category}</span>
+                                <span className="product-catagory">{categories.join("")}</span>
                                 <div className="rating-stars-group">
                                     <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#000' }}>5.0</span> Average Rating 
                                     <span>{reviewCount} Reviews</span>

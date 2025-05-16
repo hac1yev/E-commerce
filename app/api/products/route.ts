@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
         return resultArr;
     }, []);    
     
-    return NextResponse.json({ message: 'Success', products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
+    return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
    } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
    }finally{

@@ -60,7 +60,7 @@ const CardItem = (props: Pick<ProductType, keyof ProductType> & { componentType?
         </div>
         <div className="cart-counter-action">
           <div className="quantity-edit">
-            <input type="text" className="input" value={count} />
+            <span>{count}</span>
             <div className="button-wrapper-action">
               <button className="button" onClick={handleIncreaseCount}>
                 <ChevronUp width={16} />

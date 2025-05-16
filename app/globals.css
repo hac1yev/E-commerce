@@ -29025,3 +29025,21 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   justify-content: center;
   padding: 20px 0 0 0;
 }
+
+.products-pagination li button {
+  border-radius: 4px!important;
+  font-size: 14px;
+}
+
+.products-pagination li button span {
+  font-size: 14px;
+}
+
+.products-pagination li button.Mui-selected {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.products-pagination li button.Mui-selected:hover {
+  background-color: rgba(98, 157, 35, 0.8)!important;
+}
