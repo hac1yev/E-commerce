@@ -1,12 +1,17 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
 const WidgetPriceFilter = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(150);
   const [rangeValue, setRangeValue] = useState(0);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const handleFilter = async (e: FormEvent) => {
+    e.preventDefault();
+    
+  }
 
   const handleChangePrice = (e: ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
@@ -26,7 +31,7 @@ const WidgetPriceFilter = () => {
     <div className="single-filter-box">
       <h5 className="title">Widget Price Filter</h5>
       <div className="filterbox-body">
-        <form className="price-input-area" onSubmit={(e) => e.preventDefault()}>
+        <form className="price-input-area" onSubmit={handleFilter}>
           <div className="half-input-wrapper">
             <div className="single">
               <label htmlFor="min">Min price</label>
