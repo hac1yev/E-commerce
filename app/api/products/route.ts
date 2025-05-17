@@ -19,83 +19,83 @@ export async function GET(req: NextRequest) {
     
     const pool = await connectToDB();
 
-   try {
+    try {
         let productsRequest;
         const searchParamsArr = searchParams.split('&').map((item) => {
             const arr = item.split("=");
             return arr;
         });        
     
-    const obj = Object.fromEntries(searchParamsArr);        
-    const { page } = obj;
-    const arr = [];
-    
-    if(!searchParams) {
-        productsRequest = await pool.request().query(`
-            select p.*, c.label [categories], t.label [tags]
-            from Products p left join ProductCategories pc
-            on p.id = pc.productId left join Categories c
-            on pc.categoryId = c.value left join ProductTags pt 
-            on p.id = pt.productId left join Tags t
-            on pt.tagId = t.value
-        `);
-    }else{
-        let query = `
-            select p.*, c.label [categories], t.label [tags]
-            from Products p left join ProductCategories pc
-            on p.id = pc.productId left join Categories c
-            on pc.categoryId = c.value left join ProductTags pt 
-            on p.id = pt.productId left join Tags t
-            on pt.tagId = t.value
-        `;
-
-        if(obj.category || obj.tag || obj.type) {
-            query += ' where ';
-        }
-
-        for(const key in obj) {
-            if(key === 'category') {
-                arr.push(`pc.${key}Id = ${obj[key]}`);
-            }else if(key === 'tag') {
-                arr.push(`pt.${key}Id = ${obj[key]}`);
-            }else if(key === 'type'){
-                arr.push(`p.${key} = ${obj[key]}`);
-            }
-        }
+        const obj = Object.fromEntries(searchParamsArr);        
+        const { page } = obj;
+        const arr = [];
         
-        query += arr.join(' and ');
-
-        productsRequest = await pool.request().query(query);        
-    }
-
-    const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
-        const { id,categories,tags } = item;
-        const index = resultArr.findIndex((obj: ProductType) => obj.id === id);
-
-        if (index === -1) {
-            resultArr.push({
-                ...item,
-                categories: [categories],
-                tags: [tags]
-            });
+        if(!searchParams) {
+            productsRequest = await pool.request().query(`
+                select p.*, c.label [categories], t.label [tags]
+                from Products p left join ProductCategories pc
+                on p.id = pc.productId left join Categories c
+                on pc.categoryId = c.value left join ProductTags pt 
+                on p.id = pt.productId left join Tags t
+                on pt.tagId = t.value
+            `);
         }else{
-            if(!resultArr[index].categories.includes(categories)) {
-                resultArr[index].categories.push(categories);
+            let query = `
+                select p.*, c.label [categories], t.label [tags]
+                from Products p left join ProductCategories pc
+                on p.id = pc.productId left join Categories c
+                on pc.categoryId = c.value left join ProductTags pt 
+                on p.id = pt.productId left join Tags t
+                on pt.tagId = t.value
+            `;
+
+            if(obj.category || obj.tag || obj.type) {
+                query += ' where ';
             }
-            if(!resultArr[index].tags.includes(tags)) {
-                resultArr[index].tags.push(tags);
+
+            for(const key in obj) {
+                if(key === 'category') {
+                    arr.push(`pc.${key}Id = ${obj[key]}`);
+                }else if(key === 'tag') {
+                    arr.push(`pt.${key}Id = ${obj[key]}`);
+                }else if(key === 'type'){
+                    arr.push(`p.${key} = ${obj[key]}`);
+                }
             }
+            
+            query += arr.join(' and ');
+
+            productsRequest = await pool.request().query(query);        
         }
 
-        return resultArr;
-    }, []);    
-    
-    return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
-   } catch (error) {
+        const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
+            const { id,categories,tags } = item;
+            const index = resultArr.findIndex((obj: ProductType) => obj.id === id);
+
+            if (index === -1) {
+                resultArr.push({
+                    ...item,
+                    categories: [categories],
+                    tags: [tags]
+                });
+            }else{
+                if(!resultArr[index].categories.includes(categories)) {
+                    resultArr[index].categories.push(categories);
+                }
+                if(!resultArr[index].tags.includes(tags)) {
+                    resultArr[index].tags.push(tags);
+                }
+            }
+
+            return resultArr;
+        }, []);    
+        
+        return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
+    } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
-   }finally{
+    }finally{
        await pool.close();
-   }
+    }
 
 } 
 

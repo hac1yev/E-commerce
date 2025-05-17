@@ -18277,6 +18277,10 @@ li.with-megamenu:hover .rts-megamenu {
   max-width: max-content;
 }
 
+.rts-btn.btn-primary:hover {
+  background-color: rgba(98, 157, 35, 0.8)!important;  
+}
+
 .rts-btn.radious-sm {
   border-radius: 6px;
 }

@@ -1,5 +1,5 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
-import { ProductSliceActions } from "@/store/products-slice";
+import { ProductSliceActions, useTypedProductSelector } from "@/store/products-slice";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,8 @@ const ProductsFilterSelect = () => {
   const searchParams = useSearchParams();
   const navigate = useRouter();
   const axiosPrivate = useAxiosPrivate();
+  const totalProducts = useTypedProductSelector(state => state.productReducer.totalProducts);
+  const products = useTypedProductSelector(state => state.productReducer.products);
   const [filterItems, setFilterItems] = useState<{
     category: number | null;
     tag: number | null;
@@ -64,6 +66,7 @@ const ProductsFilterSelect = () => {
           ...obj,
           page
         }
+
         const params = new URLSearchParams(searchParams);
 
         for(const key in allParams) {
@@ -95,12 +98,14 @@ const ProductsFilterSelect = () => {
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
     const obj = Object.fromEntries(filterItemsArr);
+    obj['page'] = 1;
     
-    for(const key in obj) {
+    for(const key in obj) {      
       if(obj[key]) {
         if(!params.has(key)) {
           params.set(key, obj[key].toString());
         }else{
+          params.delete(key);
           params.set(key, obj[key].toString());
         }
       }
@@ -117,7 +122,15 @@ const ProductsFilterSelect = () => {
   return (
     <div className="filter-select-area">
       <div className="top-filter">
-        <span>Showing 1–20 of 57 results</span>
+        {totalProducts && <span>Showing {
+          products.length === 12 
+            ? page === 1 
+              ? 1
+              : products.length * page - 12
+            : page !== 1
+              ? 12 * (page-1)
+              : 1
+          }–{products.length === 12 ? products.length * page : totalProducts} of {totalProducts} results</span>}
       </div>
       <div className="nice-select-area-wrapper-and-button">
         <div className="nice-select-wrapper-1">

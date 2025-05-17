@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
 const WidgetPriceFilter = () => {
@@ -7,10 +8,12 @@ const WidgetPriceFilter = () => {
   const [maxPrice, setMaxPrice] = useState(150);
   const [rangeValue, setRangeValue] = useState(0);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+  const searchParams = useSearchParams();
 
   const handleFilter = async (e: FormEvent) => {
     e.preventDefault();
-    
+    const params = new URLSearchParams(searchParams);
+    console.log(Array.from(params.entries()));
   }
 
   const handleChangePrice = (e: ChangeEvent<HTMLInputElement>) => {
