@@ -13,7 +13,16 @@ const WidgetPriceFilter = () => {
   const handleFilter = async (e: FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
-    console.log(Array.from(params.entries()));
+    params.set("price", `${minPrice}-${maxPrice}`);
+    params.delete("page");
+    params.set("page", "1");
+    const obj = Object.fromEntries(params.entries());
+
+    for(const key in obj) {      
+      if(obj[key]) {
+        params.set(key, obj[key].toString());        
+      }
+    }
   }
 
   const handleChangePrice = (e: ChangeEvent<HTMLInputElement>) => {
