@@ -6,11 +6,8 @@ import sql from 'mssql';
 export async function GET(req: NextRequest) {
     const url = req.url;
     const searchParams = url.split('?')[1];
-    
     const bearer = req.headers.get("Authorization") || "";
-
     const accessToken = bearer.split(" ")[1];
-
     const isVerifyAccessToken = await verifyJWTToken(accessToken);
 
     if(!isVerifyAccessToken) {
@@ -21,11 +18,7 @@ export async function GET(req: NextRequest) {
 
     try {
         let productsRequest;
-        const searchParamsArr = searchParams.split('&').map((item) => {
-            const arr = item.split("=");
-            return arr;
-        });        
-    
+        const searchParamsArr = searchParams.split('&').map((item) => item.split("="));        
         const obj = Object.fromEntries(searchParamsArr);        
         const { page } = obj;
         const arr = [];
@@ -49,7 +42,7 @@ export async function GET(req: NextRequest) {
                 on pt.tagId = t.value
             `;
 
-            if(obj.category || obj.tag || obj.type) {
+            if(obj.category || obj.tag || obj.type || obj.price) {
                 query += ' where ';
             }
 
@@ -60,11 +53,13 @@ export async function GET(req: NextRequest) {
                     arr.push(`pt.${key}Id = ${obj[key]}`);
                 }else if(key === 'type'){
                     arr.push(`p.${key} = ${obj[key]}`);
+                }else if(key === 'price') {
+                    const min = obj[key].split("-")[0];
+                    const max = obj[key].split("-")[1];
+                    arr.push(`p.${key} between ${min} and ${max}`);
                 }
             }
-            
             query += arr.join(' and ');
-
             productsRequest = await pool.request().query(query);        
         }
 
@@ -96,15 +91,12 @@ export async function GET(req: NextRequest) {
     }finally{
        await pool.close();
     }
-
 } 
 
 export async function POST(req: NextRequest) {
     const { title,discount,image,description,additionalInfo,price,life,type,status,tags,categories,brand,userId } = await req.json();
     const bearer = req.headers.get("Authorization") || "";
-
     const accessToken = bearer.split(" ")[1];
-
     const isVerifyAccessToken = await verifyJWTToken(accessToken);
 
     if(!isVerifyAccessToken) {

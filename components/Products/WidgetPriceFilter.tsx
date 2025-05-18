@@ -1,7 +1,10 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { ProductSliceActions } from "@/store/products-slice";
+import { useSearchParams,useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const WidgetPriceFilter = () => {
   const [minPrice, setMinPrice] = useState(0);
@@ -9,6 +12,9 @@ const WidgetPriceFilter = () => {
   const [rangeValue, setRangeValue] = useState(0);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
   const searchParams = useSearchParams();
+  const axiosPrivate = useAxiosPrivate();
+  const dispatch = useDispatch();
+  const navigate = useRouter();
 
   const handleFilter = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,6 +29,12 @@ const WidgetPriceFilter = () => {
         params.set(key, obj[key].toString());        
       }
     }
+
+    const response = await axiosPrivate.get(`/api/products?${params}`);
+    dispatch(ProductSliceActions.getAllProducts({
+      ...response.data
+    })); 
+    navigate.push(`/products?${params}`);
   }
 
   const handleChangePrice = (e: ChangeEvent<HTMLInputElement>) => {
