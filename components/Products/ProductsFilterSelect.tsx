@@ -79,7 +79,7 @@ const ProductsFilterSelect = () => {
           }
         }
 
-        const response = await axiosPrivate.get(`/api/products?${params}`);
+        const response = await axiosPrivate.get(`/api/products?${params}`);        
         dispatch(ProductSliceActions.getAllProducts({
           ...response.data
         })); 
@@ -122,7 +122,7 @@ const ProductsFilterSelect = () => {
   return (
     <div className="filter-select-area">
       <div className="top-filter">
-        {totalProducts && <span>Showing {
+        {totalProducts !== 0 && <span>Showing {
           products.length === 12 
             ? page === 1 
               ? 1
@@ -131,6 +131,7 @@ const ProductsFilterSelect = () => {
               ? 12 * (page-1)
               : 1
           }–{products.length === 12 ? products.length * page : totalProducts} of {totalProducts} results</span>}
+        {!totalProducts && <span>Showing 0–0 of 0 results</span>}
       </div>
       <div className="nice-select-area-wrapper-and-button">
         <div className="nice-select-wrapper-1">

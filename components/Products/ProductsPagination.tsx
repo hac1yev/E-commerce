@@ -16,8 +16,11 @@ const ProductsPagination = () => {
     }
 
     useEffect(() => {
-        if(totalProducts){
+        if(totalProducts) {
             setPageCount(Math.ceil(totalProducts / 12));
+        }
+        if(totalProducts === 0) {
+            setPageCount(1);
         }
     }, [totalProducts]);
     

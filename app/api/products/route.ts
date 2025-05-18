@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
                 on pt.tagId = t.value
             `;
 
-            if(obj.category || obj.tag || obj.type || obj.price) {
+            if(obj.category || obj.tag || obj.type || obj.price || obj.brand) {
                 query += ' where ';
             }
 
@@ -57,6 +57,8 @@ export async function GET(req: NextRequest) {
                     const min = obj[key].split("-")[0];
                     const max = obj[key].split("-")[1];
                     arr.push(`p.${key} between ${min} and ${max}`);
+                }else if(key === 'brand') {
+                    arr.push(`p.${key} like '%${obj[key]}%'`);
                 }
             }
             query += arr.join(' and ');
