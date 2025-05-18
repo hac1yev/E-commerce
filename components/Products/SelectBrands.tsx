@@ -27,13 +27,12 @@ const SelectBrands = () => {
         params.set(key, obj[key].toString());        
       }
     }
-
-    console.log(obj);
     
     const response = await axiosPrivate.get(`/api/products?${params}`);
     dispatch(ProductSliceActions.getAllProducts({
       ...response.data
     })); 
+    setBrand('');
     navigate.push(`/products?${params}`);
   };
 

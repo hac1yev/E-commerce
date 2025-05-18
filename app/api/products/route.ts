@@ -17,53 +17,49 @@ export async function GET(req: NextRequest) {
     const pool = await connectToDB();
 
     try {
-        let productsRequest;
         const searchParamsArr = searchParams.split('&').map((item) => item.split("="));        
         const obj = Object.fromEntries(searchParamsArr);        
         const { page } = obj;
         const arr = [];
         
-        if(!searchParams) {
-            productsRequest = await pool.request().query(`
-                select p.*, c.label [categories], t.label [tags]
-                from Products p left join ProductCategories pc
-                on p.id = pc.productId left join Categories c
-                on pc.categoryId = c.value left join ProductTags pt 
-                on p.id = pt.productId left join Tags t
-                on pt.tagId = t.value
-            `);
-        }else{
-            let query = `
-                select p.*, c.label [categories], t.label [tags]
-                from Products p left join ProductCategories pc
-                on p.id = pc.productId left join Categories c
-                on pc.categoryId = c.value left join ProductTags pt 
-                on p.id = pt.productId left join Tags t
-                on pt.tagId = t.value
-            `;
+        let query = `
+            select p.*, c.label [categories], t.label [tags]
+            from Products p left join ProductCategories pc
+            on p.id = pc.productId left join Categories c
+            on pc.categoryId = c.value left join ProductTags pt 
+            on p.id = pt.productId left join Tags t
+            on pt.tagId = t.value
+        `;
 
-            if(obj.category || obj.tag || obj.type || obj.price || obj.brand) {
-                query += ' where ';
-            }
+        if(obj.category || obj.tag || obj.type || obj.price || obj.brand || obj.status) {
+            query += ' where ';
+        }
 
-            for(const key in obj) {
-                if(key === 'category') {
-                    arr.push(`pc.${key}Id = ${obj[key]}`);
-                }else if(key === 'tag') {
-                    arr.push(`pt.${key}Id = ${obj[key]}`);
-                }else if(key === 'type'){
-                    arr.push(`p.${key} = ${obj[key]}`);
-                }else if(key === 'price') {
-                    const min = obj[key].split("-")[0];
-                    const max = obj[key].split("-")[1];
-                    arr.push(`p.${key} between ${min} and ${max}`);
-                }else if(key === 'brand') {
-                    arr.push(`p.${key} like '%${obj[key]}%'`);
+        for(const key in obj) {
+            if(key === 'category') {
+                arr.push(`pc.${key}Id = ${obj[key]}`);
+            }else if(key === 'tag') {
+                arr.push(`pt.${key}Id = ${obj[key]}`);
+            }else if(key === 'type'){
+                arr.push(`p.${key} = ${obj[key]}`);
+            }else if(key === 'price') {
+                const min = obj[key].split("-")[0];
+                const max = obj[key].split("-")[1];
+                arr.push(`p.${key} between ${min} and ${max}`);
+            }else if(key === 'brand') {
+                arr.push(`p.${key} like '%${obj[key]}%'`);
+            }else if(key === 'status') {
+                if(obj[key] === 'inStock') {
+                    arr.push(`p.${key} = 1`);
+                }else if(obj[key] === 'onSale') {
+                    arr.push(`p.${key} = 2`);
+                }else{
+                    arr.push(`(p.${key} = 2 or p.${key} = 1)`);
                 }
             }
-            query += arr.join(' and ');
-            productsRequest = await pool.request().query(query);        
         }
+        query += arr.join(' and ');                    
+        const productsRequest = await pool.request().query(query);        
 
         const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
             const { id,categories,tags } = item;
