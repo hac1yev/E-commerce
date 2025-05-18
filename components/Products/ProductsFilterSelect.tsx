@@ -6,13 +6,13 @@ import { useDispatch } from "react-redux";
 import Select from "react-select";
 
 const ProductsFilterSelect = () => {
-  const [selectData,setSelectData] = useState<AddProductSelectType>({});
-  const dispatch = useDispatch();  
-  const searchParams = useSearchParams();
-  const navigate = useRouter();
-  const axiosPrivate = useAxiosPrivate();
   const totalProducts = useTypedProductSelector(state => state.productReducer.totalProducts);
   const products = useTypedProductSelector(state => state.productReducer.products);
+  const [selectData,setSelectData] = useState<AddProductSelectType>({});
+  const searchParams = useSearchParams();
+  const axiosPrivate = useAxiosPrivate();
+  const dispatch = useDispatch();  
+  const navigate = useRouter();
   const [filterItems, setFilterItems] = useState<{
     category: number | null;
     tag: number | null;
