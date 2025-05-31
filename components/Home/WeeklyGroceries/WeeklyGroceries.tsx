@@ -2,12 +2,11 @@
 
 import CardItem from "@/components/Cards/CardItem";
 // import ProductDetailModal from "@/components/Modals/ProductDetailModal";
-import { cards } from "@/public/demo/demoCardData";
 import { useState } from "react";
 
 const categories = ["Frozen Foods","Diet Foods","Healthy Foods", "Vitamin Foods"]
 
-const WeeklyGroceries = () => {
+const WeeklyGroceries = ({ weeklyProducts }: { weeklyProducts: ProductType[] }) => {
     // const [isModalOpen,setIsModalOpen] = useState(false);
     // const [modalData,setModalData] = useState<ProductType>();
     const [tab,setTab] = useState("Frozen Foods");
@@ -25,6 +24,11 @@ const WeeklyGroceries = () => {
     const handleChangeTab = (tab: string) => {
         setTab(tab);
     };  
+
+    if(weeklyProducts?.length === 0) {
+        return <p>Loading...</p>
+    }
+
 
     return (
         <div className="weekly-best-selling-area rts-section-gap bg_light-1">
@@ -52,7 +56,7 @@ const WeeklyGroceries = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         {tab === 'Frozen Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category.includes(1)).map((item) => (
+                            {weeklyProducts?.filter((card) => card.categories.includes('Female')).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         componentType="weekly"
@@ -69,7 +73,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Diet Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category.includes(2)).map((item) => (
+                            {weeklyProducts?.filter((card) => card.categories.includes('Male')).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         componentType="weekly"
@@ -86,7 +90,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Healthy Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category.includes(3)).map((item) => (
+                            {weeklyProducts?.filter((card) => card.categories.includes('Mother & Kid')).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         componentType="weekly"
@@ -103,7 +107,7 @@ const WeeklyGroceries = () => {
                             ))}
                         </div>}
                         {tab === 'Vitamin Foods' && <div className="row g-4">
-                            {cards.filter((card) => card.category.includes(4)).map((item) => (
+                            {weeklyProducts?.filter((card) => card.categories.includes('Shoes')).map((item) => (
                                 <div key={item.id} className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <CardItem 
                                         componentType="weekly"

@@ -7,6 +7,7 @@ const ProductsPagination = () => {
     const totalProducts = useTypedProductSelector(state => state.productReducer.totalProducts);
     const [pageCount,setPageCount] = useState(1);
     const searchParams = useSearchParams();
+    const page = Number(searchParams.get("page")) || 1;
     const router = useRouter();
 
     const handleChangePagination = (e: React.ChangeEvent<unknown>, value: number) => {
@@ -27,6 +28,7 @@ const ProductsPagination = () => {
     return (
         <Pagination 
             count={pageCount} 
+            page={page}
             onChange={handleChangePagination}
             className='products-pagination'
         />

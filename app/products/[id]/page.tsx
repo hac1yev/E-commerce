@@ -1,9 +1,12 @@
+"use client";
+
 import ProductDetailContainer from "@/components/ProductDetail/ProductDetailContainer";
+import { useTypedProductDetailSelector } from "@/store/product-detail-slice";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-
 const ProductDetail = ({ params }: { params: { id: string } }) => {
+  const productContent = useTypedProductDetailSelector(state => state.productDetailReducer.productContent);
   const { id } = params;
 
   return (
@@ -15,9 +18,9 @@ const ProductDetail = ({ params }: { params: { id: string } }) => {
               <div className="navigator-breadcrumb-wrapper">
                 <Link href="/">Home</Link>
                 <ChevronRight width={18} />
-                <Link className="current" href="/login">
-                  Products
-                </Link>
+                <Link className="current" href="/products">Products</Link>
+                <ChevronRight width={18} />
+                <Link className="current" href={`/products/${id}`}>{productContent?.title}</Link>
               </div>
             </div>
           </div>

@@ -42,6 +42,7 @@ const AddProduct = () => {
 
   const handleAddNewProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+console.log(productItems);
 
     try {
       const response = await axiosPrivate.post("/api/products", JSON.stringify({
@@ -52,6 +53,9 @@ const AddProduct = () => {
           'Content-Type': 'application/json'
         }
       });
+
+      console.log(response);
+      
 
       if(response.status === 200) {
         setProductItems({ title: "", life: new Date().toISOString().split('T')[0], discount: "", price: "", tags: [], categories: [], type: "", status: "", description: "", additionalInfo: "", image: { name: "", url: "" }, brand: "" });

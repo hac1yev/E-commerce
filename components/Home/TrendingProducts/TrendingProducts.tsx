@@ -1,9 +1,12 @@
 import Image from "next/image";
-import img from "../../../public/images/grocery/01.jpg";
 import bookmark from "../../../public/images/bookmark.png";
 import Link from "next/link";
 
-const TrendingProducts = () => {
+const TrendingProducts = ({ trendingProducts }: { trendingProducts: ProductType[] }) => {
+  if(trendingProducts?.length === 0) {
+    return <p>Loading...</p>
+  }
+
   return (
     <div className="top-tranding-product rts-section-gap">
       <div className="container">
@@ -18,198 +21,29 @@ const TrendingProducts = () => {
           <div className="col-lg-12">
             <div className="cover-card-main-over">
               <div className="row g-4">
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
+                {trendingProducts?.map((product) => (
+                  <div className="col-xl-3 col-md-6 col-sm-12 col-12" key={product.id}>
+                    <div className="single-shopping-card-one tranding-product">
+                      <Link href="/" className="thumbnail-preview">
+                        <div className="badge">
+                          <span>{product.discount}% <br />Off</span>
+                          <Image src={bookmark} width={50} height={50} alt="bookmark" />
+                        </div>
+                        <Image width={200} height={100} src={product.image} alt="grocery" />
                       </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
+                      <div className="body-content">
+                        <Link href="/">
+                          <h4 className="title">{product.title}</h4>
+                        </Link>
+                        <span className="availability">500g Pack</span>
+                        <div className="price-area">
+                          <span className="current">${product.price.toFixed(2)}</span>
+                          <div className="previous">${product.value.toFixed(2)}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-md-6 col-sm-12 col-12">
-                  <div className="single-shopping-card-one tranding-product">
-                    <Link href="/" className="thumbnail-preview">
-                    <div className="badge">
-                        <span>
-                            25% <br />
-                            Off
-                        </span>
-                        <Image src={bookmark} width={50} height={50} alt="bookmark" />
-                    </div>
-                      <Image width={200} height={100} src={img} alt="grocery" />
-                    </Link>
-                    <div className="body-content">
-                      <Link href="/">
-                        <h4 className="title">Pastine Mellin Filid</h4>
-                      </Link>
-                      <span className="availability">500g Pack</span>
-                      <div className="price-area">
-                        <span className="current">$36.00</span>
-                        <div className="previous">$36.00</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

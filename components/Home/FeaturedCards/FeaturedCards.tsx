@@ -1,6 +1,6 @@
 "use client"
 
-import { cards, settings } from "@/public/demo/demoCardData";
+import { settings } from "@/public/demo/demoCardData";
 import Slider from "react-slick";
 import CardItem from "../../Cards/CardItem";
 // import { useCallback, useState } from "react";
@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 // import axios from "axios";
 
-const FeaturedCards = () => {
+const FeaturedCards = ({ featuredProducts }: { featuredProducts: ProductType[] }) => {    
     // const [isModalOpen,setIsModalOpen] = useState(false);
     // const [modalData,setModalData] = useState<ProductCardModalType>();
 
@@ -44,6 +44,10 @@ const FeaturedCards = () => {
     //     setIsModalOpen(false);
     // }, []);
 
+    if(featuredProducts?.length === 0) {
+        return <p>Loading...</p>
+    }
+
     return (
         <div className="rts-grocery-feature-area rts-section-gapBottom">
             <div className="category-area-main-wrapper-one">
@@ -61,7 +65,7 @@ const FeaturedCards = () => {
                 <div className="container">
                     <div className="row">
                         <Slider {...settings}>
-                            {cards.map((card) => (
+                            {featuredProducts?.map((card) => (
                                 <CardItem 
                                     key={card.id}
                                     // handleOpenModal={handleOpenModal}

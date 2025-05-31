@@ -43,6 +43,7 @@ declare type ProductType = {
   status_content: string;
   brand: string;
   salesCount: number;
+  inStock: number;
   categories: string[];
   tags: string[];
   ratingResult: ProductDetailRatingItem[];

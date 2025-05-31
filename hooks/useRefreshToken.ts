@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const useRefreshToken = () => {
+    const router = useRouter();
+
     let userInfo = {};
 
     if (typeof window !== "undefined") {
@@ -23,8 +26,14 @@ const useRefreshToken = () => {
                 accessToken: response.data.newAccessToken
             }));
             return response.data.newAccessToken;     
-        } catch (error) {
-            console.log(error);
+        } catch (error: unknown) {
+            if (typeof error === 'object' && error !== null) {
+                const err = error as { response?: { status?: number } };
+
+                if (err.response?.status === 401) {
+                    router.replace("/login");
+                }
+            }            
         }
     };
 

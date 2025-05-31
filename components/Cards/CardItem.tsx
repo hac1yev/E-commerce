@@ -18,6 +18,10 @@ const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { compon
     else setCount((prev) => prev - 1);
   }
 
+  const handleAddFavorite = async () => {
+    console.log("sadasdsadsasad");
+  };
+
   return (
     <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
       {" "}
@@ -37,6 +41,7 @@ const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { compon
             className="single-action openuptip message-show-action"
             data-flow="up"
             title="Add To Wishlist"
+            onClick={handleAddFavorite}
           >
             <Heart width={17} style={{ color: "#fff" }} />
           </div>

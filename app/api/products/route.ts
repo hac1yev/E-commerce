@@ -81,8 +81,8 @@ export async function GET(req: NextRequest) {
             }
 
             return resultArr;
-        }, []);    
-        
+        }, []);   
+                
         return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
     } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
@@ -92,67 +92,72 @@ export async function GET(req: NextRequest) {
 } 
 
 export async function POST(req: NextRequest) {
-    const { title,discount,image,description,additionalInfo,price,life,type,status,tags,categories,brand,userId } = await req.json();
-    const bearer = req.headers.get("Authorization") || "";
-    const accessToken = bearer.split(" ")[1];
-    const isVerifyAccessToken = await verifyJWTToken(accessToken);
+    try {
+        const { title,discount,image,description,additionalInfo,price,life,type,status,tags,categories,brand,userId } = await req.json();
+        const bearer = req.headers.get("Authorization") || "";
+        const accessToken = bearer.split(" ")[1];
+        const isVerifyAccessToken = await verifyJWTToken(accessToken);
 
-    if(!isVerifyAccessToken) {
-        return NextResponse.json({ message: 'Forbidden!' }, { status: 403 });
-    }
+        if(!isVerifyAccessToken) {
+            return NextResponse.json({ message: 'Forbidden!' }, { status: 403 });
+        }
 
-    const pool = await connectToDB();
+        const pool = await connectToDB();
 
-    const insertProductRequest = await pool.request()
-        .input("discount", sql.Int, discount)
-        .input("image", sql.VarChar, image.url)
-        .input("title", sql.VarChar, title)
-        .input("description", sql.VarChar, description)
-        .input("additionalInfo", sql.VarChar, additionalInfo)
-        .input("price", sql.Int, price)
-        .input("value", sql.Int, price + (price * (discount / 100)))
-        .input("reviewCount", sql.Int, 0)
-        .input("life", sql.Date, new Date(life))
-        .input("createdAt", sql.Date, new Date())
-        .input("views", sql.Int, 1)
-        .input("type", sql.Int, type)
-        .input("status", sql.Int, status)
-        .input("brand", sql.VarChar, brand)
-        .input("salesCount", sql.Int, 0)
-    .query(`
-        insert into Products
-        output inserted.id
-        values (
-            @discount,@image,@title,@description,@additionalInfo,@price,@value,
-            @reviewCount,@life,@createdAt,@views,@type,@status,@brand,@salesCount
-        )
-    `);
+        const insertProductRequest = await pool.request()
+            .input("discount", sql.Int, discount)
+            .input("image", sql.VarChar, image.url)
+            .input("title", sql.VarChar, title)
+            .input("description", sql.VarChar, description)
+            .input("additionalInfo", sql.VarChar, additionalInfo)
+            .input("price", sql.Int, price)
+            .input("value", sql.Int, price + (price * (discount / 100)))
+            .input("reviewCount", sql.Int, 0)
+            .input("life", sql.VarChar, life)
+            .input("createdAt", sql.VarChar, new Date().toISOString())
+            .input("views", sql.Int, 1)
+            .input("type", sql.Int, type)
+            .input("status", sql.Int, status)
+            .input("brand", sql.VarChar, brand)
+            .input("salesCount", sql.Int, 0)
+            .input("inStock", sql.Int, 50)
+        .query(`
+            insert into Products
+            output inserted.id
+            values (
+                @discount,@image,@title,@description,@additionalInfo,@price,@value,@reviewCount,
+                @life,@createdAt,@views,@type,@status,@brand,@salesCount,@inStock
+            )
+        `);
 
-    const productId = insertProductRequest.recordset[0].id;
+        const productId = insertProductRequest.recordset[0].id;
 
-    for(const category of categories) {
+        for(const category of categories) {
+            await pool.request()
+                .input("productId", sql.Int, productId)
+                .input("categoryId", sql.Int, category.value)
+                .query(`INSERT INTO ProductCategories VALUES (@productId, @categoryId)`);
+        }
+
+        for(const tag of tags) {
+            await pool.request()
+                .input("productId", sql.Int, productId)
+                .input("tagId", sql.Int, tag.value)
+                .query(`INSERT INTO ProductTags VALUES (@productId, @tagId)`);
+        }
+
         await pool.request()
             .input("productId", sql.Int, productId)
-            .input("categoryId", sql.Int, category.value)
-            .query(`INSERT INTO ProductCategories VALUES (@productId, @categoryId)`);
+            .input("userId", sql.Int, parseInt(userId))
+            .input("star", sql.Int, null)
+            .input("createdAt", sql.Date, new Date())
+            .input("reviewMessage", sql.VarChar, null)
+            .query(`insert into ProductRatings values (@productId, @userId, @star, @createdAt, @reviewMessage)`);
+
+        await pool.close();
+
+        return NextResponse.json({ message: 'Success' });
+    } catch (error) {
+        return NextResponse.json({ error }, { status: 501 });
     }
-
-    for(const tag of tags) {
-        await pool.request()
-            .input("productId", sql.Int, productId)
-            .input("tagId", sql.Int, tag.value)
-            .query(`INSERT INTO ProductTags VALUES (@productId, @tagId)`);
-    }
-
-    await pool.request()
-        .input("productId", sql.Int, productId)
-        .input("userId", sql.Int, parseInt(userId))
-        .input("star", sql.Int, null)
-        .input("createdAt", sql.Date, new Date())
-        .input("reviewMessage", sql.VarChar, null)
-        .query(`insert into ProductRatings values (@productId, @userId, @star, @createdAt, @reviewMessage)`);
-
-    await pool.close();
-
-    return NextResponse.json({ message: 'Success' });
 };

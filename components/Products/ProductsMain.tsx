@@ -33,7 +33,7 @@ const ProductsMain = () => {
           id="home-tab-pane"
         >
           <div className="row g-4">
-            {products.map((product) => (
+            {products.toSorted((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((product) => (
               <div
                 className="col-lg-3 col-md-6 col-sm-6 col-12"
                 key={product.id}

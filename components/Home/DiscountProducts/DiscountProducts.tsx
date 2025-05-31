@@ -1,7 +1,10 @@
-import { discountProducts } from "@/public/demo/discountProductsData";
 import DiscountCardItem from "./DiscountCardItem";
 
-const DiscountProducts = () => {
+const DiscountProducts = ({ discountProducts }: { discountProducts: ProductType[] }) => {
+    if(discountProducts?.length === 0) {
+        return <p>Loading...</p>
+    }
+
     return (
         <div className="rts-grocery-feature-area rts-section-gapBottom">
         <div className="container">
@@ -51,7 +54,7 @@ const DiscountProducts = () => {
                                 <div className="row">
                                     {Array.from( { length: 2 } ).map((_,index) => (
                                         <div className="col-lg-6" key={index}>
-                                            {discountProducts.slice(index * 2, (index + 1) * 2).map((product) => (
+                                            {discountProducts?.map((product) => (
                                                 <DiscountCardItem 
                                                     key={product.id}
                                                     {...product}

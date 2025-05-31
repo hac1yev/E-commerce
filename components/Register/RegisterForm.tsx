@@ -14,7 +14,7 @@ const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleRegister = async (data: FieldValues) => {                
+    const handleRegister = async (data: FieldValues) => {                        
         try {
             const response = await axios.post('/api/register', JSON.stringify(data), {
                 headers: {
@@ -52,7 +52,61 @@ const RegisterForm = () => {
                             )}
                             <form className="registration-form" onSubmit={handleSubmit(handleRegister)}>
                                 <div className="input-wrapper">
-                                    <label htmlFor="name">Username*</label>
+                                    <label htmlFor="firstname">Firstname*</label>
+                                    <input 
+                                        type="text" 
+                                        {...register("firstname", { required: "Firstname is required!", minLength: {
+                                            value: 2,
+                                            message: 'Firstname must be at least 2 caracters!'
+                                        } })}
+                                        name="firstname" 
+                                        id="firstname" 
+                                    />
+                                    {errors['firstname'] && (
+                                        <p className="error">{errors['firstname'].message as string}</p>
+                                    )}
+                                </div>
+                                <div className="input-wrapper">
+                                    <label htmlFor="lastname">Lastname*</label>
+                                    <input 
+                                        type="text" 
+                                        {...register("lastname", { required: "Lastname is required!", minLength: {
+                                            value: 2,
+                                            message: 'Lastname must be at least 2 caracters!'
+                                        } })}
+                                        name="lastname" 
+                                        id="lastname" 
+                                    />
+                                    {errors['lastname'] && (
+                                        <p className="error">{errors['lastname'].message as string}</p>
+                                    )}
+                                </div>
+                                <div className="input-wrapper">
+                                    <label htmlFor="phone">Phone*</label>
+                                    <input 
+                                        type="text" 
+                                        {...register("phone", { required: "Phone number is required!" })}
+                                        name="phone" 
+                                        id="phone" 
+                                    />
+                                    {errors['phone'] && (
+                                        <p className="error">{errors['phone'].message as string}</p>
+                                    )}
+                                </div>
+                                <div className="input-wrapper">
+                                    <label htmlFor="birthday">Birthday*</label>
+                                    <input 
+                                        type="date" 
+                                        {...register("birthday", { required: "Birthday is required!" })}
+                                        name="birthday" 
+                                        id="birthday" 
+                                    />
+                                    {errors['birthday'] && (
+                                        <p className="error">{errors['birthday'].message as string}</p>
+                                    )}
+                                </div>
+                                <div className="input-wrapper">
+                                    <label htmlFor="username">Username*</label>
                                     <input 
                                         type="text" 
                                         {...register("username", { required: "Username is required!", minLength: {
@@ -60,7 +114,7 @@ const RegisterForm = () => {
                                             message: 'Username must be at least 6 caracters!'
                                         } })}
                                         name="username" 
-                                        id="name" 
+                                        id="username" 
                                     />
                                     {errors['username'] && (
                                         <p className="error">{errors['username'].message as string}</p>
