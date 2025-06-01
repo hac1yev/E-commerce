@@ -52,15 +52,13 @@ const DiscountProducts = ({ discountProducts }: { discountProducts: ProductType[
                             </div>
                             <div className="col-xl-8 col-lg-12">
                                 <div className="row">
-                                    {Array.from( { length: 2 } ).map((_,index) => (
-                                        <div className="col-lg-6" key={index}>
-                                            {discountProducts?.map((product) => (
-                                                <DiscountCardItem 
-                                                    key={product.id}
-                                                    {...product}
-                                                />
-                                            ))}
-                                        </div>
+                                    {discountProducts?.map((product) => (
+                                        <div className="col-lg-6 mb-4" key={product.id}>
+                                            <DiscountCardItem 
+                                                key={product.id}
+                                                {...product}
+                                            />
+                                        </div> 
                                     ))}
                                 </div>
                             </div>
