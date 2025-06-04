@@ -18,11 +18,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Invalid or expired access token." }, { status: 403 });
     }
 
-    try {
-      pool = await connectToDB();
-    } catch (err) {
-      return NextResponse.json({ message: "Database connection failed", error: err }, { status: 500 });
-    }
+    pool = await connectToDB();
 
     const [categoriesResult, tagsResult, typesResult, statusResult] = await Promise.all([
       pool.request().query(`SELECT * FROM Categories ORDER BY value`),

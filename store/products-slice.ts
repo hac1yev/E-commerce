@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 type ProductState = {
-    products: Pick<ProductType, keyof ProductType>[];
+    products: ProductType[];
     totalProducts: number | null;
 };
 

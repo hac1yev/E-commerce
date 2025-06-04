@@ -1,5 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import Category from "../Category/Category";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -19,15 +20,15 @@ const Banner = () => {
                         Do not miss our amazing <br />
                         grocery deals
                       </h1>
-                      <a
-                        href="shop-grid-sidebar.html"
+                      <Link
+                        href="/products"
                         className="rts-btn btn-primary radious-sm with-icon"
                       >
                         <div className="btn-text" style={{ display: 'flex', gap: '3px' }}>
                             Shop Now
                             <ShoppingCart width={20} />
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

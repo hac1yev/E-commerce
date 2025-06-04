@@ -79,7 +79,7 @@ const ProductsFilterSelect = () => {
           }
         }
 
-        const response = await axiosPrivate.get(`/api/products?${params}`);        
+        const response = await axiosPrivate.get(`/api/products?${params}`);                
         dispatch(ProductSliceActions.getAllProducts({
           ...response.data
         })); 

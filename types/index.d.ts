@@ -7,6 +7,7 @@ declare type ProductCardType = {
   id: number;
   discount: number;
   image: StaticImageData;
+  liked?: number;
   title: string;
   price: number;
   value: number;

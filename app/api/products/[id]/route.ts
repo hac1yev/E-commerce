@@ -19,12 +19,12 @@ export async function GET(req: NextRequest) {
 
     const result = await pool.request().query(`
         select p.*, c.label [categories], t.label [tags], s.label [status_content], ty.label [type_content] 
-        from Products p inner join ProductCategories pc
-        on p.id = pc.productId inner join Categories c
-        on pc.categoryId = c.value inner join ProductTags pt 
-        on p.id = pt.productId inner join Tags t
-        on pt.tagId = t.value inner join Status s
-        on p.status = s.value inner join Types ty
+        from Products p left join ProductCategories pc
+        on p.id = pc.productId left join Categories c
+        on pc.categoryId = c.value left join ProductTags pt 
+        on p.id = pt.productId left join Tags t
+        on pt.tagId = t.value left join Status s
+        on p.status = s.value left join Types ty
         on p.type = ty.value
         where p.id = ${id}
     `);
