@@ -83,6 +83,8 @@ const ProductsFilterSelect = () => {
         dispatch(ProductSliceActions.getAllProducts({
           ...response.data
         })); 
+        console.log(response);
+        
       } catch (error) {
         console.log(error);
       }

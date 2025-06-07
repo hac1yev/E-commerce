@@ -13,22 +13,34 @@ export async function GET(req: NextRequest) {
     if(!isVerifyAccessToken) {
         return NextResponse.json({ message: 'Forbidden!' }, { status: 403 });
     }
-    
-    const pool = await connectToDB();
 
     try {
         const searchParamsArr = searchParams.split('&').map((item) => item.split("="));        
         const obj = Object.fromEntries(searchParamsArr);        
         const { page } = obj;
         const arr = [];
+
+        const pool = await connectToDB();
+
+        const userResult = await pool.request().query(`
+            select userId from Users where email = '${isVerifyAccessToken.email}'
+        `);
+
+        const { userId } = userResult.recordset[0];
+        console.log(userId);
         
         let query = `
-            select p.*, c.label [categories], t.label [tags]
+            select p.*, c.label [categories], t.label [tags],
+            case 
+                when lp.productId is not null and lp.userId = ${userId} then 1
+                else 0
+            end as liked
             from Products p left join ProductCategories pc
             on p.id = pc.productId left join Categories c
             on pc.categoryId = c.value left join ProductTags pt 
             on p.id = pt.productId left join Tags t
-            on pt.tagId = t.value
+            on pt.tagId = t.value left join LikedProducts lp
+            on lp.productId = p.id
         `;
 
         if(obj.category || obj.tag || obj.type || obj.price || obj.brand || obj.status) {
@@ -82,12 +94,12 @@ export async function GET(req: NextRequest) {
 
             return resultArr;
         }, []);   
+
+        await pool.close();
                 
         return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
     } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
-    }finally{
-       await pool.close();
     }
 } 
 
