@@ -124,7 +124,7 @@ const ProductsFilterSelect = () => {
   return (
     <div className="filter-select-area">
       <div className="top-filter">
-        {totalProducts !== 0 && <span>Showing {
+        {totalProducts && <span>Showing {
           products.length === 12 
             ? page === 1 
               ? 1

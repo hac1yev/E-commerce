@@ -39,6 +39,7 @@ declare type ProductType = {
   createdAt: Date;
   views: number;
   type: number;
+  liked?: number;
   status: number;
   type_content: string;
   status_content: string;

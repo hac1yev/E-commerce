@@ -23472,6 +23472,7 @@ div.error-bg > p {
 
 @media only screen and (max-width: 767px) {
   .single-cart-area-list.main .product-main-cart {
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
@@ -23488,6 +23489,10 @@ div.error-bg > p {
 
 .single-cart-area-list.main .product-main-cart .close {
   cursor: pointer;
+}
+
+.single-cart-area-list.main .product-main-cart .close:hover svg {
+  color: #000;
 }
 
 @media only screen and (max-width: 575px) {
@@ -23752,7 +23757,7 @@ div.error-bg > p {
 }
 
 .rts-cart-list-area.wishlist .single-cart-area-list.head .product-main {
-  flex-basis: 56%;
+  flex-basis: 50%;
 }
 
 .rts-cart-list-area.wishlist .single-cart-area-list.head .price,

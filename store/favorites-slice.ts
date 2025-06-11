@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 type FavoriteStateType = {
-    favoriteProducts: ProductType[]
+    favoriteProducts: ProductType[];
+    isLoading: boolean;
 }
 
 const initialFavoriteState = {
-    favoriteProducts: []
+    favoriteProducts: [],
+    isLoading: false
 };
 
 const favoriteSlice = createSlice({
@@ -14,9 +16,10 @@ const favoriteSlice = createSlice({
     initialState: initialFavoriteState,
     reducers: {
         getFavoriteProducts(state,action) {
-            state.favoriteProducts = [
-                ...action.payload
-            ]
+            state.favoriteProducts = action.payload;
+        },
+        toggleLoading(state,action) {
+            state.isLoading = action.payload;
         }
     }
 });

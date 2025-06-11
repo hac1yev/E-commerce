@@ -19,15 +19,18 @@ export async function GET(req: NextRequest) {
         const obj = Object.fromEntries(searchParamsArr);        
         const { page } = obj;
         const arr = [];
-
+        
         const pool = await connectToDB();
-
+        
         const userResult = await pool.request().query(`
             select userId from Users where email = '${isVerifyAccessToken.email}'
         `);
 
+        if (!userResult.recordset.length) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
+
         const { userId } = userResult.recordset[0];
-        console.log(userId);
         
         let query = `
             select p.*, c.label [categories], t.label [tags],
@@ -45,33 +48,37 @@ export async function GET(req: NextRequest) {
 
         if(obj.category || obj.tag || obj.type || obj.price || obj.brand || obj.status) {
             query += ' where ';
-        }
 
-        for(const key in obj) {
-            if(key === 'category') {
-                arr.push(`pc.${key}Id = ${obj[key]}`);
-            }else if(key === 'tag') {
-                arr.push(`pt.${key}Id = ${obj[key]}`);
-            }else if(key === 'type'){
-                arr.push(`p.${key} = ${obj[key]}`);
-            }else if(key === 'price') {
-                const min = obj[key].split("-")[0];
-                const max = obj[key].split("-")[1];
-                arr.push(`p.${key} between ${min} and ${max}`);
-            }else if(key === 'brand') {
-                arr.push(`p.${key} like '%${obj[key]}%'`);
-            }else if(key === 'status') {
-                if(obj[key] === 'inStock') {
-                    arr.push(`p.${key} = 1`);
-                }else if(obj[key] === 'onSale') {
-                    arr.push(`p.${key} = 2`);
-                }else{
-                    arr.push(`(p.${key} = 2 or p.${key} = 1)`);
+            for(const key in obj) {
+                if(key === 'category') {
+                    arr.push(`pc.${key}Id = ${obj[key]}`);
+                }else if(key === 'tag') {
+                    arr.push(`pt.${key}Id = ${obj[key]}`);
+                }else if(key === 'type'){
+                    arr.push(`p.${key} = ${obj[key]}`);
+                }else if(key === 'price') {
+                    const min = obj[key].split("-")[0];
+                    const max = obj[key].split("-")[1];
+                    arr.push(`p.${key} between ${min} and ${max}`);
+                }else if(key === 'brand') {
+                    arr.push(`p.${key} like '%${obj[key]}%'`);
+                }else if(key === 'status') {
+                    if(obj[key] === 'inStock') {
+                        arr.push(`p.${key} = 1`);
+                    }else if(obj[key] === 'onSale') {
+                        arr.push(`p.${key} = 2`);
+                    }else{
+                        arr.push(`(p.${key} = 2 or p.${key} = 1)`);
+                    }
                 }
             }
-        }
-        query += arr.join(' and ');                    
-        const productsRequest = await pool.request().query(query);        
+
+            query += arr.join(' and ');  
+        }      
+        
+        const productsRequest = await pool.request().query(query);   
+
+        await pool.close();
 
         const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
             const { id,categories,tags } = item;
@@ -94,8 +101,6 @@ export async function GET(req: NextRequest) {
 
             return resultArr;
         }, []);   
-
-        await pool.close();
                 
         return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
     } catch (error) {

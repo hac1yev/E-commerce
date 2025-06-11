@@ -9,7 +9,7 @@ import Orders from "./Orders";
 import AddProduct from "./AddProduct";
 
 const ProfileSidebar = () => {
-    const [activeTab,setActiveTab] = useState("tab4");
+    const [activeTab,setActiveTab] = useState("tab3");
 
     const handleChangeTab = (e: MouseEvent<HTMLDivElement>) => {
         const target = e.target as HTMLElement;
@@ -51,7 +51,7 @@ const ProfileSidebar = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="col-lg-9 pl--50 pl_md--10 pl_sm--10 pt_md--30 pt_sm--30">
+                    <div className="col-lg-9 pt_md--30 pt_sm--30">
                         {activeTab === 'tab1' && <PersonalInformation />}
                         {activeTab === 'tab2' && <Orders />}
                         {activeTab === 'tab3' && <Favorites />}

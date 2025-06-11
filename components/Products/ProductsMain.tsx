@@ -41,6 +41,7 @@ const ProductsMain = () => {
                 <CardItem
                   key={product.id}
                   // handleOpenModal={handleOpenModal}
+                  liked={product.liked}
                   id={product.id}
                   discount={product.discount}
                   image={product.image}
