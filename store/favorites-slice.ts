@@ -6,9 +6,9 @@ type FavoriteStateType = {
     isLoading: boolean;
 }
 
-const initialFavoriteState = {
+const initialFavoriteState: FavoriteStateType = {
     favoriteProducts: [],
-    isLoading: false
+    isLoading: true
 };
 
 const favoriteSlice = createSlice({
@@ -20,6 +20,9 @@ const favoriteSlice = createSlice({
         },
         toggleLoading(state,action) {
             state.isLoading = action.payload;
+        },
+        deleteFavoriteItem(state,action) {
+            state.favoriteProducts = state.favoriteProducts.filter((item) => item.id !== action.payload);
         }
     }
 });

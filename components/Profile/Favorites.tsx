@@ -1,25 +1,47 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { FavoriteProductsAction, useTypedFavoriteSelector } from "@/store/favorites-slice";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { LinearProgress, Stack } from "@mui/material";
+import { ChevronDown, ChevronUp, ShoppingCartIcon, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Favorites = () => {
-  const [count,setCount] = useState(1);
-  const favorites = useTypedFavoriteSelector(
-    (state) => state.favoriteReducer.favoriteProducts
-  );
+  const [count,setCount] = useState<Record<string,number>>({});
+  const favorites = useTypedFavoriteSelector((state) => state.favoriteReducer.favoriteProducts);
+  const isLoading = useTypedFavoriteSelector((state) => state.favoriteReducer.isLoading);
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useDispatch();
 
-  const handleIncreaseCount = () => {
-    setCount((prev) => prev + 1);
+  const handleIncreaseCount = (id: string) => {    
+    setCount((prev) => {
+      return {
+        ...prev,
+        [id]: (prev[id] || 1) + 1
+      }
+    });
+  }  
+
+  const handleDecreaseCount = (id: string) => {
+    if(count[id] === 1) return;
+    else setCount((prev) => {
+      return {
+        ...prev,
+        [id]: prev[id] - 1
+      }
+    });
   }
 
-  const handleDecreaseCount = () => {
-    if(count === 1) return;
-    else setCount((prev) => prev - 1);
+  const handleDeleteFavoriteItem = async (id: number) => {
+    try {
+      const response = await axiosPrivate.delete(`/api/products/favorites/${id}`);
+      if(response.status === 200) {
+        dispatch(FavoriteProductsAction.deleteFavoriteItem(id));
+      }
+    } catch (error) {
+      console.log(error); 
+    }
   }
 
   useEffect(() => {
@@ -58,10 +80,20 @@ const Favorites = () => {
               </div>
               <div className="button-area"></div>
             </div>
+            {isLoading && (
+              <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+                <LinearProgress color="success" />
+              </Stack>
+            )}
+            {!isLoading && favorites.length === 0 && (
+              <div className="single-cart-area-list main item-parent">
+                <h3>There is no favorite product!</h3>
+              </div>
+            )}
             {favorites.map((item) => (
-              <div className="single-cart-area-list main  item-parent" key={item.id}>
+              <div className="single-cart-area-list main item-parent" key={item.id}>
                 <div className="product-main-cart">
-                  <div className="close section-activation">
+                  <div className="close section-activation" onClick={handleDeleteFavoriteItem.bind(null, item.id)}>
                     <X />
                   </div>
                   <div className="thumbnail">
@@ -79,33 +111,28 @@ const Favorites = () => {
                 </div>
                 <div className="quantity mr--10">
                   <div className="quantity-edit">
-                    <span>{count}</span>
+                    <span>{count[`SKU${item.id}`] || 1}</span>
                     <div className="button-wrapper-action">
-                      <button className="button" onClick={handleIncreaseCount}>
+                      <button className="button" onClick={handleIncreaseCount.bind(null, `SKU${item.id}`)}>
                         <ChevronUp width={16} />
                       </button>
-                      <button className="button" onClick={handleDecreaseCount}>
+                      <button className="button" onClick={handleDecreaseCount.bind(null, `SKU${item.id}`)}>
                         <ChevronDown width={16} />
                       </button>
                     </div>
                   </div>
                 </div>
                 <div className="subtotal">
-                  <p>${(item.price * count).toFixed(2)}</p>
+                  <p>${(item.price * (count[`SKU${item.id}`] || 1)).toFixed(2)}</p>
                 </div>
                 <div className="button-area">
-                  <a
-                    href="#"
+                  <Link
+                    href="/"
                     className="rts-btn btn-primary radious-sm with-icon"
                   >
                     <div className="btn-text">Add To Cart</div>
-                    <div className="arrow-icon">
-                      <i className="fa-regular fa-cart-shopping"></i>
-                    </div>
-                    <div className="arrow-icon">
-                      <i className="fa-regular fa-cart-shopping"></i>
-                    </div>
-                  </a>
+                    <ShoppingCartIcon width={18} />
+                  </Link>
                 </div>
               </div>
             ))}

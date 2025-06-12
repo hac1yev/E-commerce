@@ -63,5 +63,4 @@ export async function GET(req: NextRequest) {
     } catch (error) {
         return NextResponse.json({ error }, { status: 501 });
     }
-
 }
