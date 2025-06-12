@@ -15,13 +15,14 @@ const DiscountCardItem = ({ discount, image, title, price, value, brand }: Pick<
             {discount}% <br />
             Off
           </span>
-          <Image src={bookmark} width={50} height={50} alt="bookmark" />
+          <Image src={bookmark} width={50} height={50} alt="bookmark" priority />
         </div>
         <Image
           width={300}
           height={150}
           src={image}
           alt={brand}
+          priority
         />
       </a>
       <div className="body-content">

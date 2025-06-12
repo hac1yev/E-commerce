@@ -3,7 +3,6 @@ import { verifyJWTToken } from "@/app/lib/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  let pool;
   try {
     const bearer = req.headers.get("Authorization") || "";
 
@@ -11,14 +10,14 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Missing or malformed token" }, { status: 401 });
     }
 
-    const accessToken = bearer.split(" ")[1];
+    const accessToken = bearer.split(" ")[1] || "";
     const user = await verifyJWTToken(accessToken);
 
     if (!user) {
       return NextResponse.json({ message: "Invalid or expired access token." }, { status: 403 });
     }
 
-    pool = await connectToDB();
+    const pool = await connectToDB();
 
     const [categoriesResult, tagsResult, typesResult, statusResult] = await Promise.all([
       pool.request().query(`SELECT * FROM Categories ORDER BY value`),
@@ -26,6 +25,8 @@ export async function GET(req: NextRequest) {
       pool.request().query(`SELECT * FROM Types ORDER BY value`),
       pool.request().query(`SELECT * FROM Status ORDER BY value`)
     ]);
+
+    await pool.close();
 
     return NextResponse.json({
       categories: categoriesResult.recordset,
@@ -37,7 +38,5 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error("API /products/meta error:", error);
     return NextResponse.json({ message: "Internal Server Error", error }, { status: 500 });
-  } finally {
-    if (pool) await pool.close();
   }
 }

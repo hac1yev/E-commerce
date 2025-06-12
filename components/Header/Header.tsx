@@ -32,6 +32,7 @@ const Header = () => {
                     src={logo1}
                     alt="logo-main"
                     className="logo"
+                    priority
                   />
                 </Link>
                 <div className="category-search-wrapper">

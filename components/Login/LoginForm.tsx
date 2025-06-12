@@ -43,7 +43,7 @@ const LoginForm = () => {
                     <div className="col-lg-12">
                         <div className="registration-wrapper-1">
                             <div className="logo-area mb--0">
-                                <Image className="mb--10" src={fav} alt="logo" />
+                                <Image width={57} height={57} className="mb--10" src={fav} alt="logo" priority />
                             </div>
                             <h3 className="title">Login Into Your Account</h3>
                             {errorMessage && (
@@ -99,7 +99,7 @@ const LoginForm = () => {
                                     </div>
                                     <div className="login-with-brand">
                                         <Link href="/" className="single">
-                                            <Image width={30} height={30} src={google} alt="login" />
+                                            <Image width={30} height={30} src={google} alt="login" priority />
                                         </Link>
                                     </div>
                                     <p>{`You Don't Have An Account?`} <Link href="/register">Register</Link></p>

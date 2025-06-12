@@ -18,7 +18,7 @@ const MobileHeader = () => {
     <>
       <div className="logo-search-category-wrapper after-md-device-header">
         <Link href="index.html" className="logo-area">
-          <Image width={181} height={47} src={logo1} alt="logo-main" className="logo" />
+          <Image width={181} height={47} src={logo1} alt="logo-main" className="logo" priority />
         </Link>
         <div className="main-wrapper-action-2 d-flex">
         <div className="accont-wishlist-cart-area-header">

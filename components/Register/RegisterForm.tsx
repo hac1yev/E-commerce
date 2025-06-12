@@ -42,7 +42,7 @@ const RegisterForm = () => {
                     <div className="col-lg-12">
                         <div className="registration-wrapper-1">
                             <div className="logo-area mb--0">
-                                <Image className="mb--10" width={50} height={50} src={fav} alt="logo" />
+                                <Image className="mb--10" width={50} height={50} src={fav} alt="logo" priority />
                             </div>
                             <h3 className="title">Register Into Your Account</h3>
                             {errorMessage && (
@@ -168,7 +168,7 @@ const RegisterForm = () => {
                                     </div>
                                     <div className="login-with-brand">
                                         <Link href="/" className="single">
-                                            <Image width={30} height={30} src={google} alt="login" />
+                                            <Image width={30} height={30} src={google} alt="login" priority />
                                         </Link>
                                     </div>
                                     <p>Already Have Account? <Link href="/login">Login</Link></p>

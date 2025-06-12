@@ -49,9 +49,9 @@ const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { compon
               {props.discount}% <br />
               Off
             </span>
-            <Image src={bookmark} width={50} height={50} alt="bookmark" />
+            <Image src={bookmark} width={50} height={50} alt="bookmark" priority />
           </div>
-          <Image src={props.image} width={300} height={200} alt={props.brand} />
+          <Image src={props.image} width={300} height={200} alt={props.brand} priority />
         </Link>
         <div className="action-share-option">
           <div

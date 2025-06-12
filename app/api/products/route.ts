@@ -5,9 +5,9 @@ import sql from 'mssql';
 
 export async function GET(req: NextRequest) {
     const url = req.url;
-    const searchParams = url.split('?')[1];
+    const searchParams = url.split('?')[1] || "";
     const bearer = req.headers.get("Authorization") || "";
-    const accessToken = bearer.split(" ")[1];
+    const accessToken = bearer.split(" ")[1] || "";
     const isVerifyAccessToken = await verifyJWTToken(accessToken);
 
     if(!isVerifyAccessToken) {
@@ -75,10 +75,13 @@ export async function GET(req: NextRequest) {
 
             query += arr.join(' and ');  
         }      
+
+        const connection = await connectToDB();
         
-        const productsRequest = await pool.request().query(query);   
+        const productsRequest = await connection.request().query(query);  
 
         await pool.close();
+        await connection.close();
 
         const resultProducts = productsRequest.recordset.reduce((resultArr, item) => {
             const { id,categories,tags } = item;
@@ -101,7 +104,7 @@ export async function GET(req: NextRequest) {
 
             return resultArr;
         }, []);   
-                
+                        
         return NextResponse.json({ products: resultProducts.slice((page-1)*12, page*12), totalProducts: resultProducts.length });
     } catch (error) {
         return NextResponse.json({ error }, { status: 501 });

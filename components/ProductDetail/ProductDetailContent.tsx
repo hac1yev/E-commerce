@@ -28,7 +28,7 @@ const ProductDetailContent = ({ productContent }: { productContent: ProductDetai
                 <div
                   className="product-thumb zoom"
                 >
-                  <Image width={300} height={500} src={productContent.image} alt={productContent.brand} />
+                  <Image width={300} height={500} src={productContent.image} alt={productContent.brand} priority />
                 </div>
               </div>
             

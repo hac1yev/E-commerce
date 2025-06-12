@@ -19,7 +19,7 @@ const ProductDetailModal = ({ image,categories,price,value,tags,title,reviewCoun
                             <div className="cursor"></div>
                             <div className="thumb-wrapper one filterd-items figure">
                                 <div className="product-thumb zoom">
-                                    <Image src={image} width={200} height={300} alt="product-thumb" />
+                                    <Image src={image} width={200} height={300} alt="product-thumb" priority />
                                 </div>
                             </div>
                             <div className="thumb-wrapper two filterd-items hide">

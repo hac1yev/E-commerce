@@ -27,9 +27,9 @@ const TrendingProducts = ({ trendingProducts }: { trendingProducts: ProductType[
                       <Link href="/" className="thumbnail-preview">
                         <div className="badge">
                           <span>{product.discount}% <br />Off</span>
-                          <Image src={bookmark} width={50} height={50} alt="bookmark" />
+                          <Image src={bookmark} width={50} height={50} alt="bookmark" priority />
                         </div>
-                        <Image width={200} height={100} src={product.image} alt="grocery" />
+                        <Image width={200} height={100} src={product.image} alt="grocery" priority />
                       </Link>
                       <div className="body-content">
                         <Link href="/">

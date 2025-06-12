@@ -17,6 +17,7 @@ const RtsFeature = () => {
                                     width={45}
                                     height={45}
                                     alt="best-wide-assortment"
+                                    priority
                                 />
                             </div>
                             <div className="content">
@@ -33,6 +34,7 @@ const RtsFeature = () => {
                                     width={45}
                                     height={45}
                                     alt="best-policy"
+                                    priority
                                 />
                             </div>
                             <div className="content">
@@ -49,6 +51,7 @@ const RtsFeature = () => {
                                     width={45}
                                     height={45}
                                     alt="best-offer"
+                                    priority
                                 />
                             </div>
                             <div className="content">
@@ -65,6 +68,7 @@ const RtsFeature = () => {
                                     width={45}
                                     height={45}
                                     alt="best-prices"
+                                    priority
                                 />
                             </div>
                             <div className="content">

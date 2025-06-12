@@ -1,11 +1,11 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { FavoriteProductsAction, useTypedFavoriteSelector } from "@/store/favorites-slice";
-import { LinearProgress, Stack } from "@mui/material";
 import { ChevronDown, ChevronUp, ShoppingCartIcon, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import LinearProgressComponent from "../LoadingProgress/LinearProgressComponent";
 
 const Favorites = () => {
   const [count,setCount] = useState<Record<string,number>>({});
@@ -80,11 +80,7 @@ const Favorites = () => {
               </div>
               <div className="button-area"></div>
             </div>
-            {isLoading && (
-              <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-                <LinearProgress color="success" />
-              </Stack>
-            )}
+            {isLoading && <LinearProgressComponent />}
             {!isLoading && favorites.length === 0 && (
               <div className="single-cart-area-list main item-parent">
                 <h3>There is no favorite product!</h3>
@@ -97,7 +93,7 @@ const Favorites = () => {
                     <X />
                   </div>
                   <div className="thumbnail">
-                    <Image width={200} height={200} src={item.image} alt={item.title} />
+                    <Image width={200} height={200} src={item.image} alt={item.title} priority />
                   </div>
                   <div className="information">
                     <h6 className="title">

@@ -41,7 +41,7 @@ const ProductDetailOffers = () => {
       </div>
       <div className="our-payment-method">
         <h5 className="title">Guaranteed Safe Checkout</h5>
-        <Image width={300} src={payment} alt="payment" />
+        <Image width={300} height={30} src={payment} alt="payment" priority />
       </div>
     </div>
   );
