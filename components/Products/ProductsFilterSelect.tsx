@@ -1,4 +1,5 @@
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { LoadingProductsAction } from "@/store/loading-slice";
 import { ProductSliceActions, useTypedProductSelector } from "@/store/products-slice";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
@@ -60,6 +61,7 @@ const ProductsFilterSelect = () => {
 
   useEffect(() => {
     (async function() {
+      dispatch(LoadingProductsAction.toggleLoading(true));
       try {
         const obj = Object.fromEntries(Array.from(searchParams.entries()));
         const allParams: Record<string, string | number> = {
@@ -85,6 +87,8 @@ const ProductsFilterSelect = () => {
         }));         
       } catch (error) {
         console.log(error);
+      }finally{
+        dispatch(LoadingProductsAction.toggleLoading(false));
       }
     })();
   }, [axiosPrivate,dispatch,searchParams,page]);
@@ -122,7 +126,7 @@ const ProductsFilterSelect = () => {
   return (
     <div className="filter-select-area">
       <div className="top-filter">
-        {totalProducts && <span>Showing {
+        {(totalProducts !== 0 && totalProducts) && <span>Showing {
           products.length === 12 
             ? page === 1 
               ? 1

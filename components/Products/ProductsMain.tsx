@@ -15,6 +15,7 @@ const AllProducts = dynamic(() => import("./ProductList"), {
 
 const ProductsMain = () => {
   const isLoading = useTypedLoadingSelector((state) => state.loadingReducer.isLoading);
+  const totalProducts = useTypedProductSelector((state) => state.productReducer.totalProducts);
   const products = useTypedProductSelector((state) => state.productReducer.products);
 
   // const [isModalOpen,setIsModalOpen] = useState(false);
@@ -34,7 +35,7 @@ const ProductsMain = () => {
     <Suspense>
       <div className="col-xl-9 col-lg-12 products-main-wrapper">
         <ProductsFilterSelect />
-        {products.length === 0 && !isLoading && (
+        {totalProducts === 0 && !isLoading && (
           <h4 className="text-center my-4">There is no product.</h4>
         )} 
         <AllProducts products={products} />
