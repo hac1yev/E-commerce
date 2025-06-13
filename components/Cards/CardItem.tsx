@@ -7,40 +7,70 @@ import { useState } from "react";
 import Link from "next/link";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { ProductSliceActions } from "@/store/products-slice";
 
-const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { componentType?: string; handleOpenModal?: (id: string) => void }) => {
-  const [count,setCount] = useState(1);
+const CardItem = (
+  props: Pick<ProductCardType, keyof ProductCardType> & {
+    componentType?: string;
+    handleOpenModal?: (id: string) => void;
+  }
+) => {
+  const [count, setCount] = useState(1);
   const axiosPrivate = useAxiosPrivate();
-  const userId: string = typeof window !== "undefined" && localStorage.getItem("userInfo") 
-    ? JSON.parse(localStorage.getItem("userInfo") || "{}").userId 
-    : "";  
+  const dispatch = useDispatch();
+  const userId: string =
+    typeof window !== "undefined" && localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo") || "{}").userId
+      : "";
 
   const handleIncreaseCount = () => {
     setCount((prev) => prev + 1);
-  }
+  };
 
   const handleDecreaseCount = () => {
-    if(count === 1) return;
+    if (count === 1) return;
     else setCount((prev) => prev - 1);
-  }
+  };
 
   const handleAddFavorite = async (productId: number) => {
     try {
-      const response = await axiosPrivate.post(`/api/products/favorites`, JSON.stringify({ productId,userId }), {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await axiosPrivate.post(`/api/products/favorites`, JSON.stringify({ productId, userId }), {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
-      console.log(response);
+      if(response.status === 200) {
+        dispatch(ProductSliceActions.addFavProducts(productId));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const handleRemoveFavorite = async (productId: number) => {    
+    try {
+      const response = await axiosPrivate.delete(
+        `/api/products/favorites/${productId}`
+      );
+      if (response.status === 200) {
+        dispatch(ProductSliceActions.deleteFavProducts(productId));
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className={props.componentType === 'weekly' ? "single-shopping-card-one weekly-grocery-height" : "single-shopping-card-one featured-grocery-height"}>
+    <div
+      className={
+        props.componentType === "weekly"
+          ? "single-shopping-card-one weekly-grocery-height"
+          : "single-shopping-card-one featured-grocery-height"
+      }
+    >
       {" "}
       <div className="image-and-action-area-wrapper">
         <Link href={`/products/${props.id}`} className="thumbnail-preview">
@@ -49,21 +79,42 @@ const CardItem = (props: Pick<ProductCardType, keyof ProductCardType> & { compon
               {props.discount}% <br />
               Off
             </span>
-            <Image src={bookmark} width={50} height={50} alt="bookmark" priority />
+            <Image
+              src={bookmark}
+              width={50}
+              height={50}
+              alt="bookmark"
+              priority
+            />
           </div>
-          <Image src={props.image} width={300} height={200} alt={props.brand} priority />
+          <Image
+            src={props.image}
+            width={300}
+            height={200}
+            alt={props.brand}
+            priority
+          />
         </Link>
         <div className="action-share-option">
-          <div
-            className="single-action openuptip message-show-action"
-            data-flow="up"
-            title="Add To Wishlist"
-            onClick={handleAddFavorite.bind(null, props.id)}
-          >
-            {props.liked === 1 
-              ? <FaHeart width={17} style={{ color: "#fff" }} />
-              : <FaRegHeart width={17} style={{ color: "#fff" }} />}
-          </div>
+          {props.liked === 1 ? (
+            <div
+              className="single-action openuptip message-show-action"
+              data-flow="up"
+              title="Add To Wishlist"
+              onClick={handleRemoveFavorite.bind(null, props.id)}
+            >
+              <FaHeart width={17} style={{ color: "#fff" }} />
+            </div>
+          ) : (
+            <div
+              className="single-action openuptip message-show-action"
+              data-flow="up"
+              title="Add To Wishlist"
+              onClick={handleAddFavorite.bind(null, props.id)}
+            >
+              <FaRegHeart width={17} style={{ color: "#fff" }} />
+            </div>
+          )}
           <div
             className="single-action openuptip cta-quickview product-details-popup-btn"
             data-flow="up"

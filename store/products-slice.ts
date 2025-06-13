@@ -21,7 +21,15 @@ const productSlice = createSlice({
             ];
             state.totalProducts = action.payload.totalProducts;
         },
-    }
+        deleteFavProducts(state,action) {
+            const index = state.products.findIndex((product) => product.id === action.payload);
+            state.products[index].liked = 0;
+        }, 
+        addFavProducts(state,action) {
+            const index = state.products.findIndex((product) => product.id === action.payload);
+            state.products[index].liked = 1;
+        }
+    },
 });
 
 export const useTypedProductSelector: TypedUseSelectorHook<{ productReducer: ProductState }> = useSelector;
