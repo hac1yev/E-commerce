@@ -14,13 +14,28 @@ export async function GET(req: NextRequest) {
         
         const pool = await connectToDB();
 
+        const userResult = await pool.request().query(`
+            select userId from Users where email = '${isVerifyAccessToken.email}'
+        `);
+
+        if (!userResult.recordset.length) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
+
+        const { userId } = userResult.recordset[0];
+
         const query = `
-            select p.*, c.label [categories], t.label [tags]
+            select p.*, c.label [categories], t.label [tags],
+            case 
+                when lp.productId is not null and lp.userId = ${userId} then 1
+                else 0
+            end as liked
             from Products p left join ProductCategories pc
             on p.id = pc.productId left join Categories c
             on pc.categoryId = c.value left join ProductTags pt 
             on p.id = pt.productId left join Tags t
-            on pt.tagId = t.value
+            on pt.tagId = t.value left join LikedProducts lp
+            on lp.productId = p.id
         `;
 
         const result = await pool.request().query(query); 

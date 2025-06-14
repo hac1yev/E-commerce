@@ -1,6 +1,9 @@
+import { useTypedHomeSelector } from "@/store/home-slice";
 import DiscountCardItem from "./DiscountCardItem";
 
-const DiscountProducts = ({ discountProducts }: { discountProducts: ProductType[] }) => {
+const DiscountProducts = () => {
+    const discountProducts = useTypedHomeSelector((state) => state.homePageReducer.homePageData).discountProducts;
+
     if(discountProducts?.length === 0) {
         return <p>Loading...</p>
     }

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         
         const pool = await connectToDB();
 
-        const result = await pool.request()
+        await pool.request()
         .input("productId", sql.Int, productId)
         .input("userId", sql.Int, userId)
         .query(`
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             values(@productId, @userId)
         `);
 
-        return NextResponse.json({ message: 'Success', result });
+        return NextResponse.json({ message: 'Success' });
     } catch (error) {
         return NextResponse.json({ error }, { status: 501 });        
     }

@@ -9,10 +9,9 @@ import TrendingProducts from './TrendingProducts/TrendingProducts'
 import { useEffect } from 'react'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { useDispatch } from 'react-redux';
-import { homePageSliceAction, useTypedHomeSelector } from '@/store/home-slice';
+import { homePageSliceAction } from '@/store/home-slice';
 
 const HomeWrapper = () => {
-    const homePageData = useTypedHomeSelector((state) => state.homePageReducer.homePageData); 
     const dispatch = useDispatch();
     const axiosPrivate = useAxiosPrivate();
 
@@ -25,17 +24,17 @@ const HomeWrapper = () => {
                 console.log(error);
             }
         })()
-    }, [axiosPrivate,dispatch]);
+    }, [axiosPrivate,dispatch]);    
 
     return (
-        <div>
+        <>
             <Banner />  
             <RtsFeature />
-            <FeaturedCards featuredProducts={homePageData.featuredProducts} />
-            <DiscountProducts discountProducts={homePageData.discountProducts} />
-            <WeeklyGroceries weeklyProducts={homePageData.weeklyProducts} />
-            <TrendingProducts trendingProducts={homePageData.trendingProducts} />
-        </div>
+            <FeaturedCards />
+            <DiscountProducts />
+            <WeeklyGroceries />
+            <TrendingProducts />
+        </>
     );
 };
 

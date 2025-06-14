@@ -9,6 +9,7 @@ import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { ProductSliceActions } from "@/store/products-slice";
+import { homePageSliceAction } from "@/store/home-slice";
 
 const CardItem = (
   props: Pick<ProductCardType, keyof ProductCardType> & {
@@ -44,6 +45,7 @@ const CardItem = (
 
       if(response.status === 200) {
         dispatch(ProductSliceActions.addFavProducts(productId));
+        dispatch(homePageSliceAction.addFavProducts(productId));
       }
     } catch (error) {
       console.log(error);
@@ -55,8 +57,12 @@ const CardItem = (
       const response = await axiosPrivate.delete(
         `/api/products/favorites/${productId}`
       );
-      if (response.status === 200) {
+      if (response.status === 200 && props.componentType !== "featured") {
         dispatch(ProductSliceActions.deleteFavProducts(productId));
+      }
+
+      if(props.componentType === "featured") {
+        dispatch(homePageSliceAction.deleteFavProducts(productId));
       }
     } catch (error) {
       console.log(error);

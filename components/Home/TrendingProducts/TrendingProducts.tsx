@@ -1,8 +1,10 @@
 import Image from "next/image";
 import bookmark from "../../../public/images/bookmark.png";
 import Link from "next/link";
+import { useTypedHomeSelector } from "@/store/home-slice";
 
-const TrendingProducts = ({ trendingProducts }: { trendingProducts: ProductType[] }) => {
+const TrendingProducts = () => {
+  const trendingProducts = useTypedHomeSelector((state) => state.homePageReducer.homePageData).trendingProducts;
   if(trendingProducts?.length === 0) {
     return <p>Loading...</p>
   }

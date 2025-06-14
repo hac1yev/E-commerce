@@ -1,12 +1,15 @@
 "use client";
 
 import CardItem from "@/components/Cards/CardItem";
+import { useTypedHomeSelector } from "@/store/home-slice";
 // import ProductDetailModal from "@/components/Modals/ProductDetailModal";
 import { useState } from "react";
 
 const categories = ["Frozen Foods","Diet Foods","Healthy Foods", "Vitamin Foods"]
 
-const WeeklyGroceries = ({ weeklyProducts }: { weeklyProducts: ProductType[] }) => {
+const WeeklyGroceries = () => {
+    const weeklyProducts = useTypedHomeSelector((state) => state.homePageReducer.homePageData).weeklyProducts;
+
     // const [isModalOpen,setIsModalOpen] = useState(false);
     // const [modalData,setModalData] = useState<ProductType>();
     const [tab,setTab] = useState("Frozen Foods");
@@ -63,6 +66,7 @@ const WeeklyGroceries = ({ weeklyProducts }: { weeklyProducts: ProductType[] }) 
                                         // handleOpenModal={handleOpenModal}
                                         id={item.id}
                                         discount={item.discount}
+                                        liked={item.liked}
                                         image={item.image}
                                         title={item.title}
                                         price={item.price}

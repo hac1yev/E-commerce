@@ -3,15 +3,17 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 type HomePageType<T> = {
     homePageData: {
-        discountProducts: T[], 
-        trendingProducts: T[], 
-        featuredProducts: T[], 
-        weeklyProducts: T[],
+        [key: string]: T[], 
     }
 }
 
-const initialHomeState = {
-    homePageData: {}
+const initialHomeState: HomePageType<ProductType> = {
+    homePageData: {
+        discountProducts: [],
+        trendingProducts: [],
+        featuredProducts: [],
+        weeklyProducts: [],
+    }
 }
 
 const homePageSlice = createSlice({
@@ -25,7 +27,27 @@ const homePageSlice = createSlice({
                 featuredProducts: action.payload.featuredProducts, 
                 weeklyProducts: action.payload.weeklyProducts,
             }
-        }
+        },
+        addFavProducts(state, action) {
+            const productKeys = Object.keys(state.homePageData);
+
+            productKeys.forEach((key) => {
+                const index = state.homePageData[key].findIndex(product => product.id === action.payload);
+                if (index !== -1) {
+                    state.homePageData[key][index].liked = 1;
+                }
+            });
+        },
+        deleteFavProducts(state, action) {
+            const productKeys = ['discountProducts', 'trendingProducts', 'featuredProducts', 'weeklyProducts'] as const;
+            
+            productKeys.forEach((key) => {
+                const index = state.homePageData[key].findIndex(product => product.id === action.payload);
+                if (index !== -1) {
+                    state.homePageData[key][index].liked = 0;
+                }
+            });
+        },
     }
 });
 

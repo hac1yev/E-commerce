@@ -7,9 +7,11 @@ import CardItem from "../../Cards/CardItem";
 // import ProductDetailModal from "../../Modals/ProductDetailModal";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import { useTypedHomeSelector } from "@/store/home-slice";
 // import axios from "axios";
 
-const FeaturedCards = ({ featuredProducts }: { featuredProducts: ProductType[] }) => {    
+const FeaturedCards = () => {  
+    const featuredProducts = useTypedHomeSelector((state) => state.homePageReducer.homePageData).featuredProducts;  
     // const [isModalOpen,setIsModalOpen] = useState(false);
     // const [modalData,setModalData] = useState<ProductCardModalType>();
 
@@ -42,7 +44,7 @@ const FeaturedCards = ({ featuredProducts }: { featuredProducts: ProductType[] }
 
     // const handleCloseModal = useCallback(() => {
     //     setIsModalOpen(false);
-    // }, []);
+    // }, []);    
 
     if(featuredProducts?.length === 0) {
         return <p>Loading...</p>
@@ -56,7 +58,7 @@ const FeaturedCards = ({ featuredProducts }: { featuredProducts: ProductType[] }
                         <div className="col-lg-12">
                             <div className="title-area-between">
                                 <h2 className="title-left">
-                                    Featured Grocery
+                                    Most Viewed Products
                                 </h2>
                             </div>
                         </div>
@@ -68,7 +70,9 @@ const FeaturedCards = ({ featuredProducts }: { featuredProducts: ProductType[] }
                             {featuredProducts?.map((card) => (
                                 <CardItem 
                                     key={card.id}
+                                    componentType="featured"
                                     // handleOpenModal={handleOpenModal}
+                                    liked={card.liked}
                                     id={card.id}
                                     discount={card.discount}
                                     image={card.image}
