@@ -5,6 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
     try {
         const bearer = req.headers.get("Authorization") || "";
+        const refresh = req.cookies;
+        console.log(refresh);
+        
         const accessToken = bearer.split(" ")[1];
         const isVerifyAccessToken = await verifyJWTToken(accessToken);
     

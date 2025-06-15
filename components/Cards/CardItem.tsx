@@ -43,8 +43,11 @@ const CardItem = (
         }
       );
 
-      if(response.status === 200) {
+      if(response.status === 200 && props.componentType !== "featured") {
         dispatch(ProductSliceActions.addFavProducts(productId));
+      }
+
+      if(props.componentType === "featured") {
         dispatch(homePageSliceAction.addFavProducts(productId));
       }
     } catch (error) {

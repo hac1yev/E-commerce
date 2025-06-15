@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import LinearProgressComponent from "../LoadingProgress/LinearProgressComponent";
 import { useTypedFavoriteSelector } from "@/store/favorites-slice";

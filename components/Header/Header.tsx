@@ -44,7 +44,7 @@ const Header = () => {
                       <UserIcon width={18} />
                     </div>
                   </Link>
-                  <Link href="/" className="btn-border-only wishlist">
+                  <Link href="/profile/favorites" className="btn-border-only wishlist">
                     <div className="d-flex align-items-center h-100 gap-3 cart-button-wrap">
                       <div style={{ position: 'relative' }}>
                         <Heart width={18} />

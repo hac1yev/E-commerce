@@ -9,16 +9,16 @@ const isAuthPage = (url: string) => authPages.includes(url);
 export async function middleware(request: NextRequest) {
   const { url,nextUrl } = request;
   const refreshToken = request.cookies.get("refreshToken")?.value || ""; 
-
+  
   if(isAuthPage(nextUrl.pathname)) {
     const isValidRefreshToken = await verifyRefreshToken(refreshToken);
 
-    if(!isValidRefreshToken) {
+    if(!isValidRefreshToken) {      
       return NextResponse.next();
     }
   }else{
     const isValidRefreshToken = await verifyRefreshToken(refreshToken);
-
+    
     if(isValidRefreshToken) {
       return NextResponse.next();
     }else{
